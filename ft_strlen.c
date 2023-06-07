@@ -1,42 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_Strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/02 17:09:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/06 18:53:05 by mamazzal         ###   ########.fr       */
+/*   Created: 2023/06/06 18:50:29 by mamazzal          #+#    #+#             */
+/*   Updated: 2023/06/06 18:50:41 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+size_t	ft_strlen(const char *str)
 {
-	int		i;
-	int		c;
-	char	*str;
+	size_t	str_index;
 
-	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (!s1)
+	str_index = 0;
+	while (str[str_index] != '\0')
 	{
-		s1 = malloc(1 * sizeof(char));
-		s1[0] = 0;
+		str_index++;
 	}
-	i = 0;
-	c = 0;
-	if (s1)
-	{
-		while (s1[i] != '\0')
-		{
-			str[i] = s1[i];
-			i++;
-		}
-		while (s2[c] != '\0')
-			str[i++] = s2[c++];
-		str[i] = '\0';
-	}
-	// free(s1);
-	return (str);
+	return (str_index);
 }

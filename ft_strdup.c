@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/02 17:09:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/06 18:53:05 by mamazzal         ###   ########.fr       */
+/*   Created: 2022/10/03 13:14:57 by mamazzal          #+#    #+#             */
+/*   Updated: 2023/06/07 12:32:30 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strdup(const char *str)
 {
-	int		i;
-	int		c;
-	char	*str;
+	char	*distination;
+	size_t	index;
 
-	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (!s1)
+	distination = malloc(ft_strlen(str) + 1);
+	if (!distination)
 	{
-		s1 = malloc(1 * sizeof(char));
-		s1[0] = 0;
+		return (0);
 	}
-	i = 0;
-	c = 0;
-	if (s1)
+	index = 0;
+	while (str[index])
 	{
-		while (s1[i] != '\0')
-		{
-			str[i] = s1[i];
-			i++;
-		}
-		while (s2[c] != '\0')
-			str[i++] = s2[c++];
-		str[i] = '\0';
+		distination[index] = str[index];
+		index++;
 	}
-	// free(s1);
-	return (str);
+	distination[index] = '\0';
+	return (distination);
 }

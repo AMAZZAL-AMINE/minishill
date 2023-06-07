@@ -1,42 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/02 17:09:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/06 18:53:05 by mamazzal         ###   ########.fr       */
+/*   Created: 2022/09/29 14:27:08 by mamazzal          #+#    #+#             */
+/*   Updated: 2023/06/07 12:16:05 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+int	ft_isalpha(int alpha)
 {
-	int		i;
-	int		c;
-	char	*str;
-
-	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (!s1)
+	if ((alpha >= 65 && alpha <= 90) || (alpha >= 97 && alpha <= 122))
 	{
-		s1 = malloc(1 * sizeof(char));
-		s1[0] = 0;
+		return (1);
 	}
-	i = 0;
-	c = 0;
-	if (s1)
-	{
-		while (s1[i] != '\0')
-		{
-			str[i] = s1[i];
-			i++;
-		}
-		while (s2[c] != '\0')
-			str[i++] = s2[c++];
-		str[i] = '\0';
-	}
-	// free(s1);
-	return (str);
+	return (0);
 }

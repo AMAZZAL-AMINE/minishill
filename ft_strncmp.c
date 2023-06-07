@@ -1,42 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/02 17:09:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/06 18:53:05 by mamazzal         ###   ########.fr       */
+/*   Created: 2023/06/06 15:30:08 by mamazzal          #+#    #+#             */
+/*   Updated: 2023/06/06 15:30:31 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+int	ft_strncmp(const char *str1, const char *str2, size_t max)
 {
-	int		i;
-	int		c;
-	char	*str;
+	size_t			count;
+	unsigned char	*s1;
+	unsigned char	*s2;
 
-	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (!s1)
+	count = 0;
+	s1 = (unsigned char *)str1;
+	s2 = (unsigned char *)str2;
+	while ((s1[count] != '\0' || s2[count] != '\0') && count < max)
 	{
-		s1 = malloc(1 * sizeof(char));
-		s1[0] = 0;
-	}
-	i = 0;
-	c = 0;
-	if (s1)
-	{
-		while (s1[i] != '\0')
+		if (s1[count] > s2[count])
 		{
-			str[i] = s1[i];
-			i++;
+			return (1);
 		}
-		while (s2[c] != '\0')
-			str[i++] = s2[c++];
-		str[i] = '\0';
+		else if (s1[count] < s2[count])
+		{
+			return (-1);
+		}
+		count++;
 	}
-	// free(s1);
-	return (str);
+	return (0);
 }

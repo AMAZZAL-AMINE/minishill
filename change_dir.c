@@ -1,42 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   change_dir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/02 17:09:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/06 18:53:05 by mamazzal         ###   ########.fr       */
+/*   Created: 2023/06/06 12:40:01 by mamazzal          #+#    #+#             */
+/*   Updated: 2023/06/06 12:53:15 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_strjoin(char *s1, char *s2)
-{
-	int		i;
-	int		c;
-	char	*str;
+int change_dir(t_cmd_table *table) {
+  int pid = fork();
+  if (!table->args[1]) {
+    chdir(getenv("HOME"));
+    wait(NULL);
+  }else {
+    if (chdir(table->args[1]) == -1) {
+      printf("cd: no such file or directory: %s\n", table->args[1]);
+      exit(127);
+    }else {
+      wait(NULL);
+    }
+  }
 
-	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (!s1)
-	{
-		s1 = malloc(1 * sizeof(char));
-		s1[0] = 0;
-	}
-	i = 0;
-	c = 0;
-	if (s1)
-	{
-		while (s1[i] != '\0')
-		{
-			str[i] = s1[i];
-			i++;
-		}
-		while (s2[c] != '\0')
-			str[i++] = s2[c++];
-		str[i] = '\0';
-	}
-	// free(s1);
-	return (str);
+  waitpid(pid, NULL, 1);
+  return 0;
 }

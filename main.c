@@ -6,37 +6,39 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 16:10:03 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/03 20:34:12 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/07 12:59:50 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int run_cmd(char *cmd, char **param, char **env) {
+
+int run_cmd(t_cmd_table *table) {
     int pid = fork();
-    if(pid == 0)
-    {
-        if (execve(cmd, param, env) == -1) {
-            perror("execve");
+    if (pid == 0) {
+        if (execve(table->path, table->args, NULL) == -1) {
+            printf("minishell: %s: command not found\n", table->cmd);
             exit(127);
-            return -1;
         }
+        wait(NULL);
     }
     waitpid(pid, NULL, 0);
     return 0;
 }
 
 int main(void) {
-    t_shell *shell;
-    shell = malloc(sizeof(t_shell));
+    t_cmd_table *table;
+
+    table = malloc(sizeof(t_cmd_table));
     while (1) {
-        shell->buffer = readline("MINISHELL ~>");
-        if (*shell->buffer) {      
-            add_history(shell->buffer);
-            shell->args = ft_split(shell->buffer, ' ');
-            shell->cmd = shell->args[0];
-            char *cmd = ft_strjoin("/bin/", shell->cmd);
-            run_cmd(cmd, shell->args, NULL);
+        table->input = readline("mamazzal@minishell ~>");
+        if (*table->input) {
+            table->args = ft_split(table->input, ' ');
+            table->cmd = table->args[0];
+            add_history(table->input);
+            print_table(table);
         }
     }
+    free(table);
+    return 0;
 }
