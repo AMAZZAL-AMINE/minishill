@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 17:09:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/06 18:53:05 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:04:06 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,5 @@ char	*ft_strjoin(char *s1, char *s2)
 			str[i++] = s2[c++];
 		str[i] = '\0';
 	}
-	// free(s1);
 	return (str);
 }

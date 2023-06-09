@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 16:10:03 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/07 12:59:50 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/09 18:23:48 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ int main(void) {
             table->args = ft_split(table->input, ' ');
             table->cmd = table->args[0];
             add_history(table->input);
-            print_table(table);
+            // print_table(table);
+            lxr(table);
+            run_shell(table);
         }
     }
-    free(table);
     return 0;
 }
