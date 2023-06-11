@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/11 20:21:20 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/11 20:35:22 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ int commande_length(char *token) {
   int index = 0;
   while (token[count]) {
     if (count == 0) {
-      if (token[count] == ' ')
-        index++;
       while (token[count] == ' ' && token[count]) {
         count++;
       }
@@ -119,7 +117,7 @@ char *get_with_fixes_size(char *token, int size) {
 void init_and_split(t_minishell *minishell, char *token, int pos) {
   minishell->parsing[pos].cmd = get_with_fixes_size(token, commande_length(token));
   token = update_token(token, commande_length(token));
-  printf("COMMANDE =>   [ %s ]    token =>  [ %s ]\n", minishell->parsing[pos].cmd, token);
+  printf("COMMANDE =>   [%s]    token =>  [ %s ]\n", minishell->parsing[pos].cmd, token);
 }
 
 int parsing_input(t_minishell *minishell, char *line) {
