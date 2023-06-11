@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ispip.c                                         :+:      :+:    :+:   */
+/*   update_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/07 12:24:43 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/07 12:25:55 by mamazzal         ###   ########.fr       */
+/*   Created: 2023/06/11 20:15:13 by mamazzal          #+#    #+#             */
+/*   Updated: 2023/06/11 20:17:07 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_ispip(char c) {
-  if (c == '|') {
-    return 1;
+#include "../minishell.h"
+
+char *update_token(char *token, int size) {
+  int count = 0;
+  int index = 0;
+  while (token[count]) {
+    if (count == 0) {
+      while (token[count] == ' ' && token[count]) {
+        count++;
+      }
+      if (token[count]) {
+        while (index < size) {
+          index++;
+          count++;
+        }
+        break;
+      } 
+    }
   }
-  return 0;
+  return (ft_strdup(token + count));
 }
