@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/11 20:17:23 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/12 15:33:59 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ typedef struct s_minishell {
 
 int     parsing_input(t_minishell *minishell, char *line);
 char    *update_token(char *token, int size);
+char **split_commande_args(char *token);
+char *get_with_fixes_size(char *token, int size);
 
 #endif

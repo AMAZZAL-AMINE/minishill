@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/11 20:35:22 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:24:48 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int commande_length(char *token) {
   return index;
 }
 
-//to get spicifiq string and skip the ifrst spaces;
+//to get spicifiq string and skip the first spaces;
 char *get_with_fixes_size(char *token, int size) {
   int count = 0;
   int index = 0;
@@ -106,18 +106,32 @@ char *get_with_fixes_size(char *token, int size) {
           count++;
         }
         break;
-      } 
+      }
     }
   }
   dst[index] = '\0';
   return dst;
 }
 
+int skip_spaces(char *token) {
+  int count = 0;
+  while (token[count] == ' ' && token[count]) {
+    count++;
+  }
+  return count;
+}
+
 //intialis the structer
 void init_and_split(t_minishell *minishell, char *token, int pos) {
   minishell->parsing[pos].cmd = get_with_fixes_size(token, commande_length(token));
   token = update_token(token, commande_length(token));
-  printf("COMMANDE =>   [%s]    token =>  [ %s ]\n", minishell->parsing[pos].cmd, token);
+  token = &token[skip_spaces(token)];
+  minishell->parsing[pos].args = split_commande_args(token);
+  int count = 0;
+  while (minishell->parsing[pos].args[count]) {
+    printf("%d  : [%s]\n", pos, minishell->parsing[pos].args[count]);
+    count++;
+  }
 }
 
 int parsing_input(t_minishell *minishell, char *line) {
