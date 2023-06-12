@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/12 18:24:48 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/12 22:09:50 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,10 @@ void init_and_split(t_minishell *minishell, char *token, int pos) {
   minishell->parsing[pos].args = split_commande_args(token);
   int count = 0;
   while (minishell->parsing[pos].args[count]) {
-    printf("%d  : [%s]\n", pos, minishell->parsing[pos].args[count]);
+    printf("%s\n", minishell->parsing[pos].args[count]);
     count++;
   }
+ 
 }
 
 int parsing_input(t_minishell *minishell, char *line) {
