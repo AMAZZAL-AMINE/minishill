@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 19:04:47 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/13 19:11:02 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/13 19:31:43 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void builtin(t_minishell *shell, char *line) {
   int size_cmd = ft_count_tokens(line) * 2;
   while (count <= size_cmd) {
     if (count % 2 == 0) {
-      if (ft_strncmp("echo", shell->parsing[count].cmd, ft_strlen("echo")) == 0) {
+      if (!ft_strncmp("echo", shell->parsing[count].cmd, ft_strlen("echo")) ||
+        !ft_strncmp("/bin/echo", shell->parsing[count].cmd, ft_strlen("echo"))) {
         echo_cmd(&shell->parsing[count]);
       }
     }
