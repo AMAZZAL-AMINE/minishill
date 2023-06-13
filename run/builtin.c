@@ -6,12 +6,12 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 19:04:47 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/13 19:31:43 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/13 21:28:32 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
+#include <stdlib.h>
 void builtin(t_minishell *shell, char *line) {
   int count = 0;
   int size_cmd = ft_count_tokens(line) * 2;
@@ -20,9 +20,10 @@ void builtin(t_minishell *shell, char *line) {
       if (!ft_strncmp("echo", shell->parsing[count].cmd, ft_strlen("echo")) ||
         !ft_strncmp("/bin/echo", shell->parsing[count].cmd, ft_strlen("echo"))) {
         echo_cmd(&shell->parsing[count]);
+      }else if (ft_strncmp("clear", shell->parsing[count].cmd, ft_strlen("clear")) == 0) {
+        clear();
       }
     }
-
     count++;
   }
 }
