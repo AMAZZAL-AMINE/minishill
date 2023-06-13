@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/12 15:33:59 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/13 19:11:46 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "./libft/libft.h"
+#include "./errors/errors.h"
 
 typedef struct s_parsing
 {
@@ -28,9 +29,9 @@ typedef struct s_parsing
     char *input;
     char *output;
     char *append;
+    int  is_re_to_file;// (>) Sends standard output to <file>
     int  pipe;
     int index;
-
     struct s_parsing *all_cmd;
 }               t_parsing;
 
@@ -50,5 +51,12 @@ int     parsing_input(t_minishell *minishell, char *line);
 char    *update_token(char *token, int size);
 char **split_commande_args(char *token);
 char *get_with_fixes_size(char *token, int size);
+int ft_count_tokens(char *line);
+
+//start point 
+void builtin(t_minishell *shell, char *line);
+
+//commandes
+int echo_cmd(t_parsing *shill);
 
 #endif

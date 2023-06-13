@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/13 19:11:56 by mamazzal         ###   ########.fr       */
+/*   Created: 2023/06/13 19:04:47 by mamazzal          #+#    #+#             */
+/*   Updated: 2023/06/13 19:11:02 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int main(void)
-{
-  t_minishell    *minishell;
-  char           *line;
-
-  minishell = malloc(sizeof(t_minishell));
-  if (!minishell)
-    return 0;
-  while (1)
-  {
-    line = readline("\033[0;35mminishell$\033[0m ");
-    all_functions_errors(line);
-    if (*line) {
-      add_history(line);
-      parsing_input(minishell, line);
-      builtin(minishell, line);
+void builtin(t_minishell *shell, char *line) {
+  int count = 0;
+  int size_cmd = ft_count_tokens(line) * 2;
+  while (count <= size_cmd) {
+    if (count % 2 == 0) {
+      if (ft_strncmp("echo", shell->parsing[count].cmd, ft_strlen("echo")) == 0) {
+        echo_cmd(&shell->parsing[count]);
+      }
     }
+
+    count++;
   }
-  free(line);
-  return 0;
 }

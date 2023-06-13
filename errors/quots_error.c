@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   quots_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/13 19:11:56 by mamazzal         ###   ########.fr       */
+/*   Created: 2023/06/13 12:53:31 by mamazzal          #+#    #+#             */
+/*   Updated: 2023/06/13 14:53:30 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int main(void)
-{
-  t_minishell    *minishell;
-  char           *line;
-
-  minishell = malloc(sizeof(t_minishell));
-  if (!minishell)
-    return 0;
-  while (1)
-  {
-    line = readline("\033[0;35mminishell$\033[0m ");
-    all_functions_errors(line);
-    if (*line) {
-      add_history(line);
-      parsing_input(minishell, line);
-      builtin(minishell, line);
+void single_quots_arr(char *line) {
+  int count = 0;
+  int count_quots = 0;
+  while (line[count]) {
+    if (line[count] == '\"' || line[count] == '\'') {
+      count_quots++;
     }
+    count++;
   }
-  free(line);
-  return 0;
+
+  if (count_quots % 2 != 0) {
+    error_message("single quotes not closed", 1, line); 
+  }
+  return;
 }
