@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:23:36 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/12 22:11:58 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/14 07:38:18 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char **split_commande_args(char *token) {
         within_quots++;
         save++;
       }
-      if (token[count] == ' ' && within_quots % 2 != 0) {
+      while (token[count] == ' ' && within_quots % 2 != 0) {
         save++;
         count++;
       }

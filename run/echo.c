@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:55:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/13 19:29:57 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/14 09:17:16 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void echo_in_console(char **content, char *cmd) {
     }
     if (execve("/bin/echo", join_two_dim_arr(cmd, content), NULL) == -1) {
       printf("shell: %s: command not found\n", cmd);
+      exit(127);
     }
     wait(NULL);
   }
