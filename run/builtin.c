@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 19:04:47 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/14 12:56:12 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/15 10:05:24 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ void builtin(t_minishell *shell, char *line) {
         echo_cmd(&shell->parsing[count]);
       }else if (ft_strncmp("clear", shell->parsing[count].cmd, ft_strlen(shell->parsing[count].cmd)) == 0) {
         clear();
-      }else if (!ft_strncmp("ls", shell->parsing[count].cmd, ft_strlen(shell->parsing[count].cmd)) ||
-        !ft_strncmp("/bin/ls", shell->parsing[count].cmd, ft_strlen(shell->parsing[count].cmd))) {
-        ls(&shell->parsing[count]);
+      }else {
+        execut(&shell->parsing[count]);
       }
     }
     count++;

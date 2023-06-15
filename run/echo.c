@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:55:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/14 09:17:16 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/15 10:18:53 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,35 +17,6 @@ void echo_redirect_to_file(char **content, char *file, int index) {
   (void)file;
   (void)index;
   return;
-}
-
-int count_quots(char *arg) {
-  int count = 0;
-  int count_quots = 0;
-  while (arg[count]) {
-    if (arg[count] == '\"')
-      count_quots++;
-    count++;
-  }
-
-  return (count - count_quots);
-}
-
-char *remove_quots(char *arg) {
-  int count = 0;
-  int index = 0;
-  char *new_arg = malloc(sizeof(char) * (count_quots(arg) + 1));
-  while (arg[count]) {
-    if (arg[count] == '\"') {
-        count++;
-    }else {
-      new_arg[index] = arg[count];
-      index++;
-      count++;
-    }
-  }
-  new_arg[index] = 0;
-  return new_arg;
 }
 
 int count_length_two_arr(char **arr) {

@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/14 19:50:23 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/15 10:19:02 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,11 @@ int ft_count_tokens(char *line);
 void builtin(t_minishell *shell, char *line);
 char **join_two_dim_arr(char *s1, char **arr);
 char *remove_quots(char *arg);
+int count_quots(char *arg) ;
 
 //commandes
 int echo_cmd(t_parsing *shill);
-void ls(t_parsing *shell);
+void execut(t_parsing *shell);
 void clear(void);
 
 #endif
