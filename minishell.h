@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/15 20:28:02 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/15 21:18:40 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,18 @@ char    *update_token(char *token, int size);
 char **split_commande_args(char *token);
 char *get_with_fixes_size(char *token, int size);
 int ft_count_tokens(char *line);
-void redirect_output(t_parsing *shell, char **content, int is_path) ;
+void redirect_output(int is_path, t_parsing *shell, char **content);
 
 //start point 
 void builtin(t_minishell *shell, char *line);
 char **join_two_dim_arr(char *s1, char **arr);
 char *remove_quots(char *arg);
 int count_quots(char *arg) ;
+char **new_content(char **content);
+int find_file_after_redir(char **args, char c);
+int is_redirec_output(char **args) ;
+int find_file_after_redir(char **args, char c);
+char **get_only_what_ineed_in_arr(char **args);
 
 //commandes
 int echo_cmd(t_parsing *shill);
