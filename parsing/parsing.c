@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/13 19:13:48 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/16 17:36:02 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ void init_and_split(t_minishell *minishell, char *token, int pos) {
   token = update_token(token, commande_length(token));
   token = &token[skip_spaces(token)];
   minishell->parsing[pos].args = split_commande_args(token);
- 
 }
 
 int parsing_input(t_minishell *minishell, char *line) {
@@ -135,6 +134,7 @@ int parsing_input(t_minishell *minishell, char *line) {
   (void)tokens;
   int count = 0;
   int size = (ft_count_tokens(line) * 2);
+  minishell->n_cmd = size;
   minishell->parsing = malloc(sizeof(t_parsing) * size);
   while (count <= size) {
     init_and_split(minishell, tokens[count], count);

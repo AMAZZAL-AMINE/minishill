@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 07:40:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/15 21:18:16 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:19:52 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void execut(t_parsing *shell) {
     }
     if (!ft_strncmp("/bin/", shell->cmd, ft_strlen("/bin/"))) {
       if (is_redirec_output(shell->args) == 1) {
-        redirect_output(1, shell, content);
+        redirect(1, shell, content);
       }else {
         run_simple_commande(1, shell, content);
       }
     }else {
       if (is_redirec_output(shell->args) == 1) { 
-       redirect_output(0, shell, content);
+       redirect(0, shell, content);
       }else {
         run_simple_commande(0, shell, content); 
       }

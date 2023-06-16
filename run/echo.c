@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:55:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/15 10:18:53 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/16 22:37:39 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void echo_in_console(char **content, char *cmd) {
 }
 
 int echo_cmd(t_parsing *shill) {
-  shill->is_re_to_file = 0;
   int count = 0;
   while (shill->args[count]) {
     if (ft_strncmp(">", shill->args[count], ft_strlen(">")) == 0) {
