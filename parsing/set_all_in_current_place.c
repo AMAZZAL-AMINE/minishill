@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 15:44:15 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/17 13:26:42 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/17 16:04:52 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void count_redirections(t_minishell *shell) {
         count_in++;
       }else if (str_cmp(shell->parsing[count].args[index], ">>")) {
         count_out++;
+      }else if (str_cmp(shell->parsing[count].args[index], "<<")) {
+        count_in++;
       }
       index++;
     }

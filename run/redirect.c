@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 21:03:03 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/17 13:41:41 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:19:34 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,35 @@ void redirect(int is_path, t_parsing *shell, char **content) {
           dup2(fd, 1);
           last_fd_readed = 2;
         }
+        if (str_cmp("<<", content[count])) {
+         char *line = "";
+         char *tmp = "";
+          if (content[count + 1] == NULL) {
+            printf("minishell: syntax error near unexpected token `newline'\n");
+            exit(127);
+          }
+          while (1) {
+            line = readline("> ");
+            if (str_cmp(line, content[count + 1]))
+              break;
+            line = ft_strjoin(line, "\n");
+            if (tmp == NULL)
+              tmp = ft_strjoin("", line);
+            else
+              tmp = ft_strjoin(tmp, line);
+            
+            free(line);
+          }
+          int fd = open("herdoc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+          write(fd, tmp, ft_strlen(tmp));
+          fd2 = open("herdoc", O_RDONLY);
+          dup2(fd2, 0);
+          last_fd_readed = 0;
+        }
         count++;
       }
     }
-    // if (last_fd_readed == 0)
-    //   dup2(fd2, 0);
-    // else if (last_fd_readed == 1)
-    //   dup2(fd, 1);
+
     if (execve(shell->cmd, join_two_dim_arr(shell->cmd + ft_strlen("/bin/"), new_content(content)), NULL) == -1) {
       printf("minishell: %s: command not found\n", shell->cmd);
       exit(127);
@@ -104,13 +126,35 @@ void redirect(int is_path, t_parsing *shell, char **content) {
           dup2(fd, 1);
           last_fd_readed = 2;
         }
+        if (str_cmp("<<", content[count])) {
+         char *line = "";
+         char *tmp = "";
+          if (content[count + 1] == NULL) {
+            printf("minishell: syntax error near unexpected token `newline'\n");
+            exit(127);
+          }
+          while (1) {
+            line = readline("> ");
+            if (str_cmp(line, content[count + 1]))
+              break;
+            line = ft_strjoin(line, "\n");
+            if (tmp == NULL)
+              tmp = ft_strjoin("", line);
+            else
+              tmp = ft_strjoin(tmp, line);
+            
+            free(line);
+          }
+          int fd = open("herdoc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+          write(fd, tmp, ft_strlen(tmp));
+          fd2 = open("herdoc", O_RDONLY);
+          dup2(fd2, 0);
+          last_fd_readed = 0;
+        }
         count++;
       }
     }
-    // if (last_fd_readed == 0)
-    //   dup2(fd2, 0);
-    // else if (last_fd_readed == 1)
-    //   dup2(fd, 1);
+    
     if (execve(ft_strjoin("/bin/", shell->cmd), join_two_dim_arr(shell->cmd, new_content(content)), NULL) == -1) {
       printf("minishell: %s: command not found\n", shell->cmd);
       exit(127);
