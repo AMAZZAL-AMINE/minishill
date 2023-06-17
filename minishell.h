@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/17 13:12:33 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/17 23:02:04 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,16 @@ char **get_only_what_ineed_in_arr(char **args);
 void count_redirections(t_minishell *shell);
 int str_cmp(char *s1, char *s2);
 
+//redirection
+void redirect_input(int *fd2, char **content, int count, int *last_fd_readed);
+void redirect_output(int *fd, char **content, int count, int *last_fd_readed);
+void appned(int *fd, char **content, int count, int *last_fd_readed);
+void herdoc(int *fd, int *fd2, char **content, int count, int *last_fd_readed);
+
 //commandes
 int echo_cmd(t_parsing *shill);
 void execut(t_parsing *shell);
 void clear(void);
+void pip_exec(t_parsing *shell, t_minishell   *mini);
 
 #endif

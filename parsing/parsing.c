@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/17 14:56:33 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/17 19:54:03 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int find_index_pipe(char *line) {
 char **new_tokens(char *line) {
   int count = 0;
   int count_tokens = ft_count_tokens(line) * 2;
-  char **tokens = (char **)malloc(sizeof(char *) * (count_tokens + 1));
+  char **tokens = malloc(sizeof(char *) * (count_tokens + 1));
   char *new_line = ft_strdup(line);
   while (count <= count_tokens) {
     if (find_index_pipe(new_line) == 0) {
@@ -64,7 +64,7 @@ char **new_tokens(char *line) {
       count++;
     }
   }
-  tokens[count] = "\0n,";
+  tokens[count] = NULL;
   return tokens;
 }
 
@@ -99,7 +99,7 @@ char *get_with_fixes_size(char *token, int size) {
       while (token[count] == ' ' && token[count]) {
         count++;
       }
-      if (token[count]) {
+      if (token[count] != ' ' && token[count] != '\0') {
         while (index < size) {
           dst[index] = token[count];
           index++;
@@ -109,7 +109,7 @@ char *get_with_fixes_size(char *token, int size) {
       }
     }
   }
-  dst[index] = '\0';
+  dst = ft_strdup(dst);
   return dst;
 }
 

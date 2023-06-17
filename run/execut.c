@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 07:40:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/17 13:11:32 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/17 21:19:52 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void run_simple_commande(int is_path, t_parsing *shell, char **content) {
 
 void execut(t_parsing *shell) {
   int pid = fork();
+
   if (pid == 0) {
     int count = 0;
     char **content = shell->args;
@@ -42,7 +43,7 @@ void execut(t_parsing *shell) {
         run_simple_commande(1, shell, content);
       }
     }else {
-      if (is_redirec_output(shell->args) == 1) { 
+      if (is_redirec_output(shell->args) == 1) {
        redirect(0, shell, content);
       }else {
         run_simple_commande(0, shell, content); 
