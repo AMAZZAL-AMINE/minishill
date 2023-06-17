@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/17 12:22:02 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/17 13:12:33 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ typedef struct s_parsing
     int  is_re_to_file;// (>) Sends standard output to <file>
     int  pipe;
     int index;
-    int outout_fd;
-    int input_fd;
     int is_re_from_file;// (<) Reads standard input from <file>
     struct s_parsing *all_cmd;
 }               t_parsing;

@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 15:44:15 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/16 19:13:37 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/17 13:26:42 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,18 @@ void count_redirections(t_minishell *shell) {
   int index = 0;
   int count_out = 0;
   int count_in = 0;
+ 
   while (count <= shell->n_cmd) {
     index = 0;
     count_out = 0;
     count_in = 0;
     while (shell->parsing[count].args[index]) {
-      if (!ft_strncmp(shell->parsing[count].args[index], ">", ft_strlen(shell->parsing[count].args[index]))) {
+      if (str_cmp(shell->parsing[count].args[index], ">")) {
         count_out++;
-      }else if (!ft_strncmp(shell->parsing[count].args[index], "<", ft_strlen(shell->parsing[count].args[index]))) {
+      }else if (str_cmp(shell->parsing[count].args[index], "<")) {
         count_in++;
+      }else if (str_cmp(shell->parsing[count].args[index], ">>")) {
+        count_out++;
       }
       index++;
     }

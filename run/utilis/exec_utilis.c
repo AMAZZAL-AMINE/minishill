@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 21:16:47 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/17 12:36:19 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/17 13:02:03 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int is_redirec_output(char **args) {
   int count = 0;
   int is_redirec = 0;
   while (args[count]) {
-    if (str_cmp(">", args[count]) || str_cmp("<", args[count])) {
+    if (str_cmp(">", args[count])
+      || str_cmp("<", args[count])
+      || str_cmp(">>", args[count])) {
       is_redirec = 1;
     }
     count++;
