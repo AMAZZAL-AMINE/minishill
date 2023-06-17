@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/16 20:16:26 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/17 12:22:02 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int is_redirec_output(char **args) ;
 int find_file_after_redir(char **args);
 char **get_only_what_ineed_in_arr(char **args);
 void count_redirections(t_minishell *shell);
+int str_cmp(char *s1, char *s2);
 
 //commandes
 int echo_cmd(t_parsing *shill);

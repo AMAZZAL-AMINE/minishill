@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 07:40:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/16 19:19:52 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/17 12:25:26 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void execut(t_parsing *shell) {
       content[count] = remove_quots(content[count]);
       count++;
     }
-    if (!ft_strncmp("/bin/", shell->cmd, ft_strlen("/bin/"))) {
+    if (str_cmp("/bin/", shell->cmd)) {
       if (is_redirec_output(shell->args) == 1) {
         redirect(1, shell, content);
       }else {

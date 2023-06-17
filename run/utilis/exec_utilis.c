@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 21:16:47 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/16 20:18:13 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/17 12:36:19 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,12 @@ int is_redirec_output(char **args) {
   int count = 0;
   int is_redirec = 0;
   while (args[count]) {
-    if ((args[count][0] == '>' && args[count][1] == 0) 
-      || (args[count][0] == '<' && args[count][1] == 0)) {
+    if (str_cmp(">", args[count]) || str_cmp("<", args[count])) {
       is_redirec = 1;
     }
     count++;
   }
   return is_redirec;
-}
-
-int find_file_after_redir(char **args) {
-  int count = 0;
-  while (args[count]) {
-    if (args[count][0] == '<' && args[count][1] == 0) {
-      return (count + 1);
-    }else if (args[count][0] == '>' && args[count][1] == 0) {
-      return (count + 1);
-    }
-    count++;
-  }
-  return count;
 }
 
 char **new_content(char **content) {

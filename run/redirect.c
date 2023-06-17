@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 21:03:03 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/17 11:27:10 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/17 12:23:30 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void redirect(int is_path, t_parsing *shell, char **content) {
     if (shell->n_in_files >= 1 || shell->n_out_files >= 1) {
       int count = 0;
       while (content[count]) {
-        if (!ft_strncmp(content[count], ">", ft_strlen(">"))) {
+        if (str_cmp(">", content[count])) {
           fd = open(content[count + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
           if (fd  < 0) {
             dup2(2, 1);
@@ -30,7 +30,7 @@ void redirect(int is_path, t_parsing *shell, char **content) {
           }
           dup2(fd, 1);
           last_fd_readed = 1;
-        }else if (!ft_strncmp(content[count], "<", ft_strlen("<"))) {
+        }else if (str_cmp("<", content[count])) {
           fd2 = open(content[count + 1], O_RDONLY);
           if (fd2  < 0) {
             dup2(2, 1);
@@ -58,7 +58,7 @@ void redirect(int is_path, t_parsing *shell, char **content) {
     if (shell->n_out_files >= 1 || shell->n_in_files >= 1) {
       int count = 0;
       while (content[count]) {
-        if (content[count][0] == '>') {
+        if (str_cmp(">", content[count])) {
           fd = open(content[count + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
           if (fd  < 0) {
             dup2(2, 1);
@@ -69,7 +69,7 @@ void redirect(int is_path, t_parsing *shell, char **content) {
           dup2(fd, 1);
           last_fd_readed = 1;
         }
-        if (content[count][0] == '<') {
+        if (str_cmp("<", content[count])) {
           fd2 = open(content[count + 1], O_RDONLY);
           if (fd2  < 0) {
             dup2(2, 1);
