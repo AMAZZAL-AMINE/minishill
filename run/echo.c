@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:55:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/16 22:37:39 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/18 17:27:06 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,6 @@ void echo_redirect_to_file(char **content, char *file, int index) {
   (void)file;
   (void)index;
   return;
-}
-
-int count_length_two_arr(char **arr) {
-  int count = 0;
-  while (arr[count]) {
-    count++;
-  }
-  return count;
-}
-
-char **join_two_dim_arr(char *s1, char **arr) {
-  int count = 1;
-  int size = count_length_two_arr(arr) + 1;
-  char **dst = malloc(sizeof(char *) * (size + 1));
-  dst[0] = s1;
-  while (count < size) {
-    dst[count] = arr[count - 1];
-    count++;
-  }
-  dst[count] = 0;
-  return dst;
 }
 
 void echo_in_console(char **content, char *cmd) {

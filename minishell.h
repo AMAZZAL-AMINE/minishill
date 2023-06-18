@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/18 14:13:22 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/18 21:07:04 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,12 @@ char **get_only_what_ineed_in_arr(char **args);
 void count_redirections(t_minishell *shell);
 int str_cmp(char *s1, char *s2);
 char *find_cmd_path(char *cmd);
+int count_length_two_arr(char **arr);
+char **join_two_dim_arr(char *s1, char **arr);
 
 //redirection
 void redirect_input(int *fd2, char **content, int count, int *last_fd_readed);
-void redirect_output(int *fd, char **content, int count, int *last_fd_readed);
+void redirect_output(int *fd, char **content, int count, int *last_fd_readed) ;
 void appned(int *fd, char **content, int count, int *last_fd_readed);
 void herdoc(int *fd, int *fd2, char **content, int count, int *last_fd_readed);
 
@@ -86,5 +88,6 @@ int echo_cmd(t_parsing *shill);
 void execut(t_parsing *shell);
 void clear(void);
 void pip_exec(t_parsing *shell, t_minishell   *mini);
+void change_dir(t_parsing *shell);
 
 #endif
