@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/17 23:02:04 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/18 14:13:22 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <dirent.h>
+#include <sys/stat.h>
 
 typedef struct s_parsing
 {
@@ -72,6 +73,7 @@ int find_file_after_redir(char **args);
 char **get_only_what_ineed_in_arr(char **args);
 void count_redirections(t_minishell *shell);
 int str_cmp(char *s1, char *s2);
+char *find_cmd_path(char *cmd);
 
 //redirection
 void redirect_input(int *fd2, char **content, int count, int *last_fd_readed);

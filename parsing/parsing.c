@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/17 19:54:03 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/18 15:50:38 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ int commande_length(char *token) {
     }
     count++;
   }
+  if (token[index] == ' ') {
+    return index--;
+  }
   return index;
 }
 
@@ -100,7 +103,7 @@ char *get_with_fixes_size(char *token, int size) {
         count++;
       }
       if (token[count] != ' ' && token[count] != '\0') {
-        while (index < size) {
+        while (index <= size) {
           dst[index] = token[count];
           index++;
           count++;
@@ -121,9 +124,17 @@ int skip_spaces(char *token) {
   return count;
 }
 
+char *rm_spaces_from_cmd(char *cmd) {
+  int size = 0;
+  while (cmd[size] != ' ' && cmd[size]) {
+    size++;
+  }
+  return ft_strndup(cmd, size);
+}
+
 //intialis the structer
 void init_and_split(t_minishell *minishell, char *token, int pos) {
-  minishell->parsing[pos].cmd = get_with_fixes_size(token, commande_length(token));
+  minishell->parsing[pos].cmd = ft_strdup(rm_spaces_from_cmd(get_with_fixes_size(token, commande_length(token))));
   token = update_token(token, commande_length(token));
   token = &token[skip_spaces(token)];
   minishell->parsing[pos].args = split_commande_args(token);
@@ -131,7 +142,6 @@ void init_and_split(t_minishell *minishell, char *token, int pos) {
 
 int parsing_input(t_minishell *minishell, char *line) {
   char **tokens = new_tokens(line);
-  (void)tokens;
   int count = 0;
   int size = (ft_count_tokens(line) * 2);
   minishell->n_cmd = size;
