@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/19 18:06:47 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/19 22:53:36 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,16 @@ typedef struct s_env
 {
     char *name;
     char *value;
+    int is_haver_equal;
 }            t_env;
 
 typedef struct s_minishell {
-    t_env *env;
-    t_parsing *parsing;
-    char **env_v;
-    int        n_cmd;
-    int         n_var_env;
-}               t_minishell;
+    t_env           *env;
+    t_parsing       *parsing;
+    char            **env_v;
+    int             n_cmd;
+    int             n_var_env;
+}    t_minishell;
 
 
 int     parsing_input(t_minishell *minishell, char *line);

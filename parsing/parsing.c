@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/18 15:50:38 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/19 22:24:44 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,14 @@ void init_and_split(t_minishell *minishell, char *token, int pos) {
   minishell->parsing[pos].cmd = ft_strdup(rm_spaces_from_cmd(get_with_fixes_size(token, commande_length(token))));
   token = update_token(token, commande_length(token));
   token = &token[skip_spaces(token)];
-  minishell->parsing[pos].args = split_commande_args(token);
+  int count = 0;
+  char **dst = split_commande_args(token);
+  char **new_dst = dst;
+  while (dst[count]) {
+    new_dst[count] = remove_quots(dst[count]);
+    count++;
+  }
+  minishell->parsing[pos].args = new_dst;
 }
 
 int parsing_input(t_minishell *minishell, char *line) {
