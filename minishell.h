@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/18 21:07:04 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/19 18:06:47 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,11 @@ typedef struct s_env
 typedef struct s_minishell {
     t_env *env;
     t_parsing *parsing;
+    char **env_v;
     int        n_cmd;
+    int         n_var_env;
 }               t_minishell;
+
 
 int     parsing_input(t_minishell *minishell, char *line);
 char    *update_token(char *token, int size);
@@ -84,10 +87,16 @@ void appned(int *fd, char **content, int count, int *last_fd_readed);
 void herdoc(int *fd, int *fd2, char **content, int count, int *last_fd_readed);
 
 //commandes
-int echo_cmd(t_parsing *shill);
 void execut(t_parsing *shell);
+int echo_cmd(t_parsing *shill);
 void clear(void);
 void pip_exec(t_parsing *shell, t_minishell   *mini);
 void change_dir(t_parsing *shell);
+void pwd(t_parsing *shell);
+void exit_shell(t_parsing *shell);
+void get_env(t_env *env, t_minishell *shell);
+void set_env(t_minishell *shell);
+void export(t_parsing *shell, t_minishell *ms);
+
 
 #endif
