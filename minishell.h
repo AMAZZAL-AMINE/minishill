@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/20 11:50:31 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:48:19 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int find_file_after_redir(char **args);
 char **get_only_what_ineed_in_arr(char **args);
 void count_redirections(t_minishell *shell);
 int str_cmp(char *s1, char *s2);
-char *find_cmd_path(char *cmd);
+char *find_cmd_path(char *cmd, t_minishell *shell);
 int count_length_two_arr(char **arr);
 char **join_two_dim_arr(char *s1, char **arr);
 
@@ -88,7 +88,7 @@ void appned(int *fd, char **content, int count, int *last_fd_readed);
 void herdoc(int *fd, int *fd2, char **content, int count, int *last_fd_readed);
 
 //commandes
-void execut(t_parsing *shell);
+void execut(t_parsing *shell, t_minishell *mini);
 int echo_cmd(t_parsing *shill);
 void clear(void);
 void pip_exec(t_parsing *shell, t_minishell   *mini);
