@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 18:05:53 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/20 13:00:39 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:55:19 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,4 +128,4 @@ void export(t_parsing *shell, t_minishell *ms) {
     count++;
   }
   return;
-}
+} 
