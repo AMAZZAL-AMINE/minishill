@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/19 22:53:36 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/20 11:50:31 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,6 @@ void exit_shell(t_parsing *shell);
 void get_env(t_env *env, t_minishell *shell);
 void set_env(t_minishell *shell);
 void export(t_parsing *shell, t_minishell *ms);
-
+void unset(t_minishell *ms, t_parsing *shell);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 18:05:53 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/19 23:08:18 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/20 13:00:39 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,39 @@ int search_is_already_exported(char *name, t_minishell *shell) {
   return 0;
 }
 
+void update_exported_var(char *content, t_minishell *shell, char *name, char *value) {
+  int count = 0;
+  while (count < shell->n_var_env) {
+    if (str_cmp(name, shell->env[count].name)) {
+     if (ft_strchr(content, '=') != NULL) {
+      shell->env[count].is_haver_equal = 1;
+      shell->env[count].value = value;
+     }
+    }
+    count++;
+  }
+  count = 0;
+  while (count < shell->n_var_env) {
+     char **splited = ft_split(shell->env_v[count], '=');
+    if (str_cmp(name, splited[0])) {
+      if (ft_strchr(content, '=') != NULL) {
+        shell->env_v[count] = ft_strjoin(ft_strjoin(name, "="), value);
+        return;
+      }
+    }
+    count++;
+  }
+  return;
+}
+
 void export_to_en(t_minishell *shell, char *name, char *value, char *content) {
   int count = 0;
   t_env *envs = malloc(sizeof(t_env) * (shell->n_var_env + 1));
+
   if (search_is_already_exported(name, shell)) {
-    printf("the varibale [ %s ] is already exported\n", name);
+    update_exported_var(content, shell, name, value);
     return;
   }
-  
   while (count < shell->n_var_env) {
     envs[count] = shell->env[count];
     count++;

@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 19:04:47 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/19 18:18:27 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/20 11:57:20 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void builtin(t_minishell *shell, char *line) {
         get_env(shell->env, shell);
       }else if (str_cmp("export", shell->parsing[count].cmd)) {
         export(&shell->parsing[count], shell);
+      }else if (str_cmp("unset", shell->parsing[count].cmd)) {
+        unset(shell, &shell->parsing[count]);
       }else if (str_cmp("|", shell->parsing[count].cmd)) {
         pip_exec(&shell->parsing[count], shell);
       }else {
