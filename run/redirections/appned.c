@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 22:56:25 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/17 23:07:15 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/20 19:48:01 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ void appned(int *fd, char **content, int count, int *last_fd_readed) {
     dup2(2, 1);
     printf("minishell: %s: No such file or directory\n", content[count + 1]);
     *last_fd_readed = 1;
-    exit(127);
+    exit(1);
   }
   dup2(*fd, 1);
-  *last_fd_readed = 2;
+  *last_fd_readed = 1;
+  close(*fd);
 }

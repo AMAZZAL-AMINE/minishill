@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 22:45:05 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/17 22:48:51 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/20 19:44:51 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ void redirect_input(int *fd2, char **content, int count, int *last_fd_readed) {
     dup2(2, 1);
     printf("minishell: %s: No such file or directory\n", content[count + 1]);
     *last_fd_readed = 1;
-    exit(127);
+    exit(1);
   }
   dup2(*fd2, 0);
   *last_fd_readed = 0;
+  close(*fd2);
 }

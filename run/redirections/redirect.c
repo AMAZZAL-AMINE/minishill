@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 21:03:03 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/18 21:06:58 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/21 09:58:10 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ void redirect(int is_path, t_parsing *shell, char **content) {
       while (content[count]) {
         if (str_cmp(">", content[count]))
           redirect_output(&fd, content, count, &last_fd_readed);
-        if (str_cmp("<", content[count]))
+        else if (str_cmp("<", content[count]))
           redirect_input(&fd2, content, count, &last_fd_readed);
-        if (str_cmp(">>", content[count]))
+        else if (str_cmp(">>", content[count]))
          appned(&fd, content, count, &last_fd_readed);
-        if (str_cmp("<<", content[count]))
-         herdoc(&fd, &fd2, content, count, &last_fd_readed);
         count++;
       }
     }
@@ -54,8 +52,8 @@ void redirect(int is_path, t_parsing *shell, char **content) {
           redirect_input(&fd2, content, count, &last_fd_readed);
         if (str_cmp(">>", content[count]))
          appned(&fd, content, count, &last_fd_readed);
-        if (str_cmp("<<", content[count]))
-         herdoc(&fd, &fd2, content, count, &last_fd_readed);
+        // if (str_cmp("<<", content[count]))
+        //  herdoc(&fd, &fd2, content, count, &last_fd_readed);
         count++;
       }
     }

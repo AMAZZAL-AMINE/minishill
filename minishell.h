@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/20 16:48:19 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/21 09:59:06 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ char **join_two_dim_arr(char *s1, char **arr);
 void redirect_input(int *fd2, char **content, int count, int *last_fd_readed);
 void redirect_output(int *fd, char **content, int count, int *last_fd_readed) ;
 void appned(int *fd, char **content, int count, int *last_fd_readed);
-void herdoc(int *fd, int *fd2, char **content, int count, int *last_fd_readed);
+void herdoc(char **content);
+int search_for_heardoc(char **content);
 
 //commandes
 void execut(t_parsing *shell, t_minishell *mini);
