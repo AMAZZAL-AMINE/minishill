@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/19 22:24:44 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/21 22:58:19 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ char **new_tokens(char *line) {
   int count = 0;
   int count_tokens = ft_count_tokens(line) * 2;
   char **tokens = malloc(sizeof(char *) * (count_tokens + 1));
+  if (!tokens)
+    return NULL;
   char *new_line = ft_strdup(line);
   while (count <= count_tokens) {
     if (find_index_pipe(new_line) == 0) {

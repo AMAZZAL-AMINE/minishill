@@ -6,31 +6,33 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:55:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/20 17:08:32 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/21 22:00:45 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void echo_redirect_to_file(char **content, char *file, int index) {
-  (void) content;
-  (void)file;
-  (void)index;
-  return;
-}
-
-void echo_in_console(char **content, char *cmd) {
-  if (execve("/bin/echo", join_two_dim_arr(cmd, content), NULL) == -1) {
-    printf("shell: %s: command not found\n", cmd);
-    exit(127);
+void echo_in_console(char **content) {
+  int count = 0;
+  builtin_redirections(content, NULL);
+  while (content[count]) {
+    if (str_cmp(content[count], "<<") || str_cmp(content[count], ">>")
+      || str_cmp(content[count], "<") || str_cmp(content[count], ">")) {
+      break;
+    }
+    write(1, ft_strjoin(content[count], " "), ft_strlen(content[count]) + 1);
+    count++;
   }
-  return;
+  printf("\n");
+  exit(0);
 }
 
-int echo_cmd(t_parsing *shill) {
+int echo_cmd(t_parsing *shell) {
   int chld_pid = fork();
   if (chld_pid == 0) {
-    echo_in_console(shill->args, shill->cmd);
+    if (search_for_heardoc(shell->args))
+      herdoc(shell->args);
+    echo_in_console(shell->args);
   }
   waitpid(chld_pid, NULL, 0);
   return 0;

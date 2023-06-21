@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/21 09:59:06 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/21 23:56:10 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,12 @@ typedef struct s_parsing
     char **input_files;
     int n_out_files;
     int n_in_files;
-    int  is_re_to_file;// (>) Sends standard output to <file>
+    int  is_re_to_file;
+    int fd;
+    int fd2;
     int  pipe;
     int index;
-    int is_re_from_file;// (<) Reads standard input from <file>
+    int is_re_from_file;
     struct s_parsing *all_cmd;
 }               t_parsing;
 
@@ -87,6 +89,7 @@ void redirect_output(int *fd, char **content, int count, int *last_fd_readed) ;
 void appned(int *fd, char **content, int count, int *last_fd_readed);
 void herdoc(char **content);
 int search_for_heardoc(char **content);
+void builtin_redirections(char **content, t_parsing *shell);
 
 //commandes
 void execut(t_parsing *shell, t_minishell *mini);
@@ -96,7 +99,7 @@ void pip_exec(t_parsing *shell, t_minishell   *mini);
 void change_dir(t_parsing *shell);
 void pwd(t_parsing *shell);
 void exit_shell(t_parsing *shell);
-void get_env(t_env *env, t_minishell *shell);
+void get_env(t_env *env, t_minishell *shell, char **content);
 void set_env(t_minishell *shell);
 void export(t_parsing *shell, t_minishell *ms);
 void unset(t_minishell *ms, t_parsing *shell);

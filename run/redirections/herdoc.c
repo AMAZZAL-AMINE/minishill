@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 22:58:20 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/21 09:56:12 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:48:27 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,13 @@ void herdoc(char **content) {
           tmp = ft_strjoin("", line);
         else
           tmp = ft_strjoin(tmp, line);
-        free(line);
       }
-      fd = open("herdoc", O_RDWR | O_CREAT | O_TRUNC, 0644);
+      fd = open("herdoc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
       write(fd, tmp, ft_strlen(tmp));
       close(fd);
       fd = open("herdoc", O_RDONLY);
       dup2(fd, 0);
       close(fd);
-      tmp = NULL;
       content[i] = ft_strdup("<");
       content[i + 1] = ft_strdup("herdoc");
     }
