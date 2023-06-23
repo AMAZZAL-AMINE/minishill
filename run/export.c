@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 18:05:53 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/21 22:38:43 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:39:33 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void update_exported_var(char *content, t_minishell *shell, char *name, char *va
 void export_to_en(t_minishell *shell, char *name, char *value, char *content) {
   int count = 0;
   t_env *envs = malloc(sizeof(t_env) * (shell->n_var_env + 1));
-
+    
   if (search_is_already_exported(name, shell)) {
     update_exported_var(content, shell, name, value);
     return;
@@ -102,10 +102,25 @@ void get_exported_vars(t_minishell *shell) {
       }else {
         printf("\n");
       }
-      is_printed_quit= 0;
+      is_printed_quit = 0;
     count++;
   }
-  return;
+}
+
+char **get_args_without_redirections(char **args) {
+  int count = 0;
+  int index = 0;
+  while (args[index] && (!str_cmp(args[index], ">") && !str_cmp(args[index], ">>") && !str_cmp(args[index], "<") && !str_cmp(args[index], "<<")) ) {
+    index++;
+  }
+  char **new_args = malloc(sizeof(char *) * (index + 1));
+  count = 0;
+  while (count < index) {
+    new_args[count] = args[count];
+    count++;
+  }
+  new_args[count] = NULL;
+  return new_args;
 }
 
 void export(t_parsing *shell, t_minishell *ms) {
@@ -113,19 +128,20 @@ void export(t_parsing *shell, t_minishell *ms) {
   char *var = NULL;
   char *value = NULL;
   char **arg_splited;
-  if (shell->args[0] == NULL) {
+  //todo : cehck arg is have redirections
+  char **new_args  = get_args_without_redirections(shell->args);
+  if (new_args[0] == NULL) {
     get_exported_vars(ms);
-    return;
+  }else {
+    while (new_args[count]) {
+      arg_splited = ft_split(new_args[count], '=');
+      var = arg_splited[0];
+      value  = arg_splited[1];
+      if (value == NULL) {
+        value = "";
+      }
+      export_to_en(ms, var, value, new_args[count]);
+      count++;
+    } 
   }
-  while (shell->args[count]) {
-    arg_splited = ft_split(shell->args[count], '=');
-    var = arg_splited[0];
-    value  = arg_splited[1];
-    if (value == NULL) {
-      value = "";
-    }
-    export_to_en(ms, var, value, shell->args[count]);
-    count++;
-  }
-  return;
 } 

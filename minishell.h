@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/21 23:56:10 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/22 23:45:24 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct s_minishell {
     char            **env_v;
     int             n_cmd;
     int             n_var_env;
+    int             _stdin;
+    int             _stdout;
 }    t_minishell;
 
 
@@ -84,19 +86,21 @@ int count_length_two_arr(char **arr);
 char **join_two_dim_arr(char *s1, char **arr);
 
 //redirection
-void redirect_input(int *fd2, char **content, int count, int *last_fd_readed);
-void redirect_output(int *fd, char **content, int count, int *last_fd_readed) ;
-void appned(int *fd, char **content, int count, int *last_fd_readed);
+void redirect_input(char **content, int count);
+void redirect_output(char **content, int count) ;
+void appned(char **content, int count);
 void herdoc(char **content);
 int search_for_heardoc(char **content);
 void builtin_redirections(char **content, t_parsing *shell);
 
+void run_buitins(t_minishell *shell, int count);
+char *get_from_env(char *what, t_minishell *shell);
 //commandes
 void execut(t_parsing *shell, t_minishell *mini);
 int echo_cmd(t_parsing *shill);
 void clear(void);
 void pip_exec(t_parsing *shell, t_minishell   *mini);
-void change_dir(t_parsing *shell);
+void change_dir(t_parsing *shell, t_minishell *minishell) ;
 void pwd(t_parsing *shell);
 void exit_shell(t_parsing *shell);
 void get_env(t_env *env, t_minishell *shell, char **content);

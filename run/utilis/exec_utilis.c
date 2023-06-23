@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 21:16:47 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/21 21:26:57 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/23 01:53:53 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char **new_content(char **content) {
   int index = 0;
   if (is_redirec_output(content) == 0)
     return content;
-  while (content[index][0] != '>' && content[index][0] != '<' && content[index][0] != '\0') {
+  while (content[index][0] != '>' && content[index][0] != '<' && content[index]) {
     index++;
   }
   char **dst = malloc(sizeof(char *) * (index + 1));
