@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/22 23:45:24 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/23 20:25:57 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int search_for_heardoc(char **content);
 void builtin_redirections(char **content, t_parsing *shell);
 
 void run_buitins(t_minishell *shell, int count);
-char *get_from_env(char *what, t_minishell *shell);
+char *get_env_value(char *what, t_minishell *shell);
 //commandes
 void execut(t_parsing *shell, t_minishell *mini);
 int echo_cmd(t_parsing *shill);
@@ -107,5 +107,6 @@ void get_env(t_env *env, t_minishell *shell, char **content);
 void set_env(t_minishell *shell);
 void export(t_parsing *shell, t_minishell *ms);
 void unset(t_minishell *ms, t_parsing *shell);
+void expand(t_parsing *shell, t_minishell *ms);
 
 #endif

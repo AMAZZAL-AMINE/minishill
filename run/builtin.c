@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 19:04:47 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/23 20:01:58 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/23 20:23:51 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void builtin(t_minishell *shell, char *line) {
       {
         shell->_stdin = dup(STDIN_FILENO);
         shell->_stdout = dup(STDOUT_FILENO);
+        expand(&shell->parsing[count], shell);
         builtin_redirections(shell->parsing[count].args, &shell->parsing[count]);
         run_buitins(shell, count);
         dup2(shell->_stdin, STDIN_FILENO);
