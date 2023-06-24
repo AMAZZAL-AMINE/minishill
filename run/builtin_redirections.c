@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 10:40:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/23 00:18:39 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:02:30 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,4 @@ void builtin_redirections(char **content, t_parsing *shell) {
     }
     (void)shell;
   }
-
 }

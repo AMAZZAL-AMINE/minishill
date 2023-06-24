@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:23:36 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/14 07:38:18 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:54:17 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,15 @@ char **split_commande_args(char *token) {
       count++;
     }
     stopen = count;
-    while ((token[count] != ' ') && token[count])  {
+    while (token[count])  {
       save++;
       count++;
-      if ((token[count] == '\"' || token[count] == '\'') && token[count + 1]) {
+      if ((token[count] == '\"' || token[count] == '\'')) {
         within_quots++;
         save++;
       }
-      while (token[count] == ' ' && within_quots % 2 != 0) {
-        save++;
-        count++;
-      }
+      if (token[count] == ' ' && within_quots % 2 == 0)
+        break;
     }
     dst[index++] =  ft_strndup(&token[stopen], save);
     save = 0;
