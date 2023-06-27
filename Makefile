@@ -24,9 +24,9 @@ SRC = main.c ./parsing/parsing.c ./parsing/update_token.c ./parsing/split_comman
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror 
-# 
-OBJ = $(SRC:.c=.o)
 
+OBJ = $(SRC:.c=.o)
+ 
 all: $(NAME)
 
 run: all clean
@@ -34,6 +34,7 @@ run: all clean
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -lreadline ./libft/libft.a -o $(NAME) $(OBJ)
+
 
 clean:
 	@rm -f $(OBJ)

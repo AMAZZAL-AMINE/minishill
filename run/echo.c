@@ -20,10 +20,21 @@ void echo_in_console(char **content) {
       || str_cmp(content[count], "<") || str_cmp(content[count], ">")) {
       break;
     }
-    write(1, ft_strjoin(content[count], " "), ft_strlen(content[count]) + 1);
+    if (count == 0) {
+      while (content[count] && str_cmp("-n", content[count])) {
+        count++;
+      }
+    }
+    if (content[count]) {
+      write(1, ft_strjoin(content[count], " "), ft_strlen(content[count]) + 1);
+    }else {
+      break;
+    }
     count++;
   }
-  printf("\n");
+  if (content[0] == NULL || !str_cmp("-n", content[0])) {
+    write(1, "\n", 1);
+  }
 }
 
 int echo_cmd(t_parsing *shell) {
