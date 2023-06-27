@@ -107,5 +107,6 @@ void set_env(t_minishell *shell);
 void export(t_parsing *shell, t_minishell *ms);
 void unset(t_minishell *ms, t_parsing *shell);
 void expand(t_parsing *shell, t_minishell *ms);
+void handle_signals(int sig);
 
 #endif

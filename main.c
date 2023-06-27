@@ -24,6 +24,7 @@ int main(int ac, char **av, char **env)
     return 0;
   minishell->env_v = env;
   set_env(minishell);
+  signal(SIGINT, handle_signals);
   while (1)
   {
     line = readline("\033[0;35mminishell ~>\033[0m ");
