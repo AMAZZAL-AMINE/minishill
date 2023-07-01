@@ -91,6 +91,7 @@ void appned(char **content, int count);
 void herdoc(char **content);
 int search_for_heardoc(char **content);
 void builtin_redirections(char **content, t_parsing *shell);
+int is_cmd_redirected(char *cmd);
 
 void run_buitins(t_minishell *shell, int count);
 char *get_env_value(char *what, t_minishell *shell);

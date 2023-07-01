@@ -21,6 +21,9 @@ int length_cmd(char *cmd) {
 }
 
 void run_simple_commande(int is_path, t_parsing *shell, char **content, t_minishell *mini) {
+  if (is_cmd_redirected(shell->cmd)) {
+    exit(0);
+  }
   if (is_path == 1) {
     if (execve(shell->cmd, join_two_dim_arr(shell->cmd + ft_strlen("/bin/"), new_content(content)), NULL) == -1) {
       printf("minishell: %s: command not found\n", shell->cmd);

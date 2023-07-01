@@ -146,6 +146,7 @@ void init_and_split(t_minishell *minishell, char *token, int pos) {
     new_dst[count] = remove_quots(dst[count]);
     count++;
   }
+
   minishell->parsing[pos].args = new_dst;
 }
 
