@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/06 18:48:14 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/06 18:53:30 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,8 @@ typedef struct s_parsing
     char *cmd;
     char **args;
     char *input;
-    char **output_files;
-    char **input_files;
     int n_out_files;
     int n_in_files;
-    int  is_re_to_file;
-    int fd;
-    int fd2;
-    int  pipe;
-    int index;
-    int is_re_from_file;
     struct s_parsing *all_cmd;
 }               t_parsing;
 
