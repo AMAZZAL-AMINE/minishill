@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/06 16:12:24 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:35:27 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int main(int ac, char **av, char **env)
     return 0;
   minishell->env_v = env;
   set_env(minishell);
+  signal(SIGQUIT, handle_signals);
   signal(SIGINT, handle_signals);
   while (1)
   {
