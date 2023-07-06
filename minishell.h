@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/06 16:11:46 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/06 18:48:14 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,6 @@ void expand(t_parsing *shell, t_minishell *ms);
 void handle_signals(int sig);
 void handle_ctl_d(char *line);
 
+//checker
+void check_cmd_exist(t_parsing *shell, t_minishell *ms);
 #endif

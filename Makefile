@@ -6,7 +6,7 @@
 #    By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:24:14 by mamazzal          #+#    #+#              #
-#    Updated: 2023/07/06 15:22:57 by mamazzal         ###   ########.fr        #
+#    Updated: 2023/07/06 18:46:19 by mamazzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC = main.c ./parsing/parsing.c ./parsing/update_token.c ./parsing/split_comman
 			./run/redirections/redirect_output.c ./run/get_cmd_path.c  ./run/join_two_dem_arr.c ./run/cd.c \
 			./run/pwd.c ./run/exit.c ./run/env.c ./run/set_env.c ./run/export.c ./run/unset.c \
 			./run/redirections/search_for_herdoc.c ./run/builtin_redirections.c ./run/run_builtins.c \
-			./parsing/expand.c ./signals.c ./run/is_cmd_redirected.c
+			./parsing/expand.c ./signals.c ./run/is_cmd_redirected.c ./parsing/check_cmd_exist.c
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror

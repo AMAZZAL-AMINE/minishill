@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 19:04:47 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/24 19:07:37 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/06 18:49:35 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ void builtin(t_minishell *shell, char *line) {
   int size_cmd = ft_count_tokens(line) * 2;
   while (count <= size_cmd) {
     if (count % 2 == 0) {
+      check_cmd_exist(&shell->parsing[count], shell);
+      expand(&shell->parsing[count], shell);
       if (is_it_bultin_or_not(shell, count))
       {
         shell->_stdin = dup(STDIN_FILENO);
         shell->_stdout = dup(STDOUT_FILENO);
-        expand(&shell->parsing[count], shell);
         builtin_redirections(shell->parsing[count].args, &shell->parsing[count]);
         run_buitins(shell, count);
         dup2(shell->_stdin, STDIN_FILENO);
