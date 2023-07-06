@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/06 15:23:10 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/06 15:24:25 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,6 @@ void export(t_parsing *shell, t_minishell *ms);
 void unset(t_minishell *ms, t_parsing *shell);
 void expand(t_parsing *shell, t_minishell *ms);
 void handle_signals(int sig);
-void handle_ctl_c(char *line);
+void handle_ctl_d(char *line);
 
 #endif
