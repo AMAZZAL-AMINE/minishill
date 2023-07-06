@@ -6,7 +6,7 @@
 #    By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:24:14 by mamazzal          #+#    #+#              #
-#    Updated: 2023/06/23 20:24:12 by mamazzal         ###   ########.fr        #
+#    Updated: 2023/07/06 15:22:57 by mamazzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,11 @@ SRC = main.c ./parsing/parsing.c ./parsing/update_token.c ./parsing/split_comman
 			./parsing/expand.c ./signals.c ./run/is_cmd_redirected.c
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror
+
+#to defined the path of readline
+LDFLAGS="-L/goinfre/mamazzal/homebrew/opt/readline/lib"
+CPPFLAGS="-I/goinfre/mamazzal/homebrew/opt/readline/include"
 
 OBJ = $(SRC:.c=.o)
  
@@ -33,7 +37,7 @@ run: all clean
 	./$(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -lreadline ./libft/libft.a -o $(NAME) $(OBJ)
+	$(CC) $(CFLAGS)  ./libft/libft.a -o $(NAME) $(OBJ) $(LDFLAGS) $(CPPFLAGS) -lreadline
 
 
 clean:
