@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:51:14 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/06 15:24:25 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/06 15:31:37 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void handle_signals(int sig) {
         rl_on_new_line();
         rl_replace_line("", 0);
         rl_redisplay();
-    }
+    }else if (sig == SIGABRT)
+        return ;
 }
 
 void handle_ctl_d(char *line) {
