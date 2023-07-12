@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   cmd_is_only_dolar.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 13:02:18 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/13 13:17:10 by mamazzal         ###   ########.fr       */
+/*   Created: 2023/07/12 11:24:30 by mamazzal          #+#    #+#             */
+/*   Updated: 2023/07/12 11:27:10 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#include "../minishell.h"
 
-#include <errno.h>
-  
-void error_message(char *msg, int free_flag, char *line) ;
-void all_functions_errors(char *line);
-void single_quots_arr(char *line);
-
-# endif
+int cmd_is_only_dolar(char *cmd) {
+  if (str_cmp(cmd, "$")) {
+    return 1;
+  }
+  return 0;
+}

@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 17:29:23 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/24 19:03:45 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/11 15:44:49 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ void change_dir(t_parsing *shell, t_minishell *minishell) {
     }else if (shell->args[0] == NULL || is_redirec_output(&shell->args[0])) {
       chdir(get_env_value("HOME", minishell));
     }
+    captur.exit_status = 0;
   return;
 }

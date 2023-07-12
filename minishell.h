@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/06 18:53:30 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/12 11:28:59 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINISHELL_H
 
 #include "./libft/libft.h"
-#include "./errors/errors.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -24,6 +23,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <dirent.h>
+#include <stdbool.h>
 #include <sys/stat.h>
 
 typedef struct s_parsing
@@ -34,6 +34,8 @@ typedef struct s_parsing
     int n_out_files;
     int n_in_files;
     struct s_parsing *all_cmd;
+    int     fd_in;
+    int     fd_out;
 }               t_parsing;
 
 typedef struct s_env
@@ -43,6 +45,12 @@ typedef struct s_env
     int is_haver_equal;
 }            t_env;
 
+struct s_captur
+{
+    int exit_status;
+}  captur;
+
+
 typedef struct s_minishell {
     t_env           *env;
     t_parsing       *parsing;
@@ -51,7 +59,9 @@ typedef struct s_minishell {
     int             n_var_env;
     int             _stdin;
     int             _stdout;
-    int caputre_exit_status;
+    int             pipefd[2];
+    int             pipefd2[2];
+    int             prev_pipefd[2];
 }    t_minishell;
 
 int     parsing_input(t_minishell *minishell, char *line);
@@ -59,7 +69,7 @@ char    *update_token(char *token, int size);
 char **split_commande_args(char *token);
 char *get_with_fixes_size(char *token, int size);
 int ft_count_tokens(char *line);
-void redirect(int is_path, t_parsing *shell, char **content);
+int redirect(int is_path, t_parsing *shell, char **content);
 void set_the_tokens_in_ther_place(t_minishell *shell);
 
 //start point 
@@ -73,23 +83,26 @@ int find_file_after_redir(char **args);
 char **get_only_what_ineed_in_arr(char **args);
 void count_redirections(t_minishell *shell);
 int str_cmp(char *s1, char *s2);
-char *find_cmd_path(char *cmd, t_minishell *shell);
+char *find_cmd_path(char *cmd, t_minishell *shell, t_parsing *s);
 int count_length_two_arr(char **arr);
 char **join_two_dim_arr(char *s1, char **arr);
+char *expande_cmd(char *cmd, t_minishell *minishell);
+char **split_variabls(char *arg, int size);
 
 //redirection
-void redirect_input(char **content, int count);
-void redirect_output(char **content, int count) ;
-void appned(char **content, int count);
-void herdoc(char **content);
+int redirect_input(char **content, int count);
+int redirect_output(char **content, int count) ;
+int appned(char **content, int count);
+int herdoc(char **content);
 int search_for_heardoc(char **content);
-void builtin_redirections(char **content, t_parsing *shell);
+int builtin_redirections(char **content, t_parsing *shell);
 int is_cmd_redirected(char *cmd);
 
 void run_buitins(t_minishell *shell, int count);
 char *get_env_value(char *what, t_minishell *shell);
-//commandes
-void execut(t_parsing *shell, t_minishell *mini);
+
+//commandes 
+void execut(t_parsing *shell, t_minishell *mini, int ispipe);
 int echo_cmd(t_parsing *shill);
 void clear(void);
 void pip_exec(t_parsing *shell, t_minishell   *mini);
@@ -103,7 +116,21 @@ void unset(t_minishell *ms, t_parsing *shell);
 void expand(t_parsing *shell, t_minishell *ms);
 void handle_signals(int sig);
 void handle_ctl_d(char *line);
-
+void _pipe(t_parsing *shell, t_minishell   *mini, char *line);
 //checker
 void check_cmd_exist(t_parsing *shell, t_minishell *ms);
+int get_rederection_length(char *token);
+
+//ERRORS
+int all_functions_errors(char *line, t_minishell *ms, t_parsing *shell);
+void error_message(char *msg, int free_flag, char *line) ;
+int single_quots_arr(char *line);
+int handle_undfined_file(char **content);
+void cmd_not_found(char *cmd, t_minishell *shell);
+int errors(char *line, t_minishell *ms, t_parsing *shell);
+int is_can_access(char *arg, t_parsing *shell);
+int exp_not_valid_identifier(char *arg);
+int  check_cmd_type(char *cmd);
+int cmd_is_only_dolar(char *cmd);
+
 #endif

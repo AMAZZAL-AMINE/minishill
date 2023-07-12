@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   handle_undfined_file.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/19 14:41:41 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/11 15:23:27 by mamazzal         ###   ########.fr       */
+/*   Created: 2023/07/09 22:08:10 by mamazzal          #+#    #+#             */
+/*   Updated: 2023/07/11 13:59:08 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-void get_env(t_env *env, t_minishell *minishell, char **content) {
+int handle_undfined_file(char **content)
+{
   int count = 0;
-  if (search_for_heardoc(content))
-    herdoc(content);
-  while (count < minishell->n_var_env) {
-    if (env[count].is_haver_equal == 1) {
-      printf("%s=%s\n", env[count].name, env[count].value);
-    }
+  while (content[count]) {
+    if (str_cmp(">", content[count]) 
+      || str_cmp("<", content[count]) 
+      || str_cmp(">>", content[count])
+      || str_cmp("<<", content[count])) {
+        if (!content[count + 1]) {
+         printf("minishell: syntax error near unexpected token `newline'\n");
+         captur.exit_status = 258;
+          return (1);
+        }
+      }
     count++;
   }
-  captur.exit_status = 0;
+  return (0);
 }

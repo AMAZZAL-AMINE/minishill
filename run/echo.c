@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:55:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/24 12:46:13 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/11 15:23:16 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ void echo_in_console(char **content) {
       }
     }
     if (content[count]) {
-      write(1, ft_strjoin(content[count], " "), ft_strlen(content[count]) + 1);
+      if (content[count + 1] != NULL) {
+        write(1, ft_strjoin(content[count], " "), ft_strlen(content[count]) + 1);
+      }else {
+        write(1, content[count], ft_strlen(content[count]));
+      }
     }else {
       break;
     }
@@ -39,5 +43,6 @@ void echo_in_console(char **content) {
 
 int echo_cmd(t_parsing *shell) {
   echo_in_console(shell->args);
+  captur.exit_status = 0;
   return 0;
 }

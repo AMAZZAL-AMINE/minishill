@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 18:05:53 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/23 16:39:33 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/11 15:38:01 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,16 @@ void update_exported_var(char *content, t_minishell *shell, char *name, char *va
   return;
 }
 
-void export_to_en(t_minishell *shell, char *name, char *value, char *content) {
+int export_to_en(t_minishell *shell, char *name, char *value, char *content) {
   int count = 0;
   t_env *envs = malloc(sizeof(t_env) * (shell->n_var_env + 1));
-    
+  if (exp_not_valid_identifier(name)) {
+    captur.exit_status = 1;
+    return 1;
+  }
   if (search_is_already_exported(name, shell)) {
     update_exported_var(content, shell, name, value);
-    return;
+    return 0;
   }
   while (count < shell->n_var_env) {
     envs[count] = shell->env[count];
@@ -80,7 +83,7 @@ void export_to_en(t_minishell *shell, char *name, char *value, char *content) {
   }
   shell->n_var_env += 1;
   shell->env_v = new_env;
-  return;
+  return 0;
 }
 
 void get_exported_vars(t_minishell *shell) {
@@ -127,6 +130,7 @@ void export(t_parsing *shell, t_minishell *ms) {
   int count = 0;
   char *var = NULL;
   char *value = NULL;
+  int   return_status = 0;
   char **arg_splited;
   //todo : cehck arg is have redirections
   char **new_args  = get_args_without_redirections(shell->args);
@@ -140,8 +144,13 @@ void export(t_parsing *shell, t_minishell *ms) {
       if (value == NULL) {
         value = "";
       }
-      export_to_en(ms, var, value, new_args[count]);
+      if (export_to_en(ms, var, value, new_args[count]) == 1)
+        return_status = 1;
       count++;
     } 
   }
+  if (return_status == 1)
+    captur.exit_status = 1;
+  else
+    captur.exit_status = 0;
 } 

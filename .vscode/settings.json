@@ -3,6 +3,7 @@
     "minishell.h": "c",
     "__config": "c",
     "stdio.h": "c",
-    "history.h": "c"
+    "history.h": "c",
+    "errors.h": "c"
   }
 }

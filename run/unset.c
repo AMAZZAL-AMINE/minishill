@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:48:42 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/20 13:30:42 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/11 15:23:57 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,6 @@ void unset(t_minishell *ms, t_parsing *shell) {
     }
     count++;
   }
+  captur.exit_status = 0;
 }
+ 

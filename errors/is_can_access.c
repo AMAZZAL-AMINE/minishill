@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   is_can_access.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/19 14:41:41 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/11 15:23:27 by mamazzal         ###   ########.fr       */
+/*   Created: 2023/07/10 15:01:40 by mamazzal          #+#    #+#             */
+/*   Updated: 2023/07/10 18:19:37 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-void get_env(t_env *env, t_minishell *minishell, char **content) {
+int _search(char *str, char obj) {
   int count = 0;
-  if (search_for_heardoc(content))
-    herdoc(content);
-  while (count < minishell->n_var_env) {
-    if (env[count].is_haver_equal == 1) {
-      printf("%s=%s\n", env[count].name, env[count].value);
+  while (str[count]) {
+    if (str[count] == obj) {
+      return 1;
     }
     count++;
   }
-  captur.exit_status = 0;
+  return 0;
+}
+
+int is_can_access(char *arg, t_parsing *shell) {
+  if (_search(arg, '/')) {
+    if (access(arg, F_OK) == -1) {
+      ft_putstr_fd("minishell: ", 2);
+      ft_putstr_fd(shell->cmd, 2);
+      ft_putstr_fd(": No such file or directory\n", 2);
+      return 1;
+    }
+  }
+
+  return 0;
 }
