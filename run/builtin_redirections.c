@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 10:40:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/11 15:02:22 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/12 15:07:39 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,21 @@ int builtin_redirections(char **content, t_parsing *shell) {
   if (is_redirec_output(content)) {
     int count = 0;
     while (content[count]) {
-      if (str_cmp(">", content[count]))
+      if (str_cmp(">", content[count])) {
         captur = redirect_output(content, count);
-      else if (str_cmp("<", content[count]))
+        if (captur != 0)
+          break;
+      }
+      else if (str_cmp("<", content[count])) {
         captur = redirect_input(content, count);
-      else if (str_cmp(">>", content[count]))
+        if (captur != 0)
+          break;
+      }
+      else if (str_cmp(">>", content[count])) {
         captur = appned(content, count);
+        if (captur != 0)
+          break;
+      }
       count++;
     }
     (void)shell;

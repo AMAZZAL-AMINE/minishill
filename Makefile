@@ -6,7 +6,7 @@
 #    By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:24:14 by mamazzal          #+#    #+#              #
-#    Updated: 2023/07/12 11:29:42 by mamazzal         ###   ########.fr        #
+#    Updated: 2023/07/13 11:42:02 by mamazzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,10 @@ SRC = main.c ./parsing/parsing.c ./parsing/update_token.c ./parsing/split_comman
 			./parsing/expand.c ./signals.c ./run/is_cmd_redirected.c ./parsing/check_cmd_exist.c \
 			./errors/handle_undfined_file.c ./errors/cmd_not_found.c ./errors/is_can_access.c \
 			./errors/exp_not_valid_identifier.c ./errors/check_cmd_type.c ./parsing/expand_cmd.c \
-			./errors/cmd_is_only_dolar.c
+			./errors/cmd_is_only_dolar.c ./errors/unset_not_valid_identifier.c ./errors/check_the_dir_name.c
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 
 #to defined the path of readline
 LDFLAGS="-L/goinfre/mamazzal/homebrew/opt/readline/lib"
@@ -40,7 +40,7 @@ run: all clean
 	./$(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS)  ./libft/libft.a -o $(NAME) $(OBJ) $(LDFLAGS) $(CPPFLAGS) -lreadline
+	$(CC) $(CFLAGS)  ./libft/libft.a -o $(NAME) $(OBJ)  -lreadline
 
 
 clean:

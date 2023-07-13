@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 22:49:49 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/11 15:03:43 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/12 23:35:15 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,15 @@ int redirect_output(char **content, int count) {
         ft_putstr_fd(": is a directory\n", 2);
         return 1;
     }
-    captur.exit_status = 1;
     int fd = open(content[count + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    if (access(content[count + 1], W_OK)) {
+    if (access(content[count + 1], F_OK) == -1) {
+        captur.exit_status = 1;
+        ft_putstr_fd("minishell : ", 2);
+        ft_putstr_fd(content[count + 1], 2);
+        ft_putstr_fd(": No such file or directory\n", 2);
+        return 1;
+    }
+    if (access(content[count + 1], W_OK) == -1) {
         captur.exit_status = 1;
         ft_putstr_fd("minishell : ", 2);
         ft_putstr_fd(content[count + 1], 2);

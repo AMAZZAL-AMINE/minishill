@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/12 11:28:59 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/13 11:41:52 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,7 @@ int is_can_access(char *arg, t_parsing *shell);
 int exp_not_valid_identifier(char *arg);
 int  check_cmd_type(char *cmd);
 int cmd_is_only_dolar(char *cmd);
+int unset_not_valid_identifier(char *arg);
+int check_the_dir_name(char *dir_name);
 
 #endif

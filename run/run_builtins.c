@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 13:42:49 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/11 13:55:34 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/12 15:31:27 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ void run_buitins(t_minishell *shell, int count) {
   else if (str_cmp("export", shell->parsing[count].cmd))
     export(&shell->parsing[count], shell);
   else if (str_cmp("unset", shell->parsing[count].cmd))
-    unset(shell, &shell->parsing[count]);  
+    unset(shell, &shell->parsing[count]);
 }

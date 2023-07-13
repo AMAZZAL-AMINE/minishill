@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 18:05:53 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/11 15:38:01 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/12 14:39:47 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,10 @@ void get_exported_vars(t_minishell *shell) {
       int index = 0;
       printf("declare -x ");
       while (shell->env_v[count][index]) {
+        if (!shell->env_v[count][index + 1] && shell->env_v[count][index] == '$')
+          printf("\\");
         printf("%c", shell->env_v[count][index]);
-        if (shell->env_v[count][index] == '=') {
+        if (shell->env_v[count][index] == '=' && !is_printed_quit) {
           is_printed_quit = 1;
           printf("\"");
         }
@@ -132,15 +134,19 @@ void export(t_parsing *shell, t_minishell *ms) {
   char *value = NULL;
   int   return_status = 0;
   char **arg_splited;
+ 
+  int is_last_equal = 0;
   //todo : cehck arg is have redirections
   char **new_args  = get_args_without_redirections(shell->args);
   if (new_args[0] == NULL) {
     get_exported_vars(ms);
   }else {
     while (new_args[count]) {
+      if (new_args[count][ft_strlen(new_args[count]) - 1] == '=')
+        is_last_equal = 1;
       arg_splited = ft_split(new_args[count], '=');
       var = arg_splited[0];
-      value  = arg_splited[1];
+      value  = new_args[count] + (ft_strlen(var) + 1);
       if (value == NULL) {
         value = "";
       }
@@ -153,4 +159,4 @@ void export(t_parsing *shell, t_minishell *ms) {
     captur.exit_status = 1;
   else
     captur.exit_status = 0;
-} 
+}
