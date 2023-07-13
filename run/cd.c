@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 17:29:23 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/13 12:24:25 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/13 17:18:18 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,3 @@ void change_dir(t_parsing *shell, t_minishell *minishell) {
     captur.exit_status = 0;
   return;
 }
-cat <"./test_files/infile_big" | echo hi
