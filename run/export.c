@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 18:05:53 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/12 14:39:47 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/15 19:55:03 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void update_exported_var(char *content, t_minishell *shell, char *name, char *va
   }
   count = 0;
   while (count < shell->n_var_env) {
-     char **splited = ft_split(shell->env_v[count], '=');
+    char **splited = ft_split(shell->env_v[count], '=');
     if (str_cmp(name, splited[0])) {
       if (ft_strchr(content, '=') != NULL) {
         shell->env_v[count] = ft_strjoin(ft_strjoin(name, "="), value);
@@ -136,9 +136,9 @@ void export(t_parsing *shell, t_minishell *ms) {
   char **arg_splited;
  
   int is_last_equal = 0;
-  //todo : cehck arg is have redirections
   char **new_args  = get_args_without_redirections(shell->args);
-  if (new_args[0] == NULL) {
+  //todo : cehck arg is have redirections
+  if (!*new_args) {
     get_exported_vars(ms);
   }else {
     while (new_args[count]) {
@@ -147,13 +147,13 @@ void export(t_parsing *shell, t_minishell *ms) {
       arg_splited = ft_split(new_args[count], '=');
       var = arg_splited[0];
       value  = new_args[count] + (ft_strlen(var) + 1);
-      if (value == NULL) {
+      if (!value) {
         value = "";
       }
       if (export_to_en(ms, var, value, new_args[count]) == 1)
         return_status = 1;
       count++;
-    } 
+    }
   }
   if (return_status == 1)
     captur.exit_status = 1;

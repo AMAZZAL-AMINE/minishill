@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 11:30:09 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/13 11:49:04 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/15 13:11:32 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int check_the_dir_name(char *dir_name) {
     }
     if (access(dir_name, F_OK) == -1) {
       captur.exit_status = 1;
-      ft_putstr_fd("minishell: cd", 2);
+      ft_putstr_fd("minishell: cd: ", 2);
       ft_putstr_fd(dir_name, 2);
       ft_putstr_fd(": No such file or directory\n", 2);
       return 1;

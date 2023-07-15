@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:23:36 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/10 21:54:52 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/15 19:32:32 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,30 +92,36 @@ char	*ft_strndup_new(char const *str, size_t max)
 	return (dst);
 }
 
-char **split_commande_args(char *token) {
+char **split_commande_args(char *token, t_minishell *minishell) {
   int count = 0;
   int save = 0;
   int index = 0;
   int stopen = 0;
   int within_quots = 0;
+  int within_quots_two = 0;
   char **dst = malloc(sizeof(char *) * (count_splited_words(token) + 1));
   while (token[count]) {
-    if (token[count] == '\"' || token[count] == '\'')
-      within_quots++;
-    while ((token[count] == ' ') && within_quots % 2 == 0)
+    while ((token[count] == ' ') && (within_quots % 2 == 0 && within_quots_two % 2 == 0))
       count++;
     stopen = count;
-    
+    if (token[count] == '\"')
+      within_quots++;
+    if (token[count] == '\'')
+      within_quots_two++;
     while (token[count])  {
-      if ((token[count] == '>' || token[count] == '<') && within_quots % 2 == 0)
+      if ((token[count] == '>' || token[count] == '<') && (within_quots % 2 == 0 && within_quots_two % 2 == 0))
         break;
       save++;
       count++;
-      if ((token[count] == '\"' || token[count] == '\'')) {
+      if (token[count] == '\"') {
         within_quots++;
         save++;
       }
-      if (token[count] == ' ' && within_quots % 2 == 0)
+      if (token[count] == '\'') {
+        within_quots_two++;
+        save++;
+      }
+      if (token[count] == ' ' && (within_quots % 2 == 0 && within_quots_two % 2 == 0))
         break;
     }
     
@@ -124,13 +130,13 @@ char **split_commande_args(char *token) {
       index++;
     }
   
-    if (token[count] == '>' || token[count] == '<') {
+    if ((token[count] == '>' || token[count] == '<') && (within_quots % 2 == 0 && within_quots_two % 2 == 0)) {
       dst[index] =  ft_strdup(ft_strndup(&token[count], get_rederection_length(&token[count])));
       index++;
     }
 
     save = 0;
-    if (token[count] == '>' || token[count] == '<')
+    if ((token[count] == '>' || token[count] == '<') && (within_quots % 2 == 0 && within_quots_two % 2 == 0))
       count += get_rederection_length(&token[count]);
     else {
       if (token[count]) {
@@ -139,6 +145,37 @@ char **split_commande_args(char *token) {
     }
   }
   dst[index] = NULL;
+  within_quots = 0;
+  within_quots_two = 0;
+  int helepr = 0;
+  int helper2 = 0;
+  count = 0;
+  while (dst[count]) {
+    within_quots = 0;
+    within_quots_two = 0;
+    helepr = 0;
+    helper2 = 0;
+    while (dst[count][helper2]) {
+      if (dst[count][helper2] == '\'') {
+        within_quots_two++;
+      }
+      if (dst[count][helper2] == '\"') {
+        within_quots++;
+      }
+      if (dst[count][helper2] == ' ' && (within_quots % 2 == 0 && within_quots_two % 2 == 0)) {
+        helepr++;
+      }
+      helper2++;
+    
+    }
+    // printf("%s\n", dst[count]);
+    // printf("END");
+    dst[count] = ft_strndup(dst[count], helper2 - helepr);
+    count++;
+  }
+  int size_new_vars = count_length_two_arr(dst);
+  char **new_arg = malloc(sizeof(char *) * (size_new_vars + 1));
+  dst = get_new_arg(new_arg,dst, size_new_vars, minishell);
   return  dst;
 }
 

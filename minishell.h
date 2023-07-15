@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/13 11:41:52 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/16 00:36:22 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,13 @@ typedef struct s_minishell {
 
 int     parsing_input(t_minishell *minishell, char *line);
 char    *update_token(char *token, int size);
-char **split_commande_args(char *token);
+// char **split_commande_args(char *token);
 char *get_with_fixes_size(char *token, int size);
 int ft_count_tokens(char *line);
 int redirect(int is_path, t_parsing *shell, char **content);
 void set_the_tokens_in_ther_place(t_minishell *shell);
-
+char **get_new_arg(char **dst, char **args, int size, t_minishell *minishell);
+char **split_commande_args(char *token, t_minishell *minishell);
 //start point 
 void builtin(t_minishell *shell, char *line);
 char **join_two_dim_arr(char *s1, char **arr);
@@ -88,6 +89,9 @@ int count_length_two_arr(char **arr);
 char **join_two_dim_arr(char *s1, char **arr);
 char *expande_cmd(char *cmd, t_minishell *minishell);
 char **split_variabls(char *arg, int size);
+void update_exported_var(char *content, t_minishell *shell, char *name, char *value);
+char **join_tables(char **table1, char **table2);
+int is_commande_var(t_parsing *shell, t_minishell *mini, int index);
 
 //redirection
 int redirect_input(char **content, int count);
@@ -98,7 +102,7 @@ int search_for_heardoc(char **content);
 int builtin_redirections(char **content, t_parsing *shell);
 int is_cmd_redirected(char *cmd);
 
-void run_buitins(t_minishell *shell, int count);
+void run_buitins(t_minishell *shell, int count, int size);
 char *get_env_value(char *what, t_minishell *shell);
 
 //commandes 
@@ -106,9 +110,9 @@ void execut(t_parsing *shell, t_minishell *mini, int ispipe);
 int echo_cmd(t_parsing *shill);
 void clear(void);
 void pip_exec(t_parsing *shell, t_minishell   *mini);
-void change_dir(t_parsing *shell, t_minishell *minishell) ;
+void change_dir(t_parsing *shell, t_minishell *minishell, int count, int isze);
 void pwd(t_parsing *shell);
-void exit_shell(t_parsing *shell);
+void exit_shell(t_parsing *shell, t_minishell *minishell, int index, int size);
 void get_env(t_env *env, t_minishell *shell, char **content);
 void set_env(t_minishell *shell);
 void export(t_parsing *shell, t_minishell *ms);
@@ -134,5 +138,6 @@ int  check_cmd_type(char *cmd);
 int cmd_is_only_dolar(char *cmd);
 int unset_not_valid_identifier(char *arg);
 int check_the_dir_name(char *dir_name);
+int has_ambiguous_redirect(char** args);
 
 #endif

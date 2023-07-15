@@ -6,12 +6,11 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:41:41 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/11 15:23:27 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/15 16:02:24 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 void get_env(t_env *env, t_minishell *minishell, char **content) {
   int count = 0;
@@ -19,7 +18,8 @@ void get_env(t_env *env, t_minishell *minishell, char **content) {
     herdoc(content);
   while (count < minishell->n_var_env) {
     if (env[count].is_haver_equal == 1) {
-      printf("%s=%s\n", env[count].name, env[count].value);
+      char *env_val = env[count].value;
+      printf("%s=%s\n", env[count].name, env_val);
     }
     count++;
   }

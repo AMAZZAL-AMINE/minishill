@@ -6,11 +6,13 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/13 12:08:14 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/16 00:30:31 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+ 
 
 int main(int ac, char **av, char **env)
 {
@@ -39,7 +41,6 @@ int main(int ac, char **av, char **env)
       count_redirections(minishell);
       builtin(minishell, line);
       free(line);
-      
     }
   }
   return 0;

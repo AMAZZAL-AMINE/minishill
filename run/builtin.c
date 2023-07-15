@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 19:04:47 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/12 21:59:49 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/15 15:48:07 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ void builtin(t_minishell *shell, char *line) {
     if (count % 2 == 0) {
       if (handle_undfined_file(shell->parsing[count].args))
         break;
+      // is_commande_var(&shell->parsing[count], shell, count);
       if (all_functions_errors(line, shell, &shell->parsing[count]))
         break;
       check_cmd_exist(&shell->parsing[count], shell);
-      expand(&shell->parsing[count], shell);
+      // expand(&shell->parsing[count], shell);
       if (is_it_bultin_or_not(shell, count))
       {
         if (count + 1 <= size_cmd && (str_cmp(shell->parsing[count + 1].cmd, "|"))) {
@@ -60,7 +61,7 @@ void builtin(t_minishell *shell, char *line) {
               close(shell->pipefd2[1]);
             }
             if (builtin_redirections(shell->parsing[count].args, &shell->parsing[count]) == 0) {
-              run_buitins(shell, count);
+              run_buitins(shell, count, size_cmd);
               exit(0);
             }else 
               exit(1);
@@ -83,7 +84,7 @@ void builtin(t_minishell *shell, char *line) {
           }
         }else {
           if (builtin_redirections(shell->parsing[count].args, &shell->parsing[count]) == 0) {
-            run_buitins(shell, count);
+            run_buitins(shell, count, size_cmd);
           }
         }
       }
