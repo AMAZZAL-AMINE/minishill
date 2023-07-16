@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/15 23:51:51 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/16 20:53:20 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,57 +317,6 @@ int is_bettwen_double(char *arg) {
   return 1;
 }
 
-int ft_get_grepe_size(char *s) {
-  int count = 1;
-  while (s[count] && (ft_isalpha(s[count]) || s[count] == '_' || ft_isdigit(s[count])) ) {
-   count++;
-  }
-  if ((s[count] == '\'' || s[count] == '\"')) {
-    return count - 1;
-  }else if (s[count] == '?') {
-    return count;
-  }
-  return count -1;
-}
-
-char *get_var_from_arg(char *arg, t_minishell *mini) {
-  int count = 0;
-  char *tmp1;
-  char *tmp2;
-  char *dst;
-  while (arg[count]) {
-    int grep_size = 0;
-    if (arg[count] == '$') {
-      if (arg[count + 1] && (arg[count  + 1] == '@' || ft_isdigit(arg[count  + 1]))){
-        grep_size = 1;
-      }else {
-        grep_size = ft_get_grepe_size(arg + count);
-      }
-      // printf("GREPEDSIZE => %d\n", grep_size);
-      tmp1 = ft_strndup(arg, count);
-      tmp2 = arg + (grep_size + (count + 1));
-      if (arg[count] == '$' && (!ft_isalpha(arg[count + 1]) && !ft_isdigit(arg[count + 1]) && arg[count + 1] != '_' && arg[count + 1] != '?' && arg[count + 1] != '@')) {
-        dst = "$";
-      }else {
-        if (arg[count + 1] == '?') {
-          dst = ft_itoa(captur.exit_status);
-        }else {
-          dst = ft_strndup((arg + (count + 1)), grep_size);
-          dst = get_env_value(dst, mini);
-        }
-      }
-      if (dst == NULL) {
-        dst = "";
-      }
-      dst = ft_strjoin(ft_strjoin(tmp1, dst), tmp2);
-      arg  = dst;
-    }
-    count++;
-  }
-  dst = ft_strdup(dst);
-  return dst;
-}
-
 char **get_new_arg(char **dst, char **args, int size, t_minishell *minishell) {
   int count = 0;
   int index = 0;
@@ -376,10 +325,11 @@ char **get_new_arg(char **dst, char **args, int size, t_minishell *minishell) {
     if (is_dolar_var(args[count]) &&  is_bettwen_double(args[count])) {
       // printf("ARGG => %s\n", args[count]);
       // args[count] = remove_quots(args[count]);
-      dst[index] = remove_quots(get_var_from_arg(args[count], minishell));
-      if (!*dst[index])
-        dst[index] = NULL;
-      index++;
+      char *mini_dst =  remove_quots(expand(args[count], minishell));
+      if (*mini_dst) {
+        dst[index] = mini_dst;
+        index++;
+      }
     }else {
       dst[index] = remove_quots(args[count]);
       index++;
@@ -387,6 +337,11 @@ char **get_new_arg(char **dst, char **args, int size, t_minishell *minishell) {
     count++;
   }
   dst[index] = NULL;
+  // count = 0;
+  // while (dst[count]) {
+  //   printf("[%s]\n", dst[count]);
+  //   count++;
+  // }
   return dst;
 }
 
@@ -398,10 +353,10 @@ char *update_cmd_from_quotes(char *cmd) {
     int index = 0;
     while (cmd[count]) {
         if (cmd[count] == '\"' && count_s_quot == 0) {
-            count_d_quot++;
+          count_d_quot++;
         }
         if (cmd[count] == '\'' && count_d_quot == 0) {
-            count_s_quot++;
+          count_s_quot++;
         }
         count++;
     }
@@ -491,8 +446,12 @@ int count_argment_without_red(char **args) {
   int count = 0;
   int reterned_count = 0;
   while (args[count]) {
-    if (count - 1 >= 0 && !is_redirect(args[count - 1]) && !is_redirect(args[count])) {
+    if (count == 0 && !is_redirect(args[count])) {
       reterned_count++;
+    }else { 
+      if (count - 1 >= 0 && !is_redirect(args[count - 1]) && !is_redirect(args[count])) {
+        reterned_count++;
+      }
     }
     count++;
   }
@@ -525,9 +484,14 @@ char** sort_args(char** oldargs) {
   index = 0;
   count = 0;
   while (oldargs[count]) {
-    if (count - 1 >= 0 && !is_redirect(oldargs[count - 1]) && !is_redirect(oldargs[count])) {
+    if (count == 0 && !is_redirect(oldargs[count])) {
       dstTwo[index] = oldargs[count];
       index++;
+    }else {
+      if (count - 1 >= 0 && !is_redirect(oldargs[count - 1]) && !is_redirect(oldargs[count])) {
+        dstTwo[index] = oldargs[count];
+        index++;
+      }
     }
     count++;
   }
@@ -552,7 +516,7 @@ void init_and_split(t_minishell *minishell, char *token, int pos) {
   }
   minishell->parsing[pos].args = dst;
   if (is_dolar_var(minishell->parsing[pos].cmd) &&  is_bettwen_double(minishell->parsing[pos].cmd)) {
-      minishell->parsing[pos].cmd = remove_quots(get_var_from_arg(minishell->parsing[pos].cmd, minishell));
+      minishell->parsing[pos].cmd = remove_quots(expand(minishell->parsing[pos].cmd, minishell));
       is_commande_var(&minishell->parsing[pos], minishell, pos);
    }else {
       minishell->parsing[pos].cmd = remove_quots(minishell->parsing[pos].cmd);
@@ -560,11 +524,7 @@ void init_and_split(t_minishell *minishell, char *token, int pos) {
   // int size_new_vars = count_length_two_arr(minishell->parsing[pos].args);
   // char **new_arg = malloc(sizeof(char *) * (size_new_vars + 1));
   // minishell->parsing[pos].args = get_new_arg(new_arg,minishell->parsing[pos].args, size_new_vars, minishell);
-  // count = 0;
-  // while (minishell->parsing[pos].args[count]) {
-  //   printf("[%s]\n", minishell->parsing[pos].args[count]);
-  //   count++;
-  // }
+  count = 0;
 }
 
 int parsing_input(t_minishell *minishell, char *line) {

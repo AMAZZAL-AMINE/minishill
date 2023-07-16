@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:51:14 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/12 11:20:40 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/16 17:56:36 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void handle_signals(int sig) {
 
 void handle_ctl_d(char *line) {
     if ((int)line == 0)
-        exit(0);
+        exit(captur.exit_status);
 }

@@ -6,24 +6,22 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:27:58 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/15 19:34:59 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/16 19:24:15 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 int is_not_valid(char *arg) {
-  if ((arg[ft_strlen(arg) - 1] >= 35 && arg[ft_strlen(arg) - 1] <= 38) || arg[ft_strlen(arg) - 1] == 33) {
-    return 1;
-  }else if ((arg[ft_strlen(arg) - 1] >= 40 && arg[ft_strlen(arg) - 1] <= 47)) {
+  int count = 0;
+  if (ft_isdigit(arg[0])) {
     return 1;
   }
-  return 0;
-}
-
-int check_first(char *arg) {
-  if (arg[0] && !ft_isalpha(arg[0]) && arg[0] != '_') {
-    return 1;
+  while (arg[count]) {
+    if (!ft_isalpha(arg[count]) && arg[count] != '_' && !ft_isdigit(arg[count])) {
+      return 1;
+    }
+    count++;
   }
   return 0;
 }
@@ -33,7 +31,7 @@ int exp_not_valid_identifier(char *arg) {
     captur.exit_status = 0;
     return 0;
   }
-  if (is_not_valid(arg) || check_first(arg)) {
+  if (is_not_valid(arg)) {
     captur.exit_status = 1;
     ft_putstr_fd("minishell: export: `", 2);
     ft_putstr_fd(arg, 2);

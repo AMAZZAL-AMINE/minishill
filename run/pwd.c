@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 11:01:26 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/11 15:23:52 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/16 20:08:48 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void pwd(t_parsing *shell) {
     exit(2);
   }
 
-  printf("%s\n", buff);
+  ft_putstr_fd(buff, 1);
+  ft_putchar_fd('\n', 1);
   captur.exit_status = 0;
   (void)shell;
   free(buff);

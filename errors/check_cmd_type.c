@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:50:12 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/12 14:53:31 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/16 17:44:49 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,7 @@ int run_file(char *cmd) {
     ft_putstr_fd(": No such file or directory\n", 2);
     return 127;
   }
-  if (access(cmd, W_OK)) {
-    captur.exit_status = 126;
-    ft_putstr_fd("minishell : ", 2);
-    ft_putstr_fd(cmd, 2);
-    ft_putstr_fd(": Permission denied\n", 2);
-    return 126;
-  }
+
   if (access(cmd, X_OK)) {
     captur.exit_status = 126;
     ft_putstr_fd("minishell : ", 2);
@@ -50,8 +44,7 @@ int run_file(char *cmd) {
     ft_putstr_fd(": Permission denied\n", 2);
     return 126;
   }
-  open(cmd, O_RDONLY);
-  write(1, "\n", 1);
+ 
    return 0;
 }
 

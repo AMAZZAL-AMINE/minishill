@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/16 00:36:22 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/16 20:52:26 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ char **split_variabls(char *arg, int size);
 void update_exported_var(char *content, t_minishell *shell, char *name, char *value);
 char **join_tables(char **table1, char **table2);
 int is_commande_var(t_parsing *shell, t_minishell *mini, int index);
+void update_env_ontime(t_parsing *shell, t_minishell *mini);
 
 //redirection
 int redirect_input(char **content, int count);
@@ -117,7 +118,7 @@ void get_env(t_env *env, t_minishell *shell, char **content);
 void set_env(t_minishell *shell);
 void export(t_parsing *shell, t_minishell *ms);
 void unset(t_minishell *ms, t_parsing *shell);
-void expand(t_parsing *shell, t_minishell *ms);
+char *expand(char *arg, t_minishell *mini);
 void handle_signals(int sig);
 void handle_ctl_d(char *line);
 void _pipe(t_parsing *shell, t_minishell   *mini, char *line);
@@ -139,5 +140,6 @@ int cmd_is_only_dolar(char *cmd);
 int unset_not_valid_identifier(char *arg);
 int check_the_dir_name(char *dir_name);
 int has_ambiguous_redirect(char** args);
-
+int unclosed_pipe(t_minishell *mini);
+int check_cmd_syntax(char* command, char **args);
 #endif

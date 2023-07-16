@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 18:05:53 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/15 19:55:03 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/16 12:16:49 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,15 @@ void export(t_parsing *shell, t_minishell *ms) {
     while (new_args[count]) {
       if (new_args[count][ft_strlen(new_args[count]) - 1] == '=')
         is_last_equal = 1;
-      arg_splited = ft_split(new_args[count], '=');
-      var = arg_splited[0];
+       if (str_cmp(new_args[count], "=") || new_args[count][0] == '=') {
+        if (new_args[count][0] == '=')
+          var = new_args[count];
+        else
+          var = "=";
+      }else {
+        arg_splited = ft_split(new_args[count], '=');
+        var = arg_splited[0]; 
+      }
       value  = new_args[count] + (ft_strlen(var) + 1);
       if (!value) {
         value = "";

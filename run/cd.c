@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 17:29:23 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/15 13:28:18 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/16 18:26:36 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int is_redirec(char *args) {
 
 void change_dir(t_parsing *shell, t_minishell *minishell, int index, int size) {
     if ((index - 1 > 0 && str_cmp(minishell->parsing[index - 1].cmd, "|")) || (index + 1 <= size && str_cmp(minishell->parsing[index + 1].cmd, "|"))) {
-      captur.exit_status = 1;
+      captur.exit_status = 0;
       return ;
     }
     if (shell->args[0] && !is_redirec_output(&shell->args[0])) {

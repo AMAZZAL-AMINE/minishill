@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 19:04:47 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/15 15:48:07 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/16 22:05:37 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ void builtin(t_minishell *shell, char *line) {
   int count = 0;
   int size_cmd = ft_count_tokens(line) * 2;
   int is_betwwen_pipe = 0;
+  if (unclosed_pipe(shell))
+    return;
   while (count <= size_cmd) {
-    if (count % 2 == 0) {
+    if (count % 2 == 0 && check_cmd_syntax(shell->parsing[count].cmd, shell->parsing[count].args) == 0) {
       if (handle_undfined_file(shell->parsing[count].args))
         break;
       // is_commande_var(&shell->parsing[count], shell, count);
@@ -93,7 +95,7 @@ void builtin(t_minishell *shell, char *line) {
         if (ft_strlen(shell->parsing[count].cmd) > 0) {
           if (count + 1 <= size_cmd && (str_cmp(shell->parsing[count + 1].cmd, "|"))) {
             if (count - 1 >= 0  && str_cmp(shell->parsing[count - 1].cmd, "|")) {
-                execut(&shell->parsing[count], shell, 2);
+              execut(&shell->parsing[count], shell, 2);
             }
             else {
               if (check_cmd_type(shell->parsing[count].cmd) == 0) {
