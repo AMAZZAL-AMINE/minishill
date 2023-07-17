@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   get_args_without_redirections.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/19 14:41:41 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/17 14:36:28 by mamazzal         ###   ########.fr       */
+/*   Created: 2023/07/16 22:28:04 by mamazzal          #+#    #+#             */
+/*   Updated: 2023/07/16 22:28:31 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-void get_env(t_env *env, t_minishell *minishell, char **content) {
+
+char **get_args_without_redirections(char **args) {
   int count = 0;
-  if (search_for_heardoc(content))
-    herdoc(content, minishell);
-  while (count < minishell->n_var_env) {
-    if (env[count].is_haver_equal == 1) {
-      char *env_val = env[count].value;
-      printf("%s=%s\n", env[count].name, env_val);
-    }
+  int index = 0;
+  while (args[index] && (!str_cmp(args[index], ">") && !str_cmp(args[index], ">>") && !str_cmp(args[index], "<") && !str_cmp(args[index], "<<")) ) {
+    index++;
+  }
+  char **new_args = malloc(sizeof(char *) * (index + 1));
+  count = 0;
+  while (count < index) {
+    new_args[count] = args[count];
     count++;
   }
-  captur.exit_status = 0;
+  new_args[count] = NULL;
+  return new_args;
 }

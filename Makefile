@@ -6,7 +6,7 @@
 #    By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:24:14 by mamazzal          #+#    #+#              #
-#    Updated: 2023/07/16 20:54:19 by mamazzal         ###   ########.fr        #
+#    Updated: 2023/07/16 22:28:56 by mamazzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC = main.c ./parsing/parsing.c ./parsing/update_token.c ./parsing/split_comman
 			./errors/handle_undfined_file.c ./errors/cmd_not_found.c ./errors/is_can_access.c \
 			./errors/exp_not_valid_identifier.c ./errors/check_cmd_type.c ./parsing/expand_cmd.c \
 			./errors/cmd_is_only_dolar.c ./errors/unset_not_valid_identifier.c ./errors/check_the_dir_name.c \
-			join_tables.c ./errors/unclosed_pipes.c ./errors/check_cmd_syn.c update_env.c
+			join_tables.c ./errors/unclosed_pipes.c ./errors/check_cmd_syn.c update_env.c \
+			get_args_without_redirections.c
 CC = cc
 CFLAGS = -Wall -Wextra -Werror 
 

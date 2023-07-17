@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:55:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/16 22:06:07 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/16 22:48:57 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void echo_in_console(char **content) {
   int count = 0;
   count = 0;
   while (content[count]) {
-    if (str_cmp(content[count], "<<") || str_cmp(content[count], ">>")
-      || str_cmp(content[count], "<") || str_cmp(content[count], ">")) {
-      break;
-    }
+    // if (str_cmp(content[count], "<<") || str_cmp(content[count], ">>")
+    //   || str_cmp(content[count], "<") || str_cmp(content[count], ">")) {
+    //   break;
+    // }
     if (count == 0) {
       while (content[count] && is_print_new_line(content[count])) {
         count++;

@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/16 20:53:20 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/17 20:26:07 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,19 @@ char *pip_strchr(char *arg) {
     count++;
   }
   return NULL;
+}
+
+char *join_strin_with_alpha(char *str, char c) {
+  char *dst = malloc(sizeof(char) * (ft_strlen(str) + 2));
+  
+  int count = 0;
+  while (str[count]) {
+    dst[count] = str[count];
+    count++;
+  }
+  dst[count] = c;
+  dst[count + 1] = '\0';
+  return dst;
 }
 
 char **new_tokens(char *line) {
@@ -513,13 +526,19 @@ void init_and_split(t_minishell *minishell, char *token, int pos) {
   char **dst = split_commande_args(token, minishell);
   if (is_redirec_output(dst)) {
     dst = sort_args(dst);
+    if ((!ft_strlen(minishell->parsing[pos].cmd) || is_redirect(minishell->parsing[pos].cmd)) && !is_redirect(dst[0])) {
+      minishell->parsing[pos].cmd = dst[0];
+      dst = dst + 1;
+    }
   }
   minishell->parsing[pos].args = dst;
   if (is_dolar_var(minishell->parsing[pos].cmd) &&  is_bettwen_double(minishell->parsing[pos].cmd)) {
       minishell->parsing[pos].cmd = remove_quots(expand(minishell->parsing[pos].cmd, minishell));
       is_commande_var(&minishell->parsing[pos], minishell, pos);
+      minishell->parsing[pos].is_cmd_var = 1;
    }else {
       minishell->parsing[pos].cmd = remove_quots(minishell->parsing[pos].cmd);
+      minishell->parsing[pos].is_cmd_var = 0;
   }
   // int size_new_vars = count_length_two_arr(minishell->parsing[pos].args);
   // char **new_arg = malloc(sizeof(char *) * (size_new_vars + 1));
@@ -531,7 +550,7 @@ int parsing_input(t_minishell *minishell, char *line) {
   char **tokens = new_tokens(line);
   if (tokens == NULL)
     return 1;
-  int count = 0;
+  int count = 0; 
   int size = (ft_count_tokens(line) * 2);
   minishell->n_cmd = size;
   minishell->parsing = malloc(sizeof(t_parsing) * size);
@@ -541,5 +560,3 @@ int parsing_input(t_minishell *minishell, char *line) {
   }
   return 0;
 }
-
-//ls | ls -l | cat -e | grep ls | wc -l | > a

@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 19:04:47 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/16 22:05:37 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:32:46 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ void builtin(t_minishell *shell, char *line) {
               dup2(shell->pipefd2[1], STDOUT_FILENO);
               close(shell->pipefd2[1]);
             }
-            if (builtin_redirections(shell->parsing[count].args, &shell->parsing[count]) == 0) {
+            if (builtin_redirections(shell->parsing[count].args, &shell->parsing[count], shell) == 0) {
               run_buitins(shell, count, size_cmd);
               exit(0);
             }else 
-              exit(1);
+              exit(1); 
           }
           else {
             if (is_betwwen_pipe == 0) {
@@ -85,14 +85,14 @@ void builtin(t_minishell *shell, char *line) {
             }
           }
         }else {
-          if (builtin_redirections(shell->parsing[count].args, &shell->parsing[count]) == 0) {
+          if (builtin_redirections(shell->parsing[count].args, &shell->parsing[count], shell) == 0) {
             run_buitins(shell, count, size_cmd);
           }
         }
       }
       else
       {
-        if (ft_strlen(shell->parsing[count].cmd) > 0) {
+        if (ft_strlen(shell->parsing[count].cmd) > 0 || shell->parsing[count].is_cmd_var == 0) {
           if (count + 1 <= size_cmd && (str_cmp(shell->parsing[count + 1].cmd, "|"))) {
             if (count - 1 >= 0  && str_cmp(shell->parsing[count - 1].cmd, "|")) {
               execut(&shell->parsing[count], shell, 2);

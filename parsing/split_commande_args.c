@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:23:36 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/16 22:06:44 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/16 22:19:57 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,9 +173,11 @@ char **split_commande_args(char *token, t_minishell *minishell) {
     dst[count] = ft_strndup(dst[count], helper2 - helepr);
     count++;
   }
-  int size_new_vars = count_length_two_arr(dst);
-  char **new_arg = malloc(sizeof(char *) * (size_new_vars + 1));
-  dst = get_new_arg(new_arg,dst, size_new_vars, minishell);
+  dst[count] = NULL;
+  // int size_new_vars = count_length_two_arr(dst);
+  // char **new_arg = malloc(sizeof(char *) * (size_new_vars + 1));
+  // dst = get_new_arg(new_arg,dst, size_new_vars, minishell);
+  (void)minishell;
   return  dst;
 }
 

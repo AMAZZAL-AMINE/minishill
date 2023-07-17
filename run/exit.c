@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:22:04 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/16 18:25:58 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:44:03 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void exit_shell(t_parsing *shell, t_minishell *minishell, int index, int size) {
     captur.exit_status = 0;
     return ;
   }
-  ft_putstr_fd("exit\n", 1);
+  
   if (shell->args[0] && is_not_num(shell->args[0])) {
     captur.exit_status = 1;
     ft_putstr_fd("minishell: exit: ", 2);
@@ -51,8 +51,10 @@ void exit_shell(t_parsing *shell, t_minishell *minishell, int index, int size) {
     ft_putstr_fd("minishell: exit: too many arguments\n", 2);
     return ;
   }
+  // if (shell->args[0] && ft_atoi(shell->args[0]) > 0)
+  //   ft_putstr_fd("exit\n", 1);
   if (!shell->args[0]) {
-    exit(0);
+    exit(captur.exit_status);
   }
   captur.exit_status = 0;
   exit(ft_atoi(shell->args[0]));

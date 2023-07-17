@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 07:40:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/16 21:55:26 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:33:36 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void run_simple_commande(int is_path, t_parsing *shell, char **content, t_minish
     exit(0);
   }
   if (is_path == 1) {
-    if (execve(shell->cmd, join_two_dim_arr(shell->cmd + ft_strlen("/bin/"), new_content(content)), mini->env_v) == -1)
+    if (execve(shell->cmd, join_two_dim_arr(shell->cmd + ft_strlen("/bin/"), content), mini->env_v) == -1)
       cmd_not_found(shell->cmd, mini);
   }else  {
-    if (execve(find_cmd_path(shell->cmd, mini, shell), join_two_dim_arr(shell->cmd, new_content(content)), mini->env_v))
+    if (execve(find_cmd_path(shell->cmd, mini, shell), join_two_dim_arr(shell->cmd, content), mini->env_v))
       cmd_not_found(shell->cmd, mini);
   }
 }
@@ -37,7 +37,7 @@ void run_simple_commande(int is_path, t_parsing *shell, char **content, t_minish
 void execut(t_parsing *shell, t_minishell *mini, int ispipe) {
   int status;
   if (search_for_heardoc(shell->args))
-    herdoc(shell->args);
+    herdoc(shell->args, mini);
   if (ispipe == 1) {
     pipe(mini->pipefd);
   }else if (ispipe == 2) {
@@ -58,23 +58,16 @@ void execut(t_parsing *shell, t_minishell *mini, int ispipe) {
       dup2(mini->pipefd2[1], STDOUT_FILENO);
       close(mini->pipefd2[1]);
     }
-    char **content = shell->args;
+    if (is_redirec_output(shell->args) == 1)
+      if (redirect(1, shell, shell->args) != 0)
+        exit(1);
+    int size_new_vars = count_length_two_arr(shell->args);
+    char **new_arg = malloc(sizeof(char *) * (size_new_vars + 1));
+    shell->args = get_new_arg(new_arg, shell->args, size_new_vars, mini);
     if (str_cmp(find_cmd_path(shell->cmd + length_cmd(shell->cmd), mini, shell), shell->cmd)) {
-      if (is_redirec_output(shell->args) == 1) {
-        if (redirect(1, shell, content) == 0)
-          run_simple_commande(1, shell, content, mini);
-        else 
-          exit(1);
-      }else
-        run_simple_commande(1, shell, content, mini);
+      run_simple_commande(1, shell, shell->args, mini);
     }else {
-      if (is_redirec_output(shell->args) == 1) {
-        if (redirect(0, shell, content) == 0)
-          run_simple_commande(0, shell, content, mini);
-        else 
-          exit(1);
-      }else 
-        run_simple_commande(0, shell, content, mini);
+      run_simple_commande(0, shell, shell->args, mini);
     }
   }else {
     if (ispipe == 1) {

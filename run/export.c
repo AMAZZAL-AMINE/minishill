@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 18:05:53 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/16 12:16:49 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:45:50 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,20 +112,34 @@ void get_exported_vars(t_minishell *shell) {
   }
 }
 
-char **get_args_without_redirections(char **args) {
+char *get_value_with_no_moure_then_space(char *value) {
   int count = 0;
-  int index = 0;
-  while (args[index] && (!str_cmp(args[index], ">") && !str_cmp(args[index], ">>") && !str_cmp(args[index], "<") && !str_cmp(args[index], "<<")) ) {
-    index++;
-  }
-  char **new_args = malloc(sizeof(char *) * (index + 1));
-  count = 0;
-  while (count < index) {
-    new_args[count] = args[count];
+  int size = 0;
+  while (value[count]) {
+    if (value[count] != ' ') {
+      size++;
+    }else if (value[count] == ' ') {
+      if (count != 0 && value[count + 1] && value[count + 1] != ' ')
+        size++;
+      }
     count++;
   }
-  new_args[count] = NULL;
-  return new_args;
+  char *dst = malloc(sizeof(char) * (size + 1));
+  count = 0;
+  size = 0;
+  while (value[count]) {
+    if (value[count] != ' ') {
+      dst[size++] = value[count];
+    }else if (value[count] == ' ') {
+      if (count != 0 && value[count + 1] && value[count + 1] != ' ')
+        dst[size++] = value[count];
+    }
+    count++;
+  }
+  if (dst[0] == ' ')
+    dst = dst + 1;
+  dst[size] = '\0';
+    return dst;
 }
 
 void export(t_parsing *shell, t_minishell *ms) {
@@ -136,8 +150,8 @@ void export(t_parsing *shell, t_minishell *ms) {
   char **arg_splited;
  
   int is_last_equal = 0;
-  char **new_args  = get_args_without_redirections(shell->args);
-  //todo : cehck arg is have redirections
+  char **new_args  = shell->args;
+
   if (!*new_args) {
     get_exported_vars(ms);
   }else {
@@ -157,6 +171,7 @@ void export(t_parsing *shell, t_minishell *ms) {
       if (!value) {
         value = "";
       }
+      value = get_value_with_no_moure_then_space(value);
       if (export_to_en(ms, var, value, new_args[count]) == 1)
         return_status = 1;
       count++;

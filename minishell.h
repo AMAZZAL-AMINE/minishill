@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/16 20:52:26 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/17 20:25:32 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_parsing
     struct s_parsing *all_cmd;
     int     fd_in;
     int     fd_out;
+    int     is_cmd_var;
 }               t_parsing;
 
 typedef struct s_env
@@ -93,14 +94,15 @@ void update_exported_var(char *content, t_minishell *shell, char *name, char *va
 char **join_tables(char **table1, char **table2);
 int is_commande_var(t_parsing *shell, t_minishell *mini, int index);
 void update_env_ontime(t_parsing *shell, t_minishell *mini);
+char **get_args_without_redirections(char **args);
 
 //redirection
 int redirect_input(char **content, int count);
 int redirect_output(char **content, int count) ;
 int appned(char **content, int count);
-int herdoc(char **content);
+int herdoc(char **content, t_minishell *mini);
 int search_for_heardoc(char **content);
-int builtin_redirections(char **content, t_parsing *shell);
+int builtin_redirections(char **content, t_parsing *shell, t_minishell *mini);
 int is_cmd_redirected(char *cmd);
 
 void run_buitins(t_minishell *shell, int count, int size);
