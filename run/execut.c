@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 07:40:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/18 13:23:20 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/18 22:47:55 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,14 @@ void execut(t_parsing *shell, t_minishell *mini, int ispipe) {
       dup2(mini->pipefd2[1], STDOUT_FILENO);
       close(mini->pipefd2[1]);
     }
-    if (is_redirec_output(shell->args) == 1)
+    int check = 0;
+    if (is_redirec_output(shell->args) == 1) {
+      check = 1;
       if (redirect(1, shell, shell->args) != 0)
         exit(1);
+    }
+    if (check == 1 && ft_strlen(shell->cmd) == 0)
+      exit(0);
     int size_new_vars = count_length_two_arr(shell->args);
     char **new_arg = malloc(sizeof(char *) * (size_new_vars + 1));
     shell->args = get_new_arg(new_arg, shell->args, size_new_vars, mini);

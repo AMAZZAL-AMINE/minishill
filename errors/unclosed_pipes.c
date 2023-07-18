@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 13:09:02 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/18 13:35:56 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/18 22:32:11 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int unclosed_pipe(t_minishell *mini) {
  }else {
   while (count <= mini->n_cmd) {
     if (str_cmp(mini->parsing[count].cmd, "|") && (!ft_strlen(mini->parsing[count + 1].cmd) || str_cmp(mini->parsing[count + 1].cmd, "|"))) {
-      if (mini->parsing[count + 1].is_cmd_in_quotes || mini->parsing[count + 1].is_cmd_var) {
+      if (mini->parsing[count + 1].is_cmd_in_quotes || mini->parsing[count + 1].is_cmd_var || (is_redirec_output(mini->parsing[count + 1].args))) {
         return 0;
       }
       ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
