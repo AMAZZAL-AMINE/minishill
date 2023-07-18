@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/18 11:57:05 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:39:42 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,7 +207,7 @@ char *get_cmd_with_fixes_size(char *token, int size) {
       }
     }
   }
-  dst = ft_strdup(dst);
+  // dst[index] = 0;
   return dst;
 }
 
@@ -232,6 +232,7 @@ char *rm_spaces_from_cmd(char *cmd) {
       count_squots++;
     size++;
   }
+  // printf("size = %d\n", size);
   return ft_strndup(cmd, size);
 }
 
@@ -525,7 +526,9 @@ int is_quot_in_cmd(char *cmd) {
 
 //intialis the structer
 void init_and_split(t_minishell *minishell, char *token, int pos) {
-  minishell->parsing[pos].cmd = ft_strdup(rm_spaces_from_cmd(get_cmd_with_fixes_size(token, commande_length(token))));
+  char *get_cmd_ = get_cmd_with_fixes_size(token, commande_length(token));
+  char *rem_sp = rm_spaces_from_cmd(get_cmd_);
+  minishell->parsing[pos].cmd = rem_sp;
   int count = 0;
   // if (is_dolar_var(minishell->parsing[pos].cmd) && !str_cmp(minishell->parsing[pos].cmd, "$"))
   //   minishell->parsing[pos].cmd = expande_cmd(minishell->parsing[pos].cmd, minishell);
@@ -573,9 +576,9 @@ int parsing_input(t_minishell *minishell, char *line) {
   if (tokens == NULL)
     return 1;
   int count = 0; 
-  int size = (ft_count_tokens(line) * 2);
+  int size = ft_count_tokens(line) * 2;
   minishell->n_cmd = size;
-  minishell->parsing = malloc(sizeof(t_parsing) * size);
+  minishell->parsing = malloc(sizeof(t_parsing) * (size + 1));
   while (count <= size) {
     init_and_split(minishell, tokens[count], count);
     count++;

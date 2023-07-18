@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:53:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/14 21:47:53 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:42:43 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ int single_quots_arr(char *line) {
   }
 
   if (count_quots % 2 != 0 || count_s_quots % 2 != 0) {
-    ft_putstr_fd("minishell: syntax error: unexpected end of file\n", 2);
-    return 1;
+    ft_putstr_fd("minishell: unexpected EOF while looking for matching\n", 2);
+    captur.exit_status = 2;
+    return 2;
   }
   return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 07:40:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/17 14:33:36 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:23:20 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int length_cmd(char *cmd) {
   int count = ft_strlen(cmd) - 1;
-  while (count != 0 && cmd[count] != '/') {
+  while (count >= 0 && cmd[count] != '/') {
     count--;
   }
   return count + 1;

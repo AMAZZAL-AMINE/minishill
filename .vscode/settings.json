@@ -5,6 +5,11 @@
     "stdio.h": "c",
     "history.h": "c",
     "errors.h": "c",
-    "string.h": "c"
+    "string.h": "c",
+    "__bit_reference": "c",
+    "algorithm": "c",
+    "bitset": "c",
+    "chrono": "c",
+    "unordered_map": "c"
   }
 }

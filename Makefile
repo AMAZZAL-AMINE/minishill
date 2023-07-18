@@ -6,7 +6,7 @@
 #    By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:24:14 by mamazzal          #+#    #+#              #
-#    Updated: 2023/07/18 12:29:46 by mamazzal         ###   ########.fr        #
+#    Updated: 2023/07/18 13:39:11 by mamazzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC = main.c ./parsing/parsing.c ./parsing/update_token.c ./parsing/split_comman
 			join_tables.c ./errors/unclosed_pipes.c ./errors/check_cmd_syn.c update_env.c \
 			get_args_without_redirections.c
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 
 #to defined the path of readline
 LDFLAGS="-L/goinfre/mamazzal/homebrew/opt/readline/lib"
