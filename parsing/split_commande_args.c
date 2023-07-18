@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:23:36 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/16 22:19:57 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/18 00:33:29 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,14 @@
 
 int get_rederection_length(char *token) {
   int count = 0;
-  while (token[count] && (token[count] == '>' || token[count] == '<')) {
-    count++;
+  if (token[0] == '>') {
+    while (token[count] == '>') {
+      count++;
+    }
+  }else if (token[0] == '<') {
+    while (token[count] == '<') {
+      count++;
+    }
   }
   return count;
 }

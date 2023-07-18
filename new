@@ -1,0 +1,23 @@
+total 3112
+drwxr-xr-x  22 mamazzal  candidates      748 Jul 18 12:36 .
+drwxr-xr-x   8 mamazzal  candidates      272 Jul 18 11:05 ..
+drwxr-xr-x  15 mamazzal  candidates      510 Jul 18 00:28 .git
+-rw-r--r--   1 mamazzal  candidates       23 Jun 24 19:15 .gitignore
+drwxr-xr-x   3 mamazzal  candidates      102 Jun 17 10:39 .vscode
+-rw-r--r--@  1 mamazzal  candidates  1489675 Jul  8 17:49 IMG_6913.JPG
+-rw-r--r--   1 mamazzal  candidates     2540 Jul 18 12:29 Makefile
+drwxr-xr-x  16 mamazzal  candidates      544 Jul 18 12:35 errors
+-rw-r--r--   1 mamazzal  candidates     1365 Jul 16 22:28 get_args_without_redirections.c
+-rw-r--r--   1 mamazzal  candidates     1399 Jul 15 18:42 join_tables.c
+drwxr-xr-x  40 mamazzal  candidates     1360 Jul 13 13:22 libft
+-rw-r--r--   1 mamazzal  candidates     1674 Jul 18 11:28 main.c
+-rwxr-xr-x   1 mamazzal  candidates    57156 Jul 18 12:30 minishell
+-rw-r--r--   1 mamazzal  candidates     5467 Jul 18 11:50 minishell.h
+drwxr-xr-x  23 mamazzal  candidates      782 Jul 17 13:37 ms-tester
+-rw-r--r--   1 mamazzal  candidates        0 Jul 18 12:36 new
+drwxr-xr-x  10 mamazzal  candidates      340 Jul 18 12:35 parsing
+-rw-r--r--   1 mamazzal  candidates     1895 Jul 18 00:28 remove_quots.c
+drwxr-xr-x  20 mamazzal  candidates      680 Jul 18 12:35 run
+-rw-r--r--   1 mamazzal  candidates     1238 Jul 18 12:30 signals.c
+-rw-r--r--   1 mamazzal  candidates     1111 Jun 17 17:31 str_cmp.c
+-rw-r--r--   1 mamazzal  candidates     1903 Jul 16 20:25 update_env.c

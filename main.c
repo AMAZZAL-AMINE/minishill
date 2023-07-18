@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/17 20:36:47 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/18 11:28:45 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int main(int ac, char **av, char **env)
   while (1)
   {
     update_env_ontime(NULL, minishell);
-    line = readline("\033[0;35mminishell ~>\033[0m ");
+    line = readline("\033[0;33mminishell ❯❯❯\033[0m ");
     handle_ctl_d(line);
     if (*line) {
       add_history(line);
@@ -46,4 +46,3 @@ int main(int ac, char **av, char **env)
   }
   return 0;
 }
- 

@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/17 20:25:32 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/18 11:50:15 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_parsing
     int     fd_in;
     int     fd_out;
     int     is_cmd_var;
+    int     is_cmd_in_quotes;
 }               t_parsing;
 
 typedef struct s_env
@@ -107,7 +108,7 @@ int is_cmd_redirected(char *cmd);
 
 void run_buitins(t_minishell *shell, int count, int size);
 char *get_env_value(char *what, t_minishell *shell);
-
+int is_redirect(char *red);
 //commandes 
 void execut(t_parsing *shell, t_minishell *mini, int ispipe);
 int echo_cmd(t_parsing *shill);

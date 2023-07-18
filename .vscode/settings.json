@@ -4,6 +4,7 @@
     "__config": "c",
     "stdio.h": "c",
     "history.h": "c",
-    "errors.h": "c"
+    "errors.h": "c",
+    "string.h": "c"
   }
 }

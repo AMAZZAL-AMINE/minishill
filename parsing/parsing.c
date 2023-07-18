@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/17 20:26:07 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/18 11:57:05 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,11 +191,11 @@ char *get_cmd_with_fixes_size(char *token, int size) {
         if (token[count] != ' ' && token[count] != '\0') {
           while (index <= size) {
             if (token[count] == '>' || token[count] == '<') {
-              if (index == 0 && (token[count] == '>' || token[count] == '<')) {
-                char *tmp = ft_strdup(ft_strndup(&token[count], get_rederection_length(&token[count])));
-                dst[index++] = tmp[0];
-                dst[index++] = tmp[1];
-              }
+              // if (index == 0 && (token[count] == '>' || token[count] == '<')) {
+              //   char *tmp = ft_strdup(ft_strndup(&token[count], get_rederection_length(&token[count])));
+              //   dst[index++] = tmp[0];
+              //   dst[index++] = tmp[1];
+              // }
               break;
             }
             dst[index] = token[count];
@@ -512,6 +512,17 @@ char** sort_args(char** oldargs) {
   return join_tables(dstTwo, dst);
 }
 
+int is_quot_in_cmd(char *cmd) {
+  int count = 0;
+  while (cmd[count]) {
+    if (cmd[count] == '\'' || cmd[count] == '\"') {
+      return 1;
+    }
+    count++;
+  }
+  return 0;
+}
+
 //intialis the structer
 void init_and_split(t_minishell *minishell, char *token, int pos) {
   minishell->parsing[pos].cmd = ft_strdup(rm_spaces_from_cmd(get_cmd_with_fixes_size(token, commande_length(token))));
@@ -523,6 +534,11 @@ void init_and_split(t_minishell *minishell, char *token, int pos) {
   token = &token[skip_spaces(token)];
   token = ft_strdup(token + (length_new_cmd(token)));
   count = 0;
+  if (is_quot_in_cmd(minishell->parsing[pos].cmd)) {
+    minishell->parsing[pos].is_cmd_in_quotes = 1;
+  }else {
+    minishell->parsing[pos].is_cmd_in_quotes = 0;
+  }
   char **dst = split_commande_args(token, minishell);
   if (is_redirec_output(dst)) {
     dst = sort_args(dst);
@@ -540,10 +556,16 @@ void init_and_split(t_minishell *minishell, char *token, int pos) {
       minishell->parsing[pos].cmd = remove_quots(minishell->parsing[pos].cmd);
       minishell->parsing[pos].is_cmd_var = 0;
   }
+  
   // int size_new_vars = count_length_two_arr(minishell->parsing[pos].args);
   // char **new_arg = malloc(sizeof(char *) * (size_new_vars + 1));
   // minishell->parsing[pos].args = get_new_arg(new_arg,minishell->parsing[pos].args, size_new_vars, minishell);
   count = 0;
+  // printf("cmd2 = %s\n", minishell->parsing[pos].cmd);
+  // while (minishell->parsing[pos].args[count]) {
+  //   printf("args[%d] = %s\n", count, minishell->parsing[pos].args[count]);
+  //   count++;
+  // }
 }
 
 int parsing_input(t_minishell *minishell, char *line) {
