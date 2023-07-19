@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/18 23:53:25 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/19 17:22:17 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef struct s_env
 struct s_captur
 {
     int exit_status;
+    int is_press_ctrl_c;
+    int is_press_ctrl_d;
 }  captur;
 
 

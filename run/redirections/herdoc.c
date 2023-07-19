@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 22:58:20 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/19 16:12:02 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/19 17:25:46 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int run_herdoc(char __unused **content, char *eof, t_minishell __unused *mini, i
       eof = expand(eof, mini);
     while (1) {
       line = readline("> ");
+      if ((int)line == 0)
+        break;
       if (*line) {
         if (is_dolar(line)) {
           if (!is_eof_in_quot)
@@ -67,7 +69,8 @@ int run_herdoc(char __unused **content, char *eof, t_minishell __unused *mini, i
         tmp = ft_strjoin(tmp, line);
       }
     }
-    write(pipid[1], tmp, ft_strlen(tmp));
+    if (tmp)
+      write(pipid[1], tmp, ft_strlen(tmp));
     close(pipid[1]);
   return pipid[0];
 }
@@ -75,7 +78,7 @@ int run_herdoc(char __unused **content, char *eof, t_minishell __unused *mini, i
 
 int herdoc(char **content, t_minishell __unused *mini) {
   int count = 0;
-  int savedid = 0;
+  int savedid = -1;
   int status;
   char **env = mini->env_v;
   int pid = -1;
@@ -93,6 +96,7 @@ int herdoc(char **content, t_minishell __unused *mini) {
   }
 
   dup2(savedid, 0);
-  close(savedid);
+  if (savedid != -1)
+    close(savedid);
   return 0;
 }

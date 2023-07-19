@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/19 14:40:25 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/19 17:21:46 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int main(int ac, char **av, char **env)
   minishell->_stdin = dup(STDIN_FILENO);
   minishell->_stdout = dup(STDOUT_FILENO);
   captur.exit_status = 0;
-
   while (1)
   {
     update_env_ontime(NULL, minishell);
