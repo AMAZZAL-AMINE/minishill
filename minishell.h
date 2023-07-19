@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/18 11:50:15 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/18 23:53:25 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char    *update_token(char *token, int size);
 // char **split_commande_args(char *token);
 char *get_with_fixes_size(char *token, int size);
 int ft_count_tokens(char *line);
-int redirect(int is_path, t_parsing *shell, char **content);
+int redirect(int is_path, t_parsing *shell, char **content, t_minishell *mini);
 void set_the_tokens_in_ther_place(t_minishell *shell);
 char **get_new_arg(char **dst, char **args, int size, t_minishell *minishell);
 char **split_commande_args(char *token, t_minishell *minishell);

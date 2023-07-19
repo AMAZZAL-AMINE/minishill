@@ -6,13 +6,13 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 21:03:03 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/16 22:41:10 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/18 23:58:41 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int redirect(int is_path, t_parsing *shell, char **content) {
+int redirect(int is_path, t_parsing *shell, char **content, t_minishell __unused *mini) {
     int captur = 0;
     int count = 0;
     while (content[count]) {
