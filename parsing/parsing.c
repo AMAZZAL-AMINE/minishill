@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/18 13:39:42 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:21:44 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -563,7 +563,7 @@ void init_and_split(t_minishell *minishell, char *token, int pos) {
   // int size_new_vars = count_length_two_arr(minishell->parsing[pos].args);
   // char **new_arg = malloc(sizeof(char *) * (size_new_vars + 1));
   // minishell->parsing[pos].args = get_new_arg(new_arg,minishell->parsing[pos].args, size_new_vars, minishell);
-  count = 0;
+  // count = 0;
   // printf("cmd2 = %s\n", minishell->parsing[pos].cmd);
   // while (minishell->parsing[pos].args[count]) {
   //   printf("args[%d] = %s\n", count, minishell->parsing[pos].args[count]);

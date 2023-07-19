@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:23:36 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/18 00:33:29 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:35:51 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,11 +121,9 @@ char **split_commande_args(char *token, t_minishell *minishell) {
       count++;
       if (token[count] == '\"') {
         within_quots++;
-        save++;
       }
       if (token[count] == '\'') {
         within_quots_two++;
-        save++;
       }
       if (token[count] == ' ' && (within_quots % 2 == 0 && within_quots_two % 2 == 0))
         break;
@@ -169,14 +167,13 @@ char **split_commande_args(char *token, t_minishell *minishell) {
         within_quots++;
       }
       if (dst[count][helper2] == ' ' && (within_quots % 2 == 0 && within_quots_two % 2 == 0)) {
-        helepr++;
+        break;
       }
       helper2++;
-    
     }
     // printf("%s\n", dst[count]);
-    // printf("END");
-    dst[count] = ft_strndup(dst[count], helper2 - helepr);
+    // printf("END\n");
+    dst[count] = ft_strndup(dst[count], helper2);
     count++;
   }
   dst[count] = NULL;

@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/19 17:22:17 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:00:51 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ char **join_tables(char **table1, char **table2);
 int is_commande_var(t_parsing *shell, t_minishell *mini, int index);
 void update_env_ontime(t_parsing *shell, t_minishell *mini);
 char **get_args_without_redirections(char **args);
-
+char **duplicate_content(char **content);
+int is_dolar_(char *str);
 //redirection
 int redirect_input(char **content, int count);
 int redirect_output(char **content, int count) ;

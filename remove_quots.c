@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 10:17:36 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/13 18:44:27 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:13:42 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ char *remove_quots(char *arg) {
     int count = 0;
     int index = 0;
     while (arg[count]) {
-      if (arg[count] == '\"' && count_s_quot == 0)
+      if (arg[count] == '\"' && count_s_quot % 2 == 0)
           count_d_quot++;
-      else if (arg[count] == '\'' && count_d_quot == 0)
+      else if (arg[count] == '\'' && count_d_quot % 2 == 0)
         count_s_quot++;
       count++;
     }
@@ -43,9 +43,9 @@ char *remove_quots(char *arg) {
     char *new_arg = malloc(sizeof(char) * (count + 1));
     count = 0;
     while (arg[count]) {
-        if (arg[count] == '\'' && count_d_quot == 0)
+        if (arg[count] == '\'' && count_d_quot % 2 == 0)
           count_s_quot++;
-        else if (arg[count] == '\"' && count_s_quot == 0)
+        else if (arg[count] == '\"' && count_s_quot % 2 == 0)
           count_d_quot++;
         else {
           new_arg[index] = arg[count];
