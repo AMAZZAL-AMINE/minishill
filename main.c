@@ -6,13 +6,12 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/19 18:35:58 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:48:05 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
- 
 
 int main(int ac, char **av, char **env)
 {

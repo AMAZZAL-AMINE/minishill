@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 21:03:03 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/19 18:01:28 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:59:18 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,36 @@ int redirect(int is_path, t_parsing *shell, char **content, t_minishell __unused
       count++;
     }
     count = 0;
-    while (new_content[count]) {
-      if (str_cmp(">", new_content[count])) {
-        captur = redirect_output(new_content, count);
-        if (captur != 0)
+    while (content[count]) {
+      if (str_cmp(">", content[count])) {
+        if (content[count + 1] && !is_ambiguous_file(content[count + 1], mini)) {
+          captur = redirect_output(new_content, count);
+          if (captur != 0)
+            break;
+        }else {
+          captur = 1;
           break;
+        }
       }
-      if (str_cmp("<", new_content[count])) {
-        captur = redirect_input(new_content, count);
-        if (captur != 0)
+      if (str_cmp("<", content[count])) {
+         if (content[count + 1] && !is_ambiguous_file(content[count + 1], mini))  {
+          captur = redirect_input(new_content, count);
+          if (captur != 0)
+            break;
+         }else {
+          captur = 1;
           break;
+         }
       }
-      if (str_cmp(">>", new_content[count])) {
-        captur = appned(new_content, count);
-        if (captur != 0)
+      if (str_cmp(">>", content[count])) {
+        if (content[count + 1] && !is_ambiguous_file(content[count + 1], mini))  {
+          captur = appned(new_content, count);
+          if (captur != 0)
+            break;
+        }else {
+          captur = 1;
           break;
+        }
       }
       count++;
     }

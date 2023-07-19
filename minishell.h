@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/19 18:00:51 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:52:55 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,4 +148,5 @@ int check_the_dir_name(char *dir_name);
 int has_ambiguous_redirect(char** args);
 int unclosed_pipe(t_minishell *mini);
 int check_cmd_syntax(char* command, char **args);
+int is_ambiguous_file(char *name, t_minishell *mini);
 #endif

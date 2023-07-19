@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 10:40:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/19 18:01:34 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/19 19:19:03 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int builtin_redirections(char **content, t_parsing *shell, t_minishell *mini) {
   int captur = 0;
   if (search_for_heardoc(content))
     herdoc(content, mini);
+
   if (is_redirec_output(content)) {
     int count = 0;
     char **new_content = duplicate_content(content);
@@ -39,19 +40,34 @@ int builtin_redirections(char **content, t_parsing *shell, t_minishell *mini) {
     count = 0;
     while (content[count]) {
       if (str_cmp(">", content[count])) {
-        captur = redirect_output(content, count);
-        if (captur != 0)
+        if (content[count + 1] && !is_ambiguous_file(content[count + 1], mini)) {
+          captur = redirect_output(new_content, count);
+          if (captur != 0)
+            break;
+        }else {
+          captur = 1;
           break;
+        }
       }
       else if (str_cmp("<", content[count])) {
-        captur = redirect_input(content, count);
-        if (captur != 0)
+        if (content[count + 1] && !is_ambiguous_file(content[count + 1], mini)) {
+          captur = redirect_input(new_content, count);
+          if (captur != 0)
+            break;
+        }else {
+          captur = 1;
           break;
+        }
       }
       else if (str_cmp(">>", content[count])) {
-        captur = appned(content, count);
-        if (captur != 0)
+        if (content[count + 1] && !is_ambiguous_file(content[count + 1], mini)) {
+          captur = appned(new_content, count);
+          if (captur != 0)
+            break;
+        }else {
+          captur = 1;
           break;
+        }
       }
       count++;
     }
