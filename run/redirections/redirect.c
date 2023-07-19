@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 21:03:03 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/19 18:59:18 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/19 20:56:23 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int redirect(int is_path, t_parsing *shell, char **content, t_minishell __unused
     char **new_content = duplicate_content(content);
     count = 0;
     while (new_content[count]) {
-      new_content[count] = remove_quots(new_content[count]);
       if (is_dolar_(new_content[count]))
         new_content[count] = expand(new_content[count], mini);
+      new_content[count] = remove_quots(new_content[count]);
       count++;
     }
     count = 0;
