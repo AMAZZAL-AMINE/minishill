@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/20 12:39:03 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:03:39 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,6 @@ int get_rederection_length(char *token);
 
 //ERRORS
 int all_functions_errors(char *line, t_minishell *ms, t_parsing *shell);
-void error_message(char *msg, int free_flag, char *line) ;
 int single_quots_arr(char *line);
 int handle_undfined_file(char **content);
 void cmd_not_found(char *cmd, t_minishell *shell);
