@@ -6,12 +6,23 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/19 18:48:05 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/20 11:37:00 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int is_not_space(char *line)
+{
+  int i = 0;
+  while (line[i])
+  {
+    if (line[i] != ' ')
+      return 1;
+    i++;
+  }
+  return 0;
+}
 
 int main(int ac, char **av, char **env)
 {
@@ -34,7 +45,7 @@ int main(int ac, char **av, char **env)
     update_env_ontime(NULL, minishell);
     line = readline("minishell ❯❯❯ ");
     handle_ctl_d(line);
-    if (*line) {
+    if (*line && is_not_space(line)) {
       add_history(line);
       parsing_input(minishell, line);
       count_redirections(minishell);

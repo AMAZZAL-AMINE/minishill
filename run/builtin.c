@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 19:04:47 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/18 13:19:53 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/20 14:51:03 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void builtin(t_minishell *shell, char *line) {
   if (unclosed_pipe(shell))
     return;
   while (count <= size_cmd) {
-    if (count % 2 == 0 && check_cmd_syntax(shell->parsing[count].cmd, shell->parsing[count].args) == 0) {
+    if (count % 2 == 0 && check_cmd_syntax(shell->parsing[count].cmd, shell->parsing[count].args, &shell->parsing[count]) == 0) {
       if (handle_undfined_file(shell->parsing[count].args))
         break;
       // is_commande_var(&shell->parsing[count], shell, count);
@@ -92,7 +92,7 @@ void builtin(t_minishell *shell, char *line) {
       }
       else
       {
-        if (ft_strlen(shell->parsing[count].cmd) > 0 || shell->parsing[count].is_cmd_var == 0) {
+        if (ft_strlen(shell->parsing[count].cmd) > 0 || shell->parsing[count].is_cmd_var == 0 || (shell->parsing[count].is_cmd_var == 1 && ft_strlen(shell->parsing[count].cmd) > 0)) {
           if (count + 1 <= size_cmd && (str_cmp(shell->parsing[count + 1].cmd, "|"))) {
             if (count - 1 >= 0  && str_cmp(shell->parsing[count - 1].cmd, "|")) {
               execut(&shell->parsing[count], shell, 2);

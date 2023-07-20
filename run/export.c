@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 18:05:53 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/17 13:45:50 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/20 14:42:09 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void get_exported_vars(t_minishell *shell) {
       int index = 0;
       printf("declare -x ");
       while (shell->env_v[count][index]) {
-        if (!shell->env_v[count][index + 1] && shell->env_v[count][index] == '$')
+        if (shell->env_v[count][index] == '$' || (shell->env_v[count][index] == '\"' || shell->env_v[count][index] == '\\'))
           printf("\\");
         printf("%c", shell->env_v[count][index]);
         if (shell->env_v[count][index] == '=' && !is_printed_quit) {
@@ -110,36 +110,6 @@ void get_exported_vars(t_minishell *shell) {
       is_printed_quit = 0;
     count++;
   }
-}
-
-char *get_value_with_no_moure_then_space(char *value) {
-  int count = 0;
-  int size = 0;
-  while (value[count]) {
-    if (value[count] != ' ') {
-      size++;
-    }else if (value[count] == ' ') {
-      if (count != 0 && value[count + 1] && value[count + 1] != ' ')
-        size++;
-      }
-    count++;
-  }
-  char *dst = malloc(sizeof(char) * (size + 1));
-  count = 0;
-  size = 0;
-  while (value[count]) {
-    if (value[count] != ' ') {
-      dst[size++] = value[count];
-    }else if (value[count] == ' ') {
-      if (count != 0 && value[count + 1] && value[count + 1] != ' ')
-        dst[size++] = value[count];
-    }
-    count++;
-  }
-  if (dst[0] == ' ')
-    dst = dst + 1;
-  dst[size] = '\0';
-    return dst;
 }
 
 void export(t_parsing *shell, t_minishell *ms) {
@@ -171,7 +141,7 @@ void export(t_parsing *shell, t_minishell *ms) {
       if (!value) {
         value = "";
       }
-      value = get_value_with_no_moure_then_space(value);
+      // value = get_value_with_no_moure_then_space(value);
       if (export_to_en(ms, var, value, new_args[count]) == 1)
         return_status = 1;
       count++;

@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/19 21:36:43 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/20 12:39:03 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ char **get_args_without_redirections(char **args);
 char **duplicate_content(char **content);
 int is_dolar_(char *str);
 int is_bettwen_double(char *arg);
+char *get_value_with_no_moure_then_space(char *value);
+
 //redirection
 int redirect_input(char **content, int count);
 int redirect_output(char **content, int count) ;
@@ -148,6 +150,6 @@ int unset_not_valid_identifier(char *arg);
 int check_the_dir_name(char *dir_name);
 int has_ambiguous_redirect(char** args);
 int unclosed_pipe(t_minishell *mini);
-int check_cmd_syntax(char* command, char **args);
+int check_cmd_syntax(char* command, char **args, t_parsing *shell) ;
 int is_ambiguous_file(char *name, t_minishell *mini);
 #endif

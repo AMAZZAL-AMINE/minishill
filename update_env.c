@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 20:16:43 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/16 20:25:07 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/20 14:24:25 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ char *get_value_from_env(char **conten, char *what) {
     }
     count++;
   }
-  return NULL;
+  return "";
 }
-
+ 
 
 void update_env_ontime(t_parsing *shell, t_minishell *mini) {
    

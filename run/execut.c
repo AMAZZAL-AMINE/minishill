@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 07:40:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/18 23:53:41 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/20 12:50:52 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int length_cmd(char *cmd) {
 }
 
 void run_simple_commande(int is_path, t_parsing *shell, char **content, t_minishell *mini) {
-  if (is_cmd_redirected(shell->cmd)) {
-    captur.exit_status = 0;
-    exit(0);
-  }
+  // if (is_cmd_redirected(shell->cmd)) {
+  //   captur.exit_status = 0;
+  //   exit(0);
+  // }
   if (is_path == 1) {
     if (execve(shell->cmd, join_two_dim_arr(shell->cmd + ft_strlen("/bin/"), content), mini->env_v) == -1)
       cmd_not_found(shell->cmd, mini);

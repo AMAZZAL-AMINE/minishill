@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/19 20:42:18 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/20 14:17:45 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,9 @@ char *rm_spaces_from_cmd(char *cmd) {
   int size = 0;
   int count_quots = 0;
   int count_squots = 0;
+  while (cmd[size] && cmd[size] == ' ') {
+    size++;
+  }
   while (cmd[size]) {
     if (cmd[size] == ' ' && (count_quots % 2 == 0 && count_squots % 2 == 0))
       break;

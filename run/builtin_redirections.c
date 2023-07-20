@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 10:40:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/19 21:37:13 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/20 13:30:50 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ int builtin_redirections(char **content, t_parsing *shell, t_minishell *mini) {
     char **new_content = duplicate_content(content);
     count = 0;
     while (new_content[count]) {
-      if (is_dolar_(new_content[count]) && is_bettwen_double(new_content[count]))
+      if (is_dolar_(new_content[count]) && is_bettwen_double(new_content[count])) {
         new_content[count] = expand(new_content[count], mini);
+        // new_content[count] = get_value_with_no_moure_then_space(new_content[count]);
+      }
       new_content[count] = remove_quots(new_content[count]);
       count++;
     }

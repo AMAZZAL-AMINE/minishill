@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 13:09:02 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/19 21:26:55 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/20 14:30:36 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int unclosed_pipe(t_minishell *mini) {
     return 258;
  }else {
   while (count <= mini->n_cmd) {
-    if (str_cmp(mini->parsing[count].cmd, "|") && (!ft_strlen(mini->parsing[count + 1].cmd) || str_cmp(mini->parsing[count + 1].cmd, "|"))) {
+    if (str_cmp(mini->parsing[count].cmd, "|") && ((count + 1 <= mini->n_cmd && !ft_strlen(mini->parsing[count + 1].cmd)) || (count + 1 <= mini->n_cmd && str_cmp(mini->parsing[count + 1].cmd, "|")))) {
       if (mini->parsing[count + 1].is_cmd_in_quotes || mini->parsing[count + 1].is_cmd_var || (is_redirec_output(mini->parsing[count + 1].args))) {
         return 0;
       }
