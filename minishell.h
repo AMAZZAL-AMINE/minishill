@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/20 20:07:21 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/21 10:03:36 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_minishell {
 	int				pipefd[2];
 	int				pipefd2[2];
 	int				prev_pipefd[2];
+	char			*shlvl;
 }	t_minishell;
 
 int		parsing_input(t_minishell *minishell, char *line);
@@ -77,6 +78,7 @@ void	set_the_tokens_in_ther_place(t_minishell *shell);
 char	**get_new_arg(char **dst, char **args, \
 	int size, t_minishell *minishell);
 char	**split_commande_args(char *token, t_minishell *minishell);
+char	*get_value_from_env(char **conten, char *what);
 //start point 
 void	builtin(t_minishell *shell, char *line);
 char	**join_two_dim_arr(char *s1, char **arr);

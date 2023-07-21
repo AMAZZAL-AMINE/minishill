@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 20:16:43 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/20 21:17:37 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/21 10:12:49 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void	update_env_ontime(t_parsing __unused *shell, t_minishell *mini)
 	update_exported_var(get_value_from_env(mini->env_v, \
 		"equals"), mini, "equals", getenv("equals"));
 	update_exported_var(get_value_from_env(mini->env_v, \
-		"SHLVL"), mini, "SHLVL", getenv("SHLVL"));
+		"SHLVL"), mini, "SHLVL", mini->shlvl);
 	return ;
 }

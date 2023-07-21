@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 07:40:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/20 19:02:58 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/21 10:05:02 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ void execut(t_parsing *shell, t_minishell *mini, int ispipe) {
     int size_new_vars = count_length_two_arr(shell->args);
     char **new_arg = malloc(sizeof(char *) * (size_new_vars + 1));
     shell->args = get_new_arg(new_arg, shell->args, size_new_vars, mini);
+    if (str_cmp("./minishell", shell->cmd)) {
+      mini->shlvl = ft_itoa(ft_atoi(mini->shlvl) + 1);
+      update_exported_var(get_value_from_env(mini->env_v, \
+		    "SHLVL"), mini, "SHLVL", mini->shlvl);
+    }
     if (str_cmp(find_cmd_path(shell->cmd + length_cmd(shell->cmd), mini, shell), shell->cmd)) {
       run_simple_commande(1, shell, shell->args, mini);
     }else {
