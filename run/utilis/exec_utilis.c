@@ -6,40 +6,52 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 21:16:47 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/06/23 01:53:53 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/21 15:36:39 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int is_redirec_output(char **args) {
-  int count = 0;
-  int is_redirec = 0;
-  while (args[count]) {
-    if (str_cmp(">", args[count])
-      || str_cmp("<", args[count])
-      || str_cmp(">>", args[count])
-      || str_cmp("<<", args[count])) {
-      is_redirec = 1;
-    }
-    count++;
-  }
-  return is_redirec;
+int	is_redirec_output(char **args)
+{
+	int	count;
+	int	is_redirec;
+
+	count = 0;
+	is_redirec = 0;
+	while (args[count])
+	{
+		if (str_cmp(">", args[count]) \
+			|| str_cmp("<", args[count]) \
+			|| str_cmp(">>", args[count]) \
+			|| str_cmp("<<", args[count]))
+			is_redirec = 1;
+		count++;
+	}
+	return (is_redirec);
 }
 
-char **new_content(char **content) {
-  int count = 0;
-  int index = 0;
-  if (is_redirec_output(content) == 0)
-    return content;
-  while (content[index][0] != '>' && content[index][0] != '<' && content[index]) {
-    index++;
-  }
-  char **dst = malloc(sizeof(char *) * (index + 1));
-  while (count < index) {
-    dst[count] = ft_strdup(content[count]);
-    count++;
-  }
-  dst[count] = NULL;
-  return dst;
+char	**new_content(char **content)
+{
+	int		count;
+	int		index;
+	char	**dst;
+
+	count = 0;
+	index = 0;
+	if (is_redirec_output(content) == 0)
+		return (content);
+	while (content[index][0] != '>' \
+		&& content[index][0] != '<' && content[index])
+	{
+		index++;
+	}
+	dst = malloc(sizeof(char *) * (index + 1));
+	while (count < index)
+	{
+		dst[count] = ft_strdup(content[count]);
+		count++;
+	}
+	dst[count] = NULL;
+	return (dst);
 }
