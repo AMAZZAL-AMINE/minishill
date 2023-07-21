@@ -6,7 +6,7 @@
 #    By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:24:14 by mamazzal          #+#    #+#              #
-#    Updated: 2023/07/20 19:14:01 by mamazzal         ###   ########.fr        #
+#    Updated: 2023/07/21 10:59:58 by mamazzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ run: all clean
 	./$(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS)  ./libft/libft.a -o $(NAME) $(OBJ)  -lreadline
+	$(CC) $(CFLAGS)  ./libft_t/libft.a -o $(NAME) $(OBJ)  -lreadline
 
 
 clean:

@@ -6,14 +6,14 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 10:03:36 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/21 10:59:38 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "./libft/libft.h"
+# include "./libft_t/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
