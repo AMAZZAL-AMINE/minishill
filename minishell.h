@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 18:02:57 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/21 20:06:29 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	**get_new_arg(char **dst, char **args, \
 char	**split_commande_args(char *token, t_minishell *minishell);
 char	*get_value_from_env(char **conten, char *what);
 //start point 
-void	builtin(t_minishell *shell, char *line);
+void	start_cmd(t_minishell *shell, char *line);
 char	**join_two_dim_arr(char *s1, char **arr);
 char	*remove_quots(char *arg);
 int		count_quots(char *arg);
@@ -139,9 +139,21 @@ void	handle_ctl_d(char *line);
 void	_pipe(t_parsing *shell, t_minishell *mini, char *line);
 void	close_child_between_pieps(t_minishell *mini, int is_between);
 void	open_child_between_pieps(t_minishell *mini, int is_between);
+void	start_builtin(int count, int size_cmd, t_minishell *shell);
+void	close_pipe_in_child(t_minishell *shell, int betwn_pipes);
+void	run_pipe_in_child(t_minishell *shell, int betwn_pipes);
+void	close_pipes(int is_betwwen_pipe, t_minishell *shell);
 //checker
 void	check_cmd_exist(t_parsing *shell, t_minishell *ms);
 int		get_rederection_length(char *token);
+int	no_permission(char *filename);
+int	no_file_or_dir(char *filename);
+int	check_redrect_output(char **new_content, \
+	t_minishell *mini, int count, char *filename);
+int	check_redrect_input(char **new_content, \
+	t_minishell *mini, int count, char *filename);
+int	check_appned(t_minishell *mini, char *filename, \
+	int count, char **new_content);
 
 //ERRORS
 int		all_functions_errors(char *line, t_minishell *ms, t_parsing *shell);
@@ -159,4 +171,9 @@ int		has_ambiguous_redirect(char **args);
 int		unclosed_pipe(t_minishell *mini);
 int		check_cmd_syntax(char *command, char **args, t_parsing *shell);
 int		is_ambiguous_file(char *name, t_minishell *mini);
+
+//cd
+void	home_not_set(void);
+void	cd_err(char *dir);
+void	cd_between_pipe_cd_status(void);
 #endif

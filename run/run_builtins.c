@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 13:42:49 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 16:51:07 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/21 19:11:32 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,55 @@ void	run_buitins(t_minishell *shell, int count, int size)
 		export(&shell->parsing[count], shell);
 	else if (str_cmp("unset", shell->parsing[count].cmd))
 		unset(shell, &shell->parsing[count]);
+}
+
+void	builtin_that_need_to_fork(int count, int size_cmd, \
+	t_minishell *shell, int is_betwwen_pipe)
+{
+	if (is_betwwen_pipe == 0)
+		run_pipe_in_child(shell, 0);
+	else
+		run_pipe_in_child(shell, 1);
+	if (builtin_redirections(shell->parsing[count].args, \
+		&shell->parsing[count], shell) == 0)
+	{
+		run_buitins(shell, count, size_cmd);
+		exit(0);
+	}
+	else
+		exit(1);
+}
+
+void	run_single_cmd(t_minishell *shell, int count, int size_cmd)
+{
+	if (builtin_redirections(shell->parsing[count].args, \
+		&shell->parsing[count], shell) == 0)
+		run_buitins(shell, count, size_cmd);
+}
+
+void	start_builtin(int count, int size_cmd, t_minishell *shell)
+{
+	int	is_betwwen_pipe;
+	int	pid;
+
+	is_betwwen_pipe = 0;
+	if (count + 1 <= size_cmd && \
+		(str_cmp(shell->parsing[count + 1].cmd, "|")))
+	{
+		if (count - 1 >= 0 && \
+			str_cmp(shell->parsing[count - 1].cmd, "|"))
+			is_betwwen_pipe = 1;
+		if (is_betwwen_pipe == 0)
+			pipe(shell->pipefd);
+		else
+			pipe(shell->pipefd2);
+		pid = fork();
+		if (pid == 0)
+			builtin_that_need_to_fork(count, size_cmd, shell, \
+				is_betwwen_pipe);
+		else
+			close_pipes(is_betwwen_pipe, shell);
+	}
+	else
+		run_single_cmd(shell, count, size_cmd);
 }

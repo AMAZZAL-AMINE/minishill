@@ -6,11 +6,20 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 22:45:05 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 16:03:07 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/21 19:34:39 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+int	no_permission(char *filename)
+{
+	captur.exit_status = 1;
+	ft_putstr_fd("minishell : ", 2);
+	ft_putstr_fd(filename, 2);
+	ft_putstr_fd(": Permission denied\n", 2);
+	return (1);
+}
 
 int	redirect_input(char **content, int count)
 {
@@ -26,13 +35,7 @@ int	redirect_input(char **content, int count)
 	}
 	fd = open(content[count + 1], O_RDONLY);
 	if (access(content[count + 1], W_OK))
-	{
-		captur.exit_status = 1;
-		ft_putstr_fd("minishell : ", 2);
-		ft_putstr_fd(content[count + 1], 2);
-		ft_putstr_fd(": Permission denied\n", 2);
-		return (1);
-	}
+		return (no_permission(content[count + 1]));
 	if (fd == -1)
 	{
 		captur.exit_status = 1;

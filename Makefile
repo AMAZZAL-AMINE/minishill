@@ -6,7 +6,7 @@
 #    By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:24:14 by mamazzal          #+#    #+#              #
-#    Updated: 2023/07/21 18:00:09 by mamazzal         ###   ########.fr        #
+#    Updated: 2023/07/21 19:53:29 by mamazzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 
 SRC = main.c ./parsing/parsing.c ./parsing/update_token.c ./parsing/split_commande_args.c \
 			./errors/quots_error.c ./errors/all_func_errors.c \
-			./run/builtin.c ./run/echo.c ./run/clear.c ./run/execut.c remove_quots.c \
+			./run/start_cmd.c ./run/echo.c ./run/clear.c ./run/execut.c remove_quots.c \
 			./run/redirections/redirect.c ./run/utilis/exec_utilis.c ./parsing/set_all_in_current_place.c \
 			str_cmp.c ./run/redirections/appned.c ./run/redirections/herdoc.c ./run/redirections/redirect_input.c \
 			./run/redirections/redirect_output.c ./run/get_cmd_path.c  ./run/join_two_dem_arr.c ./run/cd.c \
@@ -26,7 +26,8 @@ SRC = main.c ./parsing/parsing.c ./parsing/update_token.c ./parsing/split_comman
 			./errors/cmd_is_only_dolar.c ./errors/unset_not_valid_identifier.c ./errors/check_the_dir_name.c \
 			join_tables.c ./errors/unclosed_pipes.c ./errors/check_cmd_syn.c update_env.c \
 			get_args_without_redirections.c ./duplicate_content.c ./errors/ambiguous.c \
-			get_value_with_no_moure_then_space.c ./run/utilis/execute_utilis_part1.c
+			get_value_with_no_moure_then_space.c ./run/utilis/execute_utilis_part1.c \
+			./run/utilis/cd_utilis.c ./run/utilis/builtins_utilis.c ./run/utilis/redirections_utilis.c
 CC = cc
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 

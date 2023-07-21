@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 22:58:20 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 15:53:35 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/21 19:30:32 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,11 @@ int	is_eof_in_quot_fun(char *arg)
 	return (0);
 }
 
-int	run_herdoc(char __unused **content, \
-	char *eof, t_minishell __unused *mini, int *pipid)
+char	*start_herdoc_utilis(char *eof, int is_eof_in_quot, \
+	char *tmp, t_minishell *mini)
 {
 	char	*line;
-	int		is_eof_in_quot;
-	char	*tmp;
 
-	line = NULL;
-	is_eof_in_quot = 0;
-	tmp = "";
-	if (is_eof_in_quot_fun(eof))
-		is_eof_in_quot = 1;
-	eof = remove_quots(eof);
-	if (is_dolar(eof) && !is_eof_in_quot)
-		eof = expand(eof, mini);
 	while (1)
 	{
 		line = readline("> ");
@@ -75,6 +65,25 @@ int	run_herdoc(char __unused **content, \
 			tmp = ft_strjoin(tmp, line);
 		}
 	}
+	return (tmp);
+}
+
+int	run_herdoc(char __unused **content, \
+	char *eof, t_minishell __unused *mini, int *pipid)
+{
+	char	*line;
+	int		is_eof_in_quot;
+	char	*tmp;
+
+	line = NULL;
+	is_eof_in_quot = 0;
+	tmp = "";
+	if (is_eof_in_quot_fun(eof))
+		is_eof_in_quot = 1;
+	eof = remove_quots(eof);
+	if (is_dolar(eof) && !is_eof_in_quot)
+		eof = expand(eof, mini);
+	tmp = start_herdoc_utilis(eof, is_eof_in_quot, tmp, mini);
 	if (tmp)
 		write(pipid[1], tmp, ft_strlen(tmp));
 	close(pipid[1]);

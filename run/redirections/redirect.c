@@ -6,20 +6,17 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 21:03:03 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 16:11:51 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/21 20:22:21 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	redirect(int __unused is_path, t_parsing *shell, \
-	char **content, t_minishell __unused *mini)
+char	**red_utilis(char **content, t_minishell *mini)
 {
-	int		captur;
 	int		count;
 	char	**new_content;
 
-	captur = 0;
 	new_content = duplicate_content(content);
 	count = 0;
 	while (new_content[count])
@@ -30,54 +27,53 @@ int	redirect(int __unused is_path, t_parsing *shell, \
 		new_content[count] = remove_quots(new_content[count]);
 		count++;
 	}
+	return (new_content);
+}
+
+int	redirect_utilis(char **content, t_minishell *mini, \
+	int count, char **new_content)
+{
+	int	captur;
+
+	captur = 0;
+	if (str_cmp(">", content[count]))
+	{
+		captur = check_redrect_output(new_content, mini, count, \
+			content[count + 1]);
+		if (captur != 0)
+			return (captur);
+	}
+	if (str_cmp("<", content[count]))
+	{
+		captur = check_redrect_input(new_content, mini, count, \
+			content[count + 1]);
+		if (captur != 0)
+			return (captur);
+	}
+	if (str_cmp(">>", content[count]))
+	{
+		captur = check_appned(mini, content[count + 1], count, new_content);
+		if (captur != 0)
+			return (captur);
+	}
+	return (0);
+}
+
+int	redirect(int __unused is_path, t_parsing *shell, \
+	char **content, t_minishell __unused *mini)
+{
+	int		captur;
+	int		count;
+	char	**new_content;
+
+	new_content = red_utilis(content, mini);
+	captur = 0;
 	count = 0;
 	while (content[count])
 	{
-		if (str_cmp(">", content[count]))
-		{
-			if (content[count + 1] && \
-				!is_ambiguous_file(content[count + 1], mini))
-			{
-				captur = redirect_output(new_content, count);
-				if (captur != 0)
-					break ;
-			}
-			else
-			{
-				captur = 1;
-				break ;
-			}
-		}
-		if (str_cmp("<", content[count]))
-		{
-			if (content[count + 1] && \
-				!is_ambiguous_file(content[count + 1], mini))
-			{
-				captur = redirect_input(new_content, count);
-				if (captur != 0)
-					break ;
-			}
-			else
-			{
-				captur = 1;
-				break ;
-			}
-		}
-		if (str_cmp(">>", content[count]))
-		{
-			if (content[count + 1] && \
-				!is_ambiguous_file(content[count + 1], mini))
-			{
-				captur = appned(new_content, count);
-				if (captur != 0)
-					break ;
-			}
-			else
-			{
-				captur = 1;
-				break ;
-			}
-		}
+		captur = redirect_utilis(content, mini, count, new_content);
+		if (captur != 0)
+			break ;
 		count++;
 	}
 	shell->args = get_args_without_redirections(shell->args);

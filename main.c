@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 09:54:52 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/21 19:13:14 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int __unused ac, char __unused **av, char **env)
 			add_history(line);
 			parsing_input(minishell, line);
 			count_redirections(minishell);
-			builtin(minishell, line);
+			start_cmd(minishell, line);
 			free(line);
 		}
 	}
