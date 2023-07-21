@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:41:41 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 12:12:34 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/21 16:47:41 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ void	get_env(t_env *env, t_minishell *minishell, char **content)
 	count = 0;
 	if (search_for_heardoc(content))
 		herdoc(content, minishell);
+	if (content[0])
+	{
+		printf("env: %s: No such file or directory\n", \
+			content[0]);
+		captur.exit_status = 127;
+		return ;
+	}
 	while (count < minishell->n_var_env)
 	{
 		if (env[count].is_haver_equal == 1)

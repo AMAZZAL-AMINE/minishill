@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 07:40:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 12:07:24 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:02:35 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,51 @@ void	run_simple_commande(int is_path, t_parsing *shell, \
 	}
 }
 
+void	is_redirect_utilise(t_parsing *shell, t_minishell *mini)
+{
+	int	check;
+
+	check = 0;
+	if (is_redirec_output(shell->args) == 1)
+	{
+		check = 1;
+		if (redirect(1, shell, shell->args, mini) != 0)
+			exit(1);
+	}
+	if (check == 1 && ft_strlen(shell->cmd) == 0)
+		exit(0);
+}
+
+void	run_cmd_inside_child(t_parsing *shell, t_minishell *mini, int ispipe)
+{
+	int		size_new_vars;
+	char	**new_arg;
+
+	if (ispipe == 1)
+		open_child_between_pieps(mini, 0);
+	else if (ispipe == 2)
+		open_child_between_pieps(mini, 1);
+	is_redirect_utilise(shell, mini);
+	size_new_vars = count_length_two_arr(shell->args);
+	new_arg = malloc(sizeof(char *) * (size_new_vars + 1));
+	shell->args = get_new_arg(new_arg, shell->args, size_new_vars, mini);
+	if (str_cmp("./minishell", shell->cmd))
+	{
+		mini->shlvl = ft_itoa(ft_atoi(mini->shlvl) + 1);
+		update_exported_var(get_value_from_env(mini->env_v, "SHLVL"), \
+			mini, "SHLVL", mini->shlvl);
+	}
+	if (str_cmp(find_cmd_path(shell->cmd + length_cmd(shell->cmd), \
+		mini, shell), shell->cmd))
+		run_simple_commande(1, shell, shell->args, mini);
+	else
+		run_simple_commande(0, shell, shell->args, mini);
+}
+
 void	execut(t_parsing *shell, t_minishell *mini, int ispipe)
 {
 	int		status;
 	int		pid;
-	int		size_new_vars;
-	int		check;
-	char	**new_arg;
 
 	if (search_for_heardoc(shell->args))
 		herdoc(shell->args, mini);
@@ -55,63 +93,13 @@ void	execut(t_parsing *shell, t_minishell *mini, int ispipe)
 		pipe(mini->pipefd2);
 	pid = fork();
 	if (pid == 0)
-	{
-		if (ispipe == 1)
-		{
-			close(mini->pipefd[0]);
-			dup2(mini->pipefd[1], STDOUT_FILENO);
-			close(mini->pipefd[1]);
-		}
-		else if (ispipe == 2)
-		{
-			close(mini->pipefd[0]);
-			dup2(mini->pipefd[1], STDOUT_FILENO);
-			close(mini->pipefd[1]);
-			close(mini->pipefd2[0]);
-			dup2(mini->pipefd2[1], STDOUT_FILENO);
-			close(mini->pipefd2[1]);
-		}
-		check = 0;
-		if (is_redirec_output(shell->args) == 1)
-		{
-			check = 1;
-			if (redirect(1, shell, shell->args, mini) != 0)
-				exit(1);
-		}
-		if (check == 1 && ft_strlen(shell->cmd) == 0)
-			exit(0);
-		size_new_vars = count_length_two_arr(shell->args);
-		new_arg = malloc(sizeof(char *) * (size_new_vars + 1));
-		shell->args = get_new_arg(new_arg, shell->args, size_new_vars, mini);
-		if (str_cmp("./minishell", shell->cmd))
-		{
-			mini->shlvl = ft_itoa(ft_atoi(mini->shlvl) + 1);
-			update_exported_var(get_value_from_env(mini->env_v, "SHLVL"), \
-				mini, "SHLVL", mini->shlvl);
-		}
-		if (str_cmp(find_cmd_path(shell->cmd + length_cmd(shell->cmd), \
-			mini, shell), shell->cmd))
-			run_simple_commande(1, shell, shell->args, mini);
-		else
-			run_simple_commande(0, shell, shell->args, mini);
-	}
+		run_cmd_inside_child(shell, mini, ispipe);
 	else
 	{
 		if (ispipe == 1)
-		{
-			close(mini->pipefd[1]);
-			dup2(mini->pipefd[0], STDIN_FILENO);
-			close(mini->pipefd[0]);
-		}
+			close_child_between_pieps(mini, 0);
 		else if (ispipe == 2)
-		{
-			close(mini->pipefd[1]);
-			dup2(mini->pipefd[0], STDIN_FILENO);
-			close(mini->pipefd[0]);
-			close(mini->pipefd2[1]);
-			dup2(mini->pipefd2[0], STDIN_FILENO);
-			close(mini->pipefd2[0]);
-		}
+			close_child_between_pieps(mini, 1);
 		if (!ispipe)
 			waitpid(pid, &status, 0);
 		else

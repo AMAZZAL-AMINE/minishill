@@ -6,25 +6,25 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:48:42 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 11:09:35 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/21 16:26:49 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	unset(t_minishell *ms, t_parsing *shell)
+void	unset_arr_string(t_minishell *ms, t_parsing *shell)
 {
 	int		count;
 	int		index;
 	char	**splpited;
 
-	count = 0;
-	while (shell->args[count])
+	count = -1;
+	while (shell->args[++count])
 	{
 		if (!unset_not_valid_identifier(shell->args[count]))
 		{
-			index = 0;
-			while (ms->env_v[index])
+			index = -1;
+			while (ms->env_v[++index])
 			{
 				splpited = ft_split(ms->env_v[index], '=');
 				if (str_cmp(shell->args[count], splpited[0]))
@@ -36,11 +36,17 @@ void	unset(t_minishell *ms, t_parsing *shell)
 					}
 					break ;
 				}
-				index++;
 			}
 		}
-		count++;
 	}
+}
+
+void	unset(t_minishell *ms, t_parsing *shell)
+{
+	int		count;
+	int		index;
+
+	unset_arr_string(ms, shell);
 	count = 0;
 	while (shell->args[count])
 	{

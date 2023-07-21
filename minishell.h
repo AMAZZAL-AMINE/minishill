@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 10:59:38 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:02:57 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,8 @@ char	*expand(char *arg, t_minishell *mini);
 void	handle_signals(int sig);
 void	handle_ctl_d(char *line);
 void	_pipe(t_parsing *shell, t_minishell *mini, char *line);
-
+void	close_child_between_pieps(t_minishell *mini, int is_between);
+void	open_child_between_pieps(t_minishell *mini, int is_between);
 //checker
 void	check_cmd_exist(t_parsing *shell, t_minishell *ms);
 int		get_rederection_length(char *token);
