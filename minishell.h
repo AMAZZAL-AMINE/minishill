@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/22 10:22:39 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/22 13:18:38 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,12 @@ int		has_ambiguous_redirect(char **args);
 int		unclosed_pipe(t_minishell *mini);
 int		check_cmd_syntax(char *command, char **args, t_parsing *shell);
 int		is_ambiguous_file(char *name, t_minishell *mini);
+int		is_ambiguous_file(char *name, t_minishell *mini);
+int		check_next_str(char *str, int index);
+int		is_btween_word_space(char *str);
+int		is_dolar_between_quot(char *str);
+int		check_prev_str(char *str, int index);
+char	*expand_ambiguous(char *arg, t_minishell *mini);
 
 //cd
 void	home_not_set(void);
