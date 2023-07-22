@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.c                                          :+:      :+:    :+:   */
+/*   start_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 19:04:47 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 19:12:48 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/22 12:05:48 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,13 @@
 
 int	is_it_bultin_or_not(t_minishell *shell, int count)
 {
-	if ((str_cmp("echo", shell->parsing[count].cmd) \
-		|| str_cmp("/bin/echo", shell->parsing[count].cmd)) \
-		|| (str_cmp("cd", shell->parsing[count].cmd) \
-		|| str_cmp("/usr/bin/cd", shell->parsing[count].cmd)) \
-		|| (str_cmp("clear", shell->parsing[count].cmd)) \
-		|| (str_cmp("pwd", shell->parsing[count].cmd) \
-		|| str_cmp("/bin/pwd", shell->parsing[count].cmd)) \
-		|| (str_cmp("exit", shell->parsing[count].cmd)) \
-		|| (str_cmp("env", shell->parsing[count].cmd)) \
-		|| (str_cmp("export", shell->parsing[count].cmd)) \
-		|| (str_cmp("unset", shell->parsing[count].cmd)))
+	if (str_cmp("echo", shell->parsing[count].cmd) \
+		|| str_cmp("cd", shell->parsing[count].cmd) \
+		|| str_cmp("pwd", shell->parsing[count].cmd) \
+		|| str_cmp("exit", shell->parsing[count].cmd) \
+		|| str_cmp("env", shell->parsing[count].cmd) \
+		|| str_cmp("export", shell->parsing[count].cmd) \
+		|| str_cmp("unset", shell->parsing[count].cmd))
 		return (1);
 	return (0);
 }
