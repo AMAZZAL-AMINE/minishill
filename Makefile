@@ -6,7 +6,7 @@
 #    By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:24:14 by mamazzal          #+#    #+#              #
-#    Updated: 2023/07/22 13:17:46 by mamazzal         ###   ########.fr        #
+#    Updated: 2023/07/22 15:23:13 by mamazzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRC = main.c ./parsing/parsing.c ./parsing/update_token.c ./parsing/split_comman
 			./run/utilis/cd_utilis.c ./run/utilis/builtins_utilis.c ./run/utilis/redirections_utilis.c \
 			./run/utilis/export_utilis_get_exported_vars.c ./run/utilis/export_utilis_export_to_env.c \
 			./run/utilis/export_utilis_update_exported_var.c ./errors/utilis/is_ambiguous_file.c \
-			./errors/utilis/ambiguoys_utilis_p1.c
+			./errors/utilis/ambiguoys_utilis_p1.c ./errors/utilis/ambiguoys_utilis_p2.c
 CC = cc
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 

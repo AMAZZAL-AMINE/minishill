@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/22 13:18:38 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/22 15:24:38 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,10 @@ int		is_btween_word_space(char *str);
 int		is_dolar_between_quot(char *str);
 int		check_prev_str(char *str, int index);
 char	*expand_ambiguous(char *arg, t_minishell *mini);
+int		is_var_between_quot_ambiguous(char *arg);
+int		is_only_dolar(char c, char c_next);
+int		is_arobase(char c, int grep_size, char *arg, int count);
+int		ft_get_grepe_size_ambiguous(char *s);
 
 //cd
 void	home_not_set(void);
