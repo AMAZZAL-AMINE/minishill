@@ -6,182 +6,123 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:23:36 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/19 18:35:51 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/23 01:29:19 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int get_rederection_length(char *token) {
-  int count = 0;
-  if (token[0] == '>') {
-    while (token[count] == '>') {
-      count++;
-    }
-  }else if (token[0] == '<') {
-    while (token[count] == '<') {
-      count++;
-    }
-  }
-  return count;
-}
-
-
-int count_splited_words(char *token) {
-  int count = 0;
-  int count_quots = 0;
-  int retured_value = 0;
-  int helped_counter = 0;
-  int saved = 0;
-  while (token[count]) {
-    if (token[count] == '\'' || token[count] == '\"')
-      count_quots++;
-
-    if (((token[count] == ' ') && count_quots % 2 == 0) || count == 0)
-      retured_value++;
-    if ((token[count] == '>' || token[count] == '<') && count_quots % 2 == 0) {
-      helped_counter++;
-    }
-    saved = count;
-    while ((token[saved] == ' ') && count_quots % 2 == 0) {
-      saved++;
-    }
-    if (saved == count) {
-      count++;
-    }else {
-      count = saved;
-    }
-  }
-  return (retured_value + helped_counter);
-}
-
-int chekc_is_quots(char *str) {
-  int count = 0;
-  int count_quots = 0;
-  while (str[count]) {
-    if (str[count] == '\'' || str[count] == '\"') {
-      count_quots++;
-    }
-    count++;
-  }
-  if (count_quots % 2 == 0) {
-    return 1;
-  }else {
-    return 0;
-  }
-}
-
-char	*ft_strndup_new(char const *str, size_t max)
+int	chekc_is_quots(char *str)
 {
-	size_t	index;
-	char	*dst;
+	int	count;
+	int	count_quots;
 
-	index = 0;
-	dst = malloc(sizeof(char) * (max + 1));
-	if (!dst)
+	count = 0;
+	count_quots = 0;
+	while (str[count])
 	{
+		if (str[count] == '\'' || str[count] == '\"')
+			count_quots++;
+		count++;
+	}
+	if (count_quots % 2 == 0)
+		return (1);
+	else
 		return (0);
-	}
-  int count_quots = 0;
-	while (str[index] && index < max)
+}
+
+typedef struct t_data
+{
+	int		count;
+	int		save;
+	int		index;
+	int		stopen;
+	int		within_quots;
+	int		within_quots_two;
+	char	**dst;
+}	t_data;
+
+int	init_dara_struct_split(t_data *data, char *token)
+{
+	data->count = 0;
+	data->save = 0;
+	data->index = 0;
+	data->stopen = 0;
+	data->within_quots = 0;
+	data->within_quots_two = 0;
+	data->dst = malloc(sizeof(char *) * (count_splited_words(token) + 1));
+	if (!data->dst)
+		return (0);
+	return (1);
+}
+
+int	split_commande_args_utilis_part1(char *token, \
+	t_minishell __unused *minishell, t_data *data)
+{
+	while ((token[data->count] == ' ') && (data->within_quots % 2 == 0 \
+		&& data->within_quots_two % 2 == 0))
+		data->count++;
+	data->stopen = data->count;
+	if (token[data->count] == '\"')
+		data->within_quots++;
+	if (token[data->count] == '\'')
+		data->within_quots_two++;
+	while (token[data->count])
 	{
-    if (str[index] == '\"' || str[index] == '\'') {
-      count_quots++;
-    }
-    if ((str[index] == '>' || str[index] == '<') && count_quots % 2 == 0) {
-      break;
-    }
-		dst[index] = str[index];
-		index++;
+		if ((token[data->count] == '>' || token[data->count] == '<') \
+			&& (data->within_quots % 2 == 0 && data->within_quots_two % 2 == 0))
+			break ;
+		data->save++;
+		data->count++;
+		if (token[data->count] == '\"')
+			data->within_quots++;
+		if (token[data->count] == '\'')
+			data->within_quots_two++;
+		if (token[data->count] == ' ' && (data->within_quots % 2 == 0 \
+			&& data->within_quots_two % 2 == 0))
+			break ;
 	}
-	dst[index] = '\0';
-	return (dst);
+	return (0);
 }
 
-char **split_commande_args(char *token, t_minishell *minishell) {
-  int count = 0;
-  int save = 0;
-  int index = 0;
-  int stopen = 0;
-  int within_quots = 0;
-  int within_quots_two = 0;
-  char **dst = malloc(sizeof(char *) * (count_splited_words(token) + 1));
-  while (token[count]) {
-    while ((token[count] == ' ') && (within_quots % 2 == 0 && within_quots_two % 2 == 0))
-      count++;
-    stopen = count;
-    if (token[count] == '\"')
-      within_quots++;
-    if (token[count] == '\'')
-      within_quots_two++;
-    while (token[count])  {
-      if ((token[count] == '>' || token[count] == '<') && (within_quots % 2 == 0 && within_quots_two % 2 == 0))
-        break;
-      save++;
-      count++;
-      if (token[count] == '\"') {
-        within_quots++;
-      }
-      if (token[count] == '\'') {
-        within_quots_two++;
-      }
-      if (token[count] == ' ' && (within_quots % 2 == 0 && within_quots_two % 2 == 0))
-        break;
-    }
-    
-    if (save > 0) {
-      dst[index] =  ft_strdup(ft_strndup_new(&token[stopen], save));
-      index++;
-    }
-  
-    if ((token[count] == '>' || token[count] == '<') && (within_quots % 2 == 0 && within_quots_two % 2 == 0)) {
-      dst[index] =  ft_strdup(ft_strndup(&token[count], get_rederection_length(&token[count])));
-      index++;
-    }
-
-    save = 0;
-    if ((token[count] == '>' || token[count] == '<') && (within_quots % 2 == 0 && within_quots_two % 2 == 0))
-      count += get_rederection_length(&token[count]);
-    else {
-      if (token[count]) {
-        count++;
-      }
-    }
-  }
-  dst[index] = NULL;
-  within_quots = 0;
-  within_quots_two = 0;
-  int helepr = 0;
-  int helper2 = 0;
-  count = 0;
-  while (dst[count]) {
-    within_quots = 0;
-    within_quots_two = 0;
-    helepr = 0;
-    helper2 = 0;
-    while (dst[count][helper2]) {
-      if (dst[count][helper2] == '\'') {
-        within_quots_two++;
-      }
-      if (dst[count][helper2] == '\"') {
-        within_quots++;
-      }
-      if (dst[count][helper2] == ' ' && (within_quots % 2 == 0 && within_quots_two % 2 == 0)) {
-        break;
-      }
-      helper2++;
-    }
-    // printf("%s\n", dst[count]);
-    // printf("END\n");
-    dst[count] = ft_strndup(dst[count], helper2);
-    count++;
-  }
-  dst[count] = NULL;
-  // int size_new_vars = count_length_two_arr(dst);
-  // char **new_arg = malloc(sizeof(char *) * (size_new_vars + 1));
-  // dst = get_new_arg(new_arg,dst, size_new_vars, minishell);
-  (void)minishell;
-  return  dst;
+int	split_commande_args_utilis_part2(char *token, t_data *data)
+{
+	if (data->save > 0)
+	{
+		data->dst[data->index] = ft_strdup(ft_strndup_new(&token[data->stopen], \
+			data->save));
+		data->index++;
+	}
+	if ((token[data->count] == '>' || token[data->count] == '<') \
+		&& (data->within_quots % 2 == 0 && data->within_quots_two % 2 == 0))
+	{
+		data->dst[data->index] = ft_strdup(ft_strndup(&token[data->count], \
+			get_rederection_length(&token[data->count])));
+		data->index++;
+	}
+	return (0);
 }
 
-//echo hello world nice"brother thank you">a | ls -l>a
+char	**split_commande_args(char *token, t_minishell __unused *minishell)
+{
+	t_data	data;
+
+	if (!init_dara_struct_split(&data, token))
+		return (NULL);
+	while (token[data.count])
+	{
+		split_commande_args_utilis_part1(token, minishell, &data);
+		split_commande_args_utilis_part2(token, &data);
+		data.save = 0;
+		if ((token[data.count] == '>' || token[data.count] == '<') \
+			&& (data.within_quots % 2 == 0 && data.within_quots_two % 2 == 0))
+			data.count += get_rederection_length(&token[data.count]);
+		else
+			if (token[data.count])
+				data.count++;
+	}
+	data.dst[data.index] = NULL;
+	data.dst = remove_space_from_dst(data.dst);
+	(void)minishell;
+	return (data.dst);
+}

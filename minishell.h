@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/22 15:24:38 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/23 01:52:14 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,10 @@ int		str_cmp(char *s1, char *s2);
 char	*find_cmd_path(char *cmd, t_minishell *shell, t_parsing *s);
 int		count_length_two_arr(char **arr);
 char	**join_two_dim_arr(char *s1, char **arr);
-char	*expande_cmd(char *cmd, t_minishell *minishell);
 char	**split_variabls(char *arg, int size);
 void	update_exported_var(char *content, t_minishell *shell, \
 	char *name, char *value);
 char	**join_tables(char **table1, char **table2);
-int		is_commande_var(t_parsing *shell, t_minishell *mini, int index);
 void	update_env_ontime(t_parsing *shell, t_minishell *mini);
 char	**get_args_without_redirections(char **args);
 char	**duplicate_content(char **content);
@@ -106,9 +104,35 @@ int		is_dolar_(char *str);
 int		is_bettwen_double(char *arg);
 char	*get_value_with_no_moure_then_space(char *value);
 void	get_exported_vars(t_minishell *shell);
-int		export_to_en(t_minishell *shell, char *name, char *value, char *content);
-void	update_exported_var(char *content, \
-	t_minishell *shell, char *name, char *value);
+int		count_redirection_and_files(char **args);
+int		export_to_en(t_minishell *shell, char *name, \
+	char *value, char *content);
+void	update_exported_var(char *content, t_minishell \
+	*shell, char *name, char *value);
+char	**sort_args(char **oldargs);
+int		count_argment_without_red(char **args);
+int		is_redirect(char *red);
+int		is_quot_in_cmd(char *cmd);
+int		count_argment_without_red(char **args);
+int		is_commande_var(t_parsing *shell, t_minishell *mini, int index);
+int		length_new_cmd(char *arg);
+char	*update_cmd_from_quotes(char *cmd);
+int		is_dolar_var(char *arg);
+char	**split_variabls(char *arg, int size);
+int		skip_spaces(char *token);
+char	*rm_spaces_from_cmd(char *cmd);
+int		get_size_of_arg_if_args(char **args);
+int		get_length_var(char *s);
+char	*get_cmd_with_fixes_size(char *token, int size);
+int		commande_length(char *token);
+char	**new_tokens(char *line);
+char	*pip_strchr(char *arg);
+int		find_index_pipe(char *line);
+int		ft_count_tokens(char *line);
+char	**remove_space_from_dst(char **dst);
+int		get_rederection_length(char *token);
+int		count_splited_words(char *token);
+char	*ft_strndup_new(char const *str, size_t max);
 
 //redirection
 int		redirect_input(char **content, int count);
@@ -150,14 +174,15 @@ void	close_pipes(int is_betwwen_pipe, t_minishell *shell);
 //checker
 void	check_cmd_exist(t_parsing *shell, t_minishell *ms);
 int		get_rederection_length(char *token);
-int	no_permission(char *filename);
-int	no_file_or_dir(char *filename);
-int	check_redrect_output(char **new_content, \
-	t_minishell *mini, int count, char *filename);
-int	check_redrect_input(char **new_content, \
-	t_minishell *mini, int count, char *filename);
-int	check_appned(t_minishell *mini, char *filename, \
-	int count, char **new_content);
+int		no_permission(char *filename);
+int		no_file_or_dir(char *filename);
+int		check_redrect_output(char **new_content, t_minishell *mini, \
+	int count, char *filename);
+int		check_redrect_input(char **new_content, t_minishell *mini, \
+	int count, char *filename);
+int		check_appned(t_minishell *mini, char *filename, int count, \
+	char **new_content);
+int		is_q_in_cmd(char *token);
 
 //ERRORS
 int		all_functions_errors(char *line, t_minishell *ms, t_parsing *shell);

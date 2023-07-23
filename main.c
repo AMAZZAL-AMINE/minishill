@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 19:13:14 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/23 01:54:25 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,8 @@ int	is_not_space(char *line)
 	return (0);
 }
 
-int	main(int __unused ac, char __unused **av, char **env)
+int	init_structer(t_minishell *minishell, char **env)
 {
-	t_minishell	*minishell;
-	char		*line;
-
-	minishell = malloc(sizeof(t_minishell));
-	if (!minishell)
-		return (0);
 	minishell->env_v = env;
 	set_env(minishell);
 	signal(SIGQUIT, handle_signals);
@@ -42,6 +36,19 @@ int	main(int __unused ac, char __unused **av, char **env)
 	minishell->_stdout = dup(STDOUT_FILENO);
 	captur.exit_status = 0;
 	minishell->shlvl = get_env_value("SHLVL", minishell);
+	return (1);
+}
+
+int	main(int __unused ac, char __unused **av, char **env)
+{
+	t_minishell	*minishell;
+	char		*line;
+
+	minishell = malloc(sizeof(t_minishell));
+	if (!minishell)
+		return (0);
+	if (init_structer(minishell, env) == 0)
+		return (0);
 	while (1)
 	{
 		update_env_ontime(NULL, minishell);
@@ -51,7 +58,6 @@ int	main(int __unused ac, char __unused **av, char **env)
 		{
 			add_history(line);
 			parsing_input(minishell, line);
-			count_redirections(minishell);
 			start_cmd(minishell, line);
 			free(line);
 		}

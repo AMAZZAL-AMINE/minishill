@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_token.c                                     :+:      :+:    :+:   */
+/*   ft_strndup_new.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/11 20:15:13 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/23 01:32:02 by mamazzal         ###   ########.fr       */
+/*   Created: 2023/07/23 01:28:26 by mamazzal          #+#    #+#             */
+/*   Updated: 2023/07/23 01:28:39 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*update_token(char *token, int size)
+char	*ft_strndup_new(char const *str, size_t max)
 {
-	int	count;
-	int	index;
+	size_t	index;
+	char	*dst;
+	int		count_quots;
 
-	count = 0;
 	index = 0;
-	while (token[count])
+	dst = malloc(sizeof(char) * (max + 1));
+	if (!dst)
+		return (0);
+	count_quots = 0;
+	while (str[index] && index < max)
 	{
-		if (count == 0)
-		{
-			while (token[count] == ' ' && token[count])
-				count++;
-			if (token[count])
-			{
-				while (index < size)
-				{
-					index++;
-					count++;
-				}
-				break ;
-			}
-		}
+		if (str[index] == '\"' || str[index] == '\'')
+			count_quots++;
+		if ((str[index] == '>' || str[index] == '<') \
+			&& count_quots % 2 == 0)
+			break ;
+		dst[index] = str[index];
+		index++;
 	}
-	return (ft_strdup(token + count));
+	dst[index] = '\0';
+	return (dst);
 }

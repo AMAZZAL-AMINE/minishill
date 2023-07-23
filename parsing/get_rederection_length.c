@@ -1,40 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_token.c                                     :+:      :+:    :+:   */
+/*   get_rederection_length.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/11 20:15:13 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/23 01:32:02 by mamazzal         ###   ########.fr       */
+/*   Created: 2023/07/23 01:10:36 by mamazzal          #+#    #+#             */
+/*   Updated: 2023/07/23 01:10:44 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
-
-char	*update_token(char *token, int size)
+int	get_rederection_length(char *token)
 {
 	int	count;
-	int	index;
 
 	count = 0;
-	index = 0;
-	while (token[count])
+	if (token[0] == '>')
 	{
-		if (count == 0)
-		{
-			while (token[count] == ' ' && token[count])
-				count++;
-			if (token[count])
-			{
-				while (index < size)
-				{
-					index++;
-					count++;
-				}
-				break ;
-			}
-		}
+		while (token[count] == '>')
+			count++;
 	}
-	return (ft_strdup(token + count));
+	else if (token[0] == '<')
+	{
+		while (token[count] == '<')
+			count++;
+	}
+	return (count);
 }

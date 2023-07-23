@@ -6,93 +6,107 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 20:17:48 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/20 13:33:29 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/22 23:09:20 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// void expand(t_parsing *shell, t_minishell *ms) {
-//   int count = 0;
-//   while (shell->args[count]) {
-//     if (shell->args[count][0] == '$' && shell->args[count][1]) {
-//       if (shell->args[count][1] == '?') {
-//         shell->args[count] = ft_itoa(captur.exit_status);
-//       }else {
-//         shell->args[count] = get_env_value(&shell->args[count][1], ms);
-//       }
-//     }
-//     count++;
-//   }
-// }
+int	ft_get_grepe_size(char *s)
+{
+	int	count;
 
-int ft_get_grepe_size(char *s) {
-  int count = 1;
-  while (s[count] && (ft_isalpha(s[count]) || s[count] == '_' || ft_isdigit(s[count])) ) {
-   count++;
-  }
-  if ((s[count] == '\'' || s[count] == '\"')) {
-    return count - 1;
-  }else if (s[count] == '?') {
-    return count;
-  }
-  return count -1;
+	count = 1;
+	while (s[count] && (ft_isalpha(s[count]) \
+	|| s[count] == '_' || ft_isdigit(s[count])))
+		count++;
+	if ((s[count] == '\'' || s[count] == '\"'))
+		return (count - 1);
+	else if (s[count] == '?')
+		return (count);
+	return (count - 1);
 }
 
-int is_var_between_quot(char *arg) {
-  int count = 0;
-  int count2 = 0;
-  while (arg[count]) {
-    if (arg[count] == '\"') {
-      count2++;
-    }
-    if (arg[count] == '$' && count2 % 2 != 0) {
-      return 1;
-    }
-    count++;
-  }
-  return 0;
+int	is_var_between_quot(char *arg)
+{
+	int	count;
+	int	count2;
+
+	count = 0;
+	count2 = 0;
+	while (arg[count])
+	{
+		if (arg[count] == '\"')
+			count2++;
+		if (arg[count] == '$' && count2 % 2 != 0)
+			return (1);
+		count++;
+	}
+	return (0);
 }
 
-char *expand(char *arg, t_minishell *mini) {
-  int count = 0;
-  char *tmp1;
-  char *tmp2;
-  char *dst;
-  while (arg[count]) {
-    int grep_size = 0;
-    if (arg[count] == '$') {
-      if (arg[count + 1] && (arg[count  + 1] == '@' || ft_isdigit(arg[count  + 1]))){
-        grep_size = 1;
-      }else {
-        grep_size = ft_get_grepe_size(arg + count);
-      }
-      // printf("GREPEDSIZE => %d\n", grep_size);
-      tmp1 = ft_strndup(arg, count);
-      tmp2 = arg + (grep_size + (count + 1));
-      if (arg[count] == '$' && (!ft_isalpha(arg[count + 1]) && !ft_isdigit(arg[count + 1]) && arg[count + 1] != '_' && arg[count + 1] != '?' && arg[count + 1] != '@')) {
-        dst = "$";
-      }else {
-        if (arg[count + 1] == '?') {
-          dst = ft_itoa(captur.exit_status);
-        }else {
-          dst = ft_strndup((arg + (count + 1)), grep_size);
-          dst = get_env_value(dst, mini);
-          if (dst) {
-            if (!is_var_between_quot(arg)) {
-              dst = get_value_with_no_moure_then_space(dst);
-            }
-          }
-        }
-      }
-      if (dst == NULL) {
-        dst = "";
-      }
-      dst = ft_strjoin(ft_strjoin(tmp1, dst), tmp2);
-      arg  = dst;
-    }
-    count++;
-  }
-  dst = ft_strdup(dst);
-  return dst;
+typedef struct t_data
+{
+	int		count;
+	char	*tmp1;
+	char	*tmp2;
+	char	*dst;
+	int		grep_size;
+}	t_data;
+
+int	nothing_nrear_dolar_importent(t_data *data, char *arg)
+{
+	if (arg[data->count] == '$' && (!ft_isalpha(arg[data->count + 1]) \
+		&& !ft_isdigit(arg[data->count + 1]) && arg[data->count + 1] != '_' \
+		&& arg[data->count + 1] != '?' && arg[data->count + 1] != '@'))
+		return (1);
+	return (0);
+}
+
+void	expan_utilis(t_data *data, char *arg, t_minishell *mini)
+{
+	if (arg[data->count + 1] && (arg[data->count + 1] == '@' \
+		|| ft_isdigit(arg[data->count + 1])))
+		data->grep_size = 1;
+	else
+		data->grep_size = ft_get_grepe_size(arg + data->count);
+	data->tmp1 = ft_strndup(arg, data->count);
+	data->tmp2 = arg + (data->grep_size + (data->count + 1));
+	if (nothing_nrear_dolar_importent(data, arg))
+		data->dst = "$";
+	else
+	{
+		if (arg[data->count + 1] == '?')
+			data->dst = ft_itoa(captur.exit_status);
+		else
+		{
+			data->dst = ft_strndup((arg + (data->count + 1)), data->grep_size);
+			data->dst = get_env_value(data->dst, mini);
+			if (data->dst)
+				if (!is_var_between_quot(arg))
+					data->dst = get_value_with_no_moure_then_space(data->dst);
+		}
+	}
+}
+
+char	*expand(char *arg, t_minishell *mini)
+{
+	t_data	data;
+
+	data.count = 0;
+	while (arg[data.count])
+	{
+		data.grep_size = 0;
+		if (arg[data.count] == '$')
+		{
+			expan_utilis(&data, arg, mini);
+			if (data.dst == NULL)
+				data.dst = "";
+			data.dst = ft_strjoin(ft_strjoin(data.tmp1, data.dst), data.tmp2);
+			arg = data.dst;
+		}
+		data.count++;
+	}
+	data.dst = ft_strdup(data.dst);
+	return (data.dst);
 }
