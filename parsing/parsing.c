@@ -6,28 +6,11 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/22 23:46:24 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/23 21:22:49 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-char	*join_strin_with_alpha(char *str, char c)
-{
-	char	*dst;
-	int		count;
-
-	dst = malloc(sizeof(char) * (ft_strlen(str) + 2));
-	count = 0;
-	while (str[count])
-	{
-		dst[count] = str[count];
-		count++;
-	}
-	dst[count] = c;
-	dst[count + 1] = '\0';
-	return (dst);
-}
 
 void	init_and_split_utilis_part2(t_minishell *minishell, \
 	char __unused *token, int pos)
