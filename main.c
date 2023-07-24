@@ -6,24 +6,11 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/24 22:19:30 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/24 23:15:22 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	please_free_me(t_minishell *minishell)
-{
-	int	i;
-
-	i = 0;
-	while (minishell->n_cmd > i)
-	{
-		free(minishell->parsing[i].cmd);
-		i++;
-	}
-	free(minishell->parsing);
-}
 
 void	free_double(char **str)
 {
@@ -37,6 +24,20 @@ void	free_double(char **str)
 		i++;
 	}
 }
+
+void	please_free_me(t_minishell *minishell)
+{
+	int	i;
+
+	i = 0;
+	while (minishell->n_cmd >= i)
+	{
+		free(minishell->parsing[i].cmd);
+		i++;
+	}
+	free(minishell->parsing);
+}
+
 
 int	is_not_space(char *line)
 {
