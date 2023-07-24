@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 10:17:36 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/20 21:10:24 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/24 21:35:47 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*remove_quots(char *arg)
 	index = 0;
 	count_d_quot = 0;
 	count_s_quot = 0;
-	new_arg = malloc(sizeof(char) * (count + 1));
+	new_arg = malloc(sizeof(char) * (count + 2));
 	count = 0;
 	while (arg[count])
 	{

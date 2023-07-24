@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:48:42 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 16:26:49 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:24:04 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	unset(t_minishell *ms, t_parsing *shell)
 			{
 				while (index <= ms->n_var_env)
 				{
-					ms->env[index] = ms->env[index + 1];
+					if (index + 1 <= ms->n_var_env)
+						ms->env[index] = ms->env[index + 1];
 					index++;
 				}
 				ms->n_var_env--;

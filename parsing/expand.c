@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 20:17:48 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/22 23:09:20 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/24 20:07:34 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,11 @@ void	expan_utilis(t_data *data, char *arg, t_minishell *mini)
 char	*expand(char *arg, t_minishell *mini)
 {
 	t_data	data;
+	int			size;
 
 	data.count = 0;
-	while (arg[data.count])
+	size = ft_strlen(arg);
+	while (size > data.count)
 	{
 		data.grep_size = 0;
 		if (arg[data.count] == '$')
@@ -104,6 +106,8 @@ char	*expand(char *arg, t_minishell *mini)
 				data.dst = "";
 			data.dst = ft_strjoin(ft_strjoin(data.tmp1, data.dst), data.tmp2);
 			arg = data.dst;
+			if (data.tmp1)
+				free(data.tmp1);
 		}
 		data.count++;
 	}

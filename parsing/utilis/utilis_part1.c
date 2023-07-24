@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 16:47:59 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/22 21:23:41 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:52:29 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,16 @@ char	**get_new_arg(char **dst, char **args, int __unused size, \
 	t_minishell *minishell)
 {
 	t_data	data;
+	char		*tmp;
 
 	init_data_fet_new_arg(&data);
 	while (args[data.count])
 	{
-		if (is_dolar_var(args[data.count]) && \
-			is_bettwen_double(args[data.count]))
+		tmp = args[data.count];
+		if (is_dolar_var(tmp) && \
+			is_bettwen_double(tmp))
 		{
-			data.mini_dst = remove_quots(expand(args[data.count], minishell));
+			data.mini_dst = remove_quots(expand(tmp, minishell));
 			if (*data.mini_dst)
 			{
 				dst[data.index] = data.mini_dst;
@@ -78,9 +80,10 @@ char	**get_new_arg(char **dst, char **args, int __unused size, \
 		}
 		else
 		{
-			dst[data.index] = remove_quots(args[data.count]);
+			dst[data.index] = remove_quots(tmp);
 			data.index++;
 		}
+		free(tmp);
 		data.count++;
 	}
 	dst[data.index] = NULL;

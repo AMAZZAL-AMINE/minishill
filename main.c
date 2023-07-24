@@ -6,11 +6,37 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/23 01:54:25 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/24 22:19:30 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	please_free_me(t_minishell *minishell)
+{
+	int	i;
+
+	i = 0;
+	while (minishell->n_cmd > i)
+	{
+		free(minishell->parsing[i].cmd);
+		i++;
+	}
+	free(minishell->parsing);
+}
+
+void	free_double(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (*str)
+			free(str[i]);
+		i++;
+	}
+}
 
 int	is_not_space(char *line)
 {
@@ -59,6 +85,8 @@ int	main(int __unused ac, char __unused **av, char **env)
 			add_history(line);
 			parsing_input(minishell, line);
 			start_cmd(minishell, line);
+			please_free_me(minishell);
+			// free_double(minishell->tokens);
 			free(line);
 		}
 	}

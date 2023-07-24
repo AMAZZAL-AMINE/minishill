@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/23 21:22:49 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/24 22:12:16 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@ void	init_and_split(t_minishell *minishell, char *token, int pos)
 
 	get_cmd_ = get_cmd_with_fixes_size(token, commande_length(token));
 	rem_sp = rm_spaces_from_cmd(get_cmd_);
+	free(get_cmd_);
 	minishell->parsing[pos].cmd = rem_sp;
 	token = &token[skip_spaces(token)];
-	token = ft_strdup(token + (length_new_cmd(token)));
+	token = token + (length_new_cmd(token));
 	if (is_quot_in_cmd(minishell->parsing[pos].cmd))
 		minishell->parsing[pos].is_cmd_in_quotes = 1;
 	else
@@ -68,17 +69,19 @@ void	init_and_split(t_minishell *minishell, char *token, int pos)
 	init_and_split_utilis_part2(minishell, token, pos);
 }
 
+
 int	parsing_input(t_minishell *minishell, char *line)
 {
 	char	**tokens;
 	int		count;
 	int		size;
 
+	//ceold duplacate line
+	size = ft_count_tokens(line) * 2;
 	tokens = new_tokens(line);
 	if (tokens == NULL)
 		return (1);
 	count = 0;
-	size = ft_count_tokens(line) * 2;
 	minishell->n_cmd = size;
 	minishell->parsing = malloc(sizeof(t_parsing) * (size + 1));
 	while (count <= size)
@@ -86,5 +89,6 @@ int	parsing_input(t_minishell *minishell, char *line)
 		init_and_split(minishell, tokens[count], count);
 		count++;
 	}
+	minishell->tokens = tokens;
 	return (0);
 }

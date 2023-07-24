@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:08:10 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/22 13:27:54 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:17:00 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	handle_undfined_file(char **content)
 	count = 0;
 	while (content[count])
 	{
-		if (content[count][2] && (isredirection(content[count][0]) \
+		if (ft_strlen(content[count]) > 2 && (isredirection(content[count][0]) \
 			&& isredirection(content[count][1]) \
 			&& isredirection(content[count][2])))
 		{

@@ -6,7 +6,7 @@
 #    By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:24:14 by mamazzal          #+#    #+#              #
-#    Updated: 2023/07/23 01:29:45 by mamazzal         ###   ########.fr        #
+#    Updated: 2023/07/24 21:35:15 by mamazzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SRC = main.c ./parsing/parsing.c ./parsing/update_token.c ./parsing/split_comman
 			./parsing/count_splited_words.c ./parsing/get_rederection_length.c
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -g -O0 #-fsanitize=address -g
 
 #to defined the path of readline
 LDFLAGS="-L/goinfre/mamazzal/homebrew/opt/readline/lib"

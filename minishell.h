@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/23 01:52:14 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/24 21:30:26 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_minishell {
 	int				pipefd2[2];
 	int				prev_pipefd[2];
 	char			*shlvl;
+	char			**tokens;
 }	t_minishell;
 
 int		parsing_input(t_minishell *minishell, char *line);

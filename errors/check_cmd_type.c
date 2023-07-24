@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:50:12 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/22 13:24:48 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:17:50 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_is_file(char *cmd)
 {
-	if (cmd[1] && ((cmd[0] == '.' && cmd[1] == '/') || cmd[0] == '/'))
+	if (ft_strlen(cmd) && ((cmd[0] == '.' && cmd[1] == '/') || cmd[0] == '/'))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 17:01:16 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/22 21:31:06 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/24 21:46:11 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@ int	skip_spaces(char *token)
 	return (count);
 }
 
+
+
 char	*rm_spaces_from_cmd(char *cmd)
 {
 	int	size;
 	int	count_quots;
 	int	count_squots;
+	char	*new_cmd;
 
 	size = 0;
 	count_quots = 0;
@@ -43,7 +46,8 @@ char	*rm_spaces_from_cmd(char *cmd)
 			count_squots++;
 		size++;
 	}
-	return (ft_strndup(cmd, size));
+	new_cmd = ft_strndup(cmd, size);
+	return (new_cmd);
 }
 
 int	get_size_of_arg_if_args(char **args)

@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 17:09:46 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/22 19:03:00 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/24 21:19:36 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	init_data_structer(t_data *data, char *line)
 {
 	data->count = 0;
 	data->count_tokens = ft_count_tokens(line) * 2;
-	data->tokens = malloc(sizeof(char *) * (data->count_tokens + 1));
-	data->new_line = ft_strdup(line);
+	data->tokens = malloc(sizeof(char *) * (data->count_tokens + 2));
+	data->new_line = line;
 }
 
 int	utilis_func(t_data	*data)
