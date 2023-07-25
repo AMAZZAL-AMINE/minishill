@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 14:02:51 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/25 17:21:26 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/25 18:33:32 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_env_value(char *what, t_minishell *shell)
 	{
 		content = ft_split(shell->env_v[count], '=');
 		if (str_cmp(content[0], what))
-			return (content[1]);
+			return (free(content[0]), content[1]);
 		free_double(content);
 		count++;
 	}
