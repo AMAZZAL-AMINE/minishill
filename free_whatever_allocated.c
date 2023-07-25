@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_whatever_allocated.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 21:29:11 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/23 21:35:26 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/25 16:57:09 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,5 @@ void	free_whatever_allocated(t_minishell *minishell, \
 	}
 	free(minishell->parsing);
 	free(minishell->env_v);
-	free(minishell->env);
 	free(minishell->shlvl);
 }

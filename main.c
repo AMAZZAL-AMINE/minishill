@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/24 23:15:22 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/25 17:17:01 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ void	please_free_me(t_minishell *minishell)
 		free(minishell->parsing[i].cmd);
 		i++;
 	}
-	free(minishell->parsing);
 }
-
 
 int	is_not_space(char *line)
 {
@@ -80,7 +78,7 @@ int	main(int __unused ac, char __unused **av, char **env)
 	{
 		update_env_ontime(NULL, minishell);
 		line = readline("minishell ❯❯❯ ");
-		handle_ctl_d(line);
+		handle_ctl_d(line, minishell);
 		if (*line && is_not_space(line))
 		{
 			add_history(line);
@@ -89,6 +87,7 @@ int	main(int __unused ac, char __unused **av, char **env)
 			please_free_me(minishell);
 			// free_double(minishell->tokens);
 			free(line);
+			// system("leaks minishell | grep 'leaks for'");
 		}
 	}
 	return (0);

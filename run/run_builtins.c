@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_builtins.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 13:42:49 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/22 12:02:44 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/25 16:58:29 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	run_buitins(t_minishell *shell, int count, int size)
 	else if (str_cmp("exit", shell->parsing[count].cmd))
 		exit_shell(&shell->parsing[count], shell, count, size);
 	else if (str_cmp("env", shell->parsing[count].cmd))
-		get_env(shell->env, shell, shell->parsing[count].args);
+		get_env(NULL, shell, shell->parsing[count].args);
 	else if (str_cmp("export", shell->parsing[count].cmd))
 		export(&shell->parsing[count], shell);
 	else if (str_cmp("unset", shell->parsing[count].cmd))

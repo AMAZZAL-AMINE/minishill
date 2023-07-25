@@ -3,19 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:41:41 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 16:47:41 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/25 16:43:36 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	get_env(t_env *env, t_minishell *minishell, char **content)
+int	check_env(char *env)
+{
+	int count = 0;
+	while(env[count])
+	{
+		if (env[count] == '=') {
+			return 1;
+		}	
+		count++;
+	}
+	return 0;
+}
+
+void	get_env(t_env __unused *env, t_minishell *minishell, char **content)
 {
 	int		count;
-	char	*env_val;
 
 	count = 0;
 	if (search_for_heardoc(content))
@@ -27,13 +39,10 @@ void	get_env(t_env *env, t_minishell *minishell, char **content)
 		captur.exit_status = 127;
 		return ;
 	}
-	while (count < minishell->n_var_env)
+	while (minishell->env_v[count])
 	{
-		if (env[count].is_haver_equal == 1)
-		{
-			env_val = env[count].value;
-			printf("%s=%s\n", env[count].name, env_val);
-		}
+		if (check_env(minishell->env_v[count]))
+			printf("%s\n", minishell->env_v[count]);
 		count++;
 	}
 	captur.exit_status = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/24 21:30:26 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/25 17:14:28 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_parsing
 	int					is_cmd_in_quotes;
 }	t_parsing;
 
+//unused chold remove
 typedef struct s_env
 {
 	char	*name;
@@ -55,7 +56,6 @@ struct s_captur
 }	captur;
 
 typedef struct s_minishell {
-	t_env			*env;
 	t_parsing		*parsing;
 	char			**env_v;
 	int				n_cmd;
@@ -164,7 +164,7 @@ void	export(t_parsing *shell, t_minishell *ms);
 void	unset(t_minishell *ms, t_parsing *shell);
 char	*expand(char *arg, t_minishell *mini);
 void	handle_signals(int sig);
-void	handle_ctl_d(char *line);
+void	handle_ctl_d(char *line, t_minishell *mini);
 void	_pipe(t_parsing *shell, t_minishell *mini, char *line);
 void	close_child_between_pieps(t_minishell *mini, int is_between);
 void	open_child_between_pieps(t_minishell *mini, int is_between);
@@ -216,4 +216,6 @@ int		ft_get_grepe_size_ambiguous(char *s);
 void	home_not_set(void);
 void	cd_err(char *dir);
 void	cd_between_pipe_cd_status(void);
+
+void	free_double(char **str);
 #endif
