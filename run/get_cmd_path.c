@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 14:02:51 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/25 18:33:32 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/25 19:09:27 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_env_value(char *what, t_minishell *shell)
 	{
 		content = ft_split(shell->env_v[count], '=');
 		if (str_cmp(content[0], what))
-			return (free(content[0]), content[1]);
+			return (free(content), shell->env_v[count] + ft_strlen(what) + 1);
 		free_double(content);
 		count++;
 	}

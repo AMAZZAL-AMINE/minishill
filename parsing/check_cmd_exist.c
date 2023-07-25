@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 18:40:48 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/25 15:58:15 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/25 19:12:02 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ void	check_cmd_exist(t_parsing *shell, t_minishell __unused *ms)
 			shell->args = shell->args + 1;
 		}
 	}
+	free(old_cmd);
 }
