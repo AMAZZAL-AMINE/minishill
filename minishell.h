@@ -6,7 +6,11 @@
 /*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/07/25 17:14:28 by rouali           ###   ########.fr       */
+=======
+/*   Updated: 2023/07/25 16:08:22 by mamazzal         ###   ########.fr       */
+>>>>>>> 8c961a81de76705618d01c1a0d24ea3e98f6d4a5
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +42,7 @@ typedef struct s_parsing
 	int					fd_out;
 	int					is_cmd_var;
 	int					is_cmd_in_quotes;
+	char				*cmd_tmp;
 }	t_parsing;
 
 //unused chold remove
@@ -134,7 +139,7 @@ char	**remove_space_from_dst(char **dst);
 int		get_rederection_length(char *token);
 int		count_splited_words(char *token);
 char	*ft_strndup_new(char const *str, size_t max);
-
+void	free_double(char **str);
 //redirection
 int		redirect_input(char **content, int count);
 int		redirect_output(char **content, int count);

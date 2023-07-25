@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:23:36 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/23 01:29:19 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/25 14:56:22 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,15 @@ int	split_commande_args_utilis_part2(char *token, t_data *data)
 {
 	if (data->save > 0)
 	{
-		data->dst[data->index] = ft_strdup(ft_strndup_new(&token[data->stopen], \
-			data->save));
+		data->dst[data->index] = ft_strndup_new(&token[data->stopen], \
+			data->save);
 		data->index++;
 	}
 	if ((token[data->count] == '>' || token[data->count] == '<') \
 		&& (data->within_quots % 2 == 0 && data->within_quots_two % 2 == 0))
 	{
-		data->dst[data->index] = ft_strdup(ft_strndup(&token[data->count], \
-			get_rederection_length(&token[data->count])));
+		data->dst[data->index] = ft_strndup(&token[data->count], \
+			get_rederection_length(&token[data->count]));
 		data->index++;
 	}
 	return (0);

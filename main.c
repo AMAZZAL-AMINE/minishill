@@ -6,7 +6,11 @@
 /*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/07/25 17:17:01 by rouali           ###   ########.fr       */
+=======
+/*   Updated: 2023/07/25 16:09:21 by mamazzal         ###   ########.fr       */
+>>>>>>> 8c961a81de76705618d01c1a0d24ea3e98f6d4a5
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +27,8 @@ void	free_double(char **str)
 			free(str[i]);
 		i++;
 	}
+	if (*str)
+		free(str);
 }
 
 void	please_free_me(t_minishell *minishell)
@@ -33,8 +39,13 @@ void	please_free_me(t_minishell *minishell)
 	while (minishell->n_cmd >= i)
 	{
 		free(minishell->parsing[i].cmd);
+		free(minishell->parsing[i].cmd_tmp);
 		i++;
 	}
+<<<<<<< HEAD
+=======
+	// free(minishell->parsing);
+>>>>>>> 8c961a81de76705618d01c1a0d24ea3e98f6d4a5
 }
 
 int	is_not_space(char *line)
