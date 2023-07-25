@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/24 23:15:22 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:09:38 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ void	please_free_me(t_minishell *minishell)
 	while (minishell->n_cmd >= i)
 	{
 		free(minishell->parsing[i].cmd);
+		free(minishell->parsing[i].cmd_tmp);
 		i++;
 	}
-	free(minishell->parsing);
+	// free(minishell->parsing);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/24 21:30:26 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/25 14:58:32 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_parsing
 	int					fd_out;
 	int					is_cmd_var;
 	int					is_cmd_in_quotes;
+	char				*cmd_tmp;
 }	t_parsing;
 
 typedef struct s_env

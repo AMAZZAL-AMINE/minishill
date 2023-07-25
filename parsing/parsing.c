@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/24 23:02:49 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:03:26 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_and_split_utilis_part2(t_minishell *minishell, \
 	if (is_dolar_var(minishell->parsing[pos].cmd) && \
 		is_bettwen_double(minishell->parsing[pos].cmd))
 	{
+		minishell->parsing[pos].cmd_tmp = minishell->parsing[pos].cmd;
 		minishell->parsing[pos].cmd = \
 			remove_quots(expand(minishell->parsing[pos].cmd, minishell));
 		is_commande_var(&minishell->parsing[pos], minishell, pos);
@@ -25,6 +26,7 @@ void	init_and_split_utilis_part2(t_minishell *minishell, \
 	}
 	else
 	{
+		minishell->parsing[pos].cmd_tmp = minishell->parsing[pos].cmd;
 		minishell->parsing[pos].cmd = remove_quots(minishell->parsing[pos].cmd);
 		minishell->parsing[pos].is_cmd_var = 0;
 	}
