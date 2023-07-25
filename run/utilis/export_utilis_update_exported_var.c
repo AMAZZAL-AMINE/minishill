@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 10:22:07 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/25 17:30:01 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/25 18:45:50 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	update_exported_var(char *content, \
 			if (ft_strchr(content, '=') != NULL)
 			{
 				shell->env_v[count] = ft_strjoin(ft_strjoin(name, "="), value);
+				free_double(splited);
 				return ;
 			}
 		}
