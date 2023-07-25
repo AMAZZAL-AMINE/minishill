@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/25 15:09:38 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/25 16:09:21 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	free_double(char **str)
 			free(str[i]);
 		i++;
 	}
+	if (*str)
+		free(str);
 }
 
 void	please_free_me(t_minishell *minishell)

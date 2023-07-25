@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/25 14:58:32 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/25 16:08:22 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ char	**remove_space_from_dst(char **dst);
 int		get_rederection_length(char *token);
 int		count_splited_words(char *token);
 char	*ft_strndup_new(char const *str, size_t max);
-
+void	free_double(char **str);
 //redirection
 int		redirect_input(char **content, int count);
 int		redirect_output(char **content, int count);
