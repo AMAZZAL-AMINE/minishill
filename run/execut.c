@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 07:40:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 18:02:35 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/25 22:55:55 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,26 @@ int	length_cmd(char *cmd)
 	return (count + 1);
 }
 
-void	run_simple_commande(int is_path, t_parsing *shell, \
+void	run_simple_commande(t_parsing *shell, \
 	char **content, t_minishell *mini)
 {
-	if (is_path == 1)
+	char *tmp = find_cmd_path(shell->cmd + length_cmd(shell->cmd), \
+		mini, shell);
+	if (str_cmp(tmp, shell->cmd))
 	{
-		if (execve(shell->cmd, join_two_dim_arr(shell->cmd + \
-			length_cmd(shell->cmd), content), mini->env_v) == -1)
+		free(tmp);
+		shell->args = join_two_dim_arr(shell->cmd +	length_cmd(shell->cmd), content);
+		if (execve(shell->cmd, shell->args, mini->env_v) == -1) {
 			cmd_not_found(shell->cmd, mini);
+		}
 	}
 	else
 	{
-		if (execve(find_cmd_path(shell->cmd, mini, shell), \
-			join_two_dim_arr(shell->cmd, content), mini->env_v) == -1)
+		free(tmp);
+		shell->args = join_two_dim_arr(shell->cmd, content);
+		if (execve(find_cmd_path(shell->cmd, mini, shell), shell->args, mini->env_v) == -1) {
 			cmd_not_found(shell->cmd, mini);
+		}
 	}
 }
 
@@ -73,11 +79,7 @@ void	run_cmd_inside_child(t_parsing *shell, t_minishell *mini, int ispipe)
 		update_exported_var(get_value_from_env(mini->env_v, "SHLVL"), \
 			mini, "SHLVL", mini->shlvl);
 	}
-	if (str_cmp(find_cmd_path(shell->cmd + length_cmd(shell->cmd), \
-		mini, shell), shell->cmd))
-		run_simple_commande(1, shell, shell->args, mini);
-	else
-		run_simple_commande(0, shell, shell->args, mini);
+	run_simple_commande(shell, shell->args, mini);
 }
 
 void	execut(t_parsing *shell, t_minishell *mini, int ispipe)

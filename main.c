@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/25 18:37:44 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/25 23:37:23 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	please_free_me(t_minishell *minishell)
 		free(minishell->parsing[i].cmd_tmp);
 		i++;
 	}
+	// free(minishell->parsing);
 }
 
 int	is_not_space(char *line)
@@ -87,7 +88,6 @@ int	main(int __unused ac, char __unused **av, char **env)
 			parsing_input(minishell, line);
 			start_cmd(minishell, line);
 			please_free_me(minishell);
-			// free_double(minishell->tokens);
 			free(line);
 			// system("leaks minishell | grep 'leaks for'");
 		}

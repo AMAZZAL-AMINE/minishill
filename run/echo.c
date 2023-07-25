@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:55:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 12:50:41 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/25 19:36:08 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ void	echo_in_console(char **content)
 		if (content[count])
 		{
 			if (content[count + 1])
-				write(1, ft_strjoin(content[count], " "), \
-					ft_strlen(content[count]) + 1);
+			{
+				write(1, content[count], \
+					ft_strlen(content[count]));
+				write(1, " ", 1);
+			}
 			else
 				write(1, content[count], ft_strlen(content[count]));
 		}

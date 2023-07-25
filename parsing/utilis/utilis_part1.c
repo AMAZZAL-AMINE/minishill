@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 16:47:59 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/24 19:52:29 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/25 22:49:09 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ char	**get_new_arg(char **dst, char **args, int __unused size, \
 		free(tmp);
 		data.count++;
 	}
+	free(args);
 	dst[data.index] = NULL;
 	return (dst);
 }
