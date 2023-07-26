@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/25 23:37:23 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/26 15:09:44 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ void	free_double(char **str)
 	int	i;
 
 	i = 0;
+	if (str[0] && ft_strlen(str[0]) == 0)
+		return ;
 	while (str[i])
 	{
-			free(str[i]);
+		free(str[i]);
 		i++;
 	}
 	free(str);
@@ -29,15 +31,22 @@ void	free_double(char **str)
 void	please_free_me(t_minishell *minishell)
 {
 	int	i;
+	int	count;
 
 	i = 0;
 	while (minishell->n_cmd >= i)
 	{
+		count = 0;
+		while (minishell->parsing[i].args[count]) {
+			free(minishell->parsing[i].args[count]);
+			count++;
+		}
 		free(minishell->parsing[i].cmd);
 		free(minishell->parsing[i].cmd_tmp);
+		
 		i++;
 	}
-	// free(minishell->parsing);
+	free(minishell->tokens);
 }
 
 int	is_not_space(char *line)
@@ -79,7 +88,7 @@ int	main(int __unused ac, char __unused **av, char **env)
 		return (0);
 	while (1)
 	{
-		update_env_ontime(NULL, minishell);
+		// update_env_ontime(NULL, minishell);
 		line = readline("minishell ❯❯❯ ");
 		handle_ctl_d(line, minishell);
 		if (*line && is_not_space(line))
@@ -89,6 +98,7 @@ int	main(int __unused ac, char __unused **av, char **env)
 			start_cmd(minishell, line);
 			please_free_me(minishell);
 			free(line);
+			free(minishell->parsing);
 			// system("leaks minishell | grep 'leaks for'");
 		}
 	}
