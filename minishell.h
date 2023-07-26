@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/25 23:43:19 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:46:47 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ char	**split_variabls(char *arg, int size);
 void	update_exported_var(char *content, t_minishell *shell, \
 	char *name, char *value);
 char	**join_tables(char **table1, char **table2);
-void	update_env_ontime(t_parsing *shell, t_minishell *mini);
 char	**get_args_without_redirections(char **args);
 char	**duplicate_content(char **content);
 int		is_dolar_(char *str);

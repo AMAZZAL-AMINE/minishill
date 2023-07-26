@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/26 16:36:48 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:45:28 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	please_free_me(t_minishell *minishell)
 		free(minishell->parsing[i].cmd_tmp);
 		i++;
 	}
+	
 	count = 0;
 	while (minishell->tokens[count]) {
 		free(minishell->tokens[count]);
@@ -92,7 +93,6 @@ int	main(int __unused ac, char __unused **av, char **env)
 		return (0);
 	while (1)
 	{
-		update_env_ontime(NULL, minishell);
 		line = readline("minishell ❯❯❯ ");
 		handle_ctl_d(line, minishell);
 		if (*line && is_not_space(line))
