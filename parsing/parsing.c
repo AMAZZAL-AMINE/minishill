@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/26 14:51:45 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/26 16:15:33 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,14 @@ void	init_and_split(t_minishell *minishell, char *token, int pos)
 
 int	parsing_input(t_minishell *minishell, char *line)
 {
-	char	**tokens;
 	int		count;
 	int		size;
 	t_parsing	*parsing;
 
 	//ceold duplacate line
 	size = ft_count_tokens(line) * 2;
-	tokens = new_tokens(line);
-	if (tokens == NULL)
+	minishell->tokens = new_tokens(line);
+	if (minishell->tokens == NULL)
 		return (1);
 	count = 0;
 	minishell->n_cmd = size;
@@ -90,9 +89,8 @@ int	parsing_input(t_minishell *minishell, char *line)
 	minishell->parsing = parsing;
 	while (count <= size)
 	{
-		init_and_split(minishell, tokens[count], count);
+		init_and_split(minishell, minishell->tokens[count], count);
 		count++;
 	}
-	minishell->tokens = tokens;
 	return (0);
 }

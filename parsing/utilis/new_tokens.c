@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 17:09:46 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/24 21:19:36 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/26 16:21:00 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	utilis_func(t_data	*data)
 	data->count++;
 	if (!data->new_line)
 		return (1);
-	data->tokens[data->count] = "|";
+	data->tokens[data->count] = ft_strdup("|");
 	data->count++;
 	return (0);
 }
