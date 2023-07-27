@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 20:17:48 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/27 18:47:39 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/27 21:18:04 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,9 @@ void	expan_utilis(t_data *data, char *arg, t_minishell *mini)
 			data->dst = ft_strndup((arg + (data->count + 1)), data->grep_size);
 			data->dst = get_env_value(data->dst, mini);
 			if (data->dst)
-				if (!is_var_between_quot(arg))
+				if (!is_var_between_quot(arg)) {
 					data->dst = get_value_with_no_moure_then_space(data->dst);
+				}
 		}
 	}
 }
@@ -97,7 +98,7 @@ char	*expand(char *arg, t_minishell *mini)
 
 	data.count = 0;
 	size = ft_strlen(arg);
-	while (size > data.count)
+	while (arg[data.count])
 	{
 		data.grep_size = 0;
 		if (arg[data.count] == '$')
