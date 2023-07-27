@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 20:17:48 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/27 21:18:04 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/27 21:57:44 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ typedef struct t_data
 	char	*tmp1;
 	char	*tmp2;
 	char	*dst;
+	char	*tmp3;
 	int		grep_size;
+	int		yes;
 }	t_data;
 
 int	nothing_nrear_dolar_importent(t_data *data, char *arg)
@@ -72,19 +74,25 @@ void	expan_utilis(t_data *data, char *arg, t_minishell *mini)
 		data->grep_size = ft_get_grepe_size(arg + data->count);
 	data->tmp1 = ft_strndup(arg, data->count);
 	data->tmp2 = arg + (data->grep_size + (data->count + 1));
-	if (nothing_nrear_dolar_importent(data, arg))
+	if (nothing_nrear_dolar_importent(data, arg)) {
 		data->dst = ft_strdup("$");
+		data->yes = 0;
+	}
 	else
 	{
-		if (arg[data->count + 1] == '?')
+		if (arg[data->count + 1] == '?') {
 			data->dst = ft_itoa(captur.exit_status);
+			data->yes = 0;
+		}
 		else
 		{
 			data->dst = ft_strndup((arg + (data->count + 1)), data->grep_size);
 			data->dst = get_env_value(data->dst, mini);
 			if (data->dst)
 				if (!is_var_between_quot(arg)) {
-					data->dst = get_value_with_no_moure_then_space(data->dst);
+					data->tmp3 = get_value_with_no_moure_then_space(data->dst);
+					data->yes = 1;
+					data->dst = data->tmp3;
 				}
 		}
 	}
@@ -104,18 +112,21 @@ char	*expand(char *arg, t_minishell *mini)
 		if (arg[data.count] == '$')
 		{
 			expan_utilis(&data, arg, mini);
-			if (data.dst == NULL)
+			if (data.dst == NULL) {
+				data.yes = 0;
 				data.dst = ft_strdup("");
+			}
 			tmp = ft_strjoin(data.tmp1, data.dst);
 			data.dst = ft_strjoin(tmp, data.tmp2);
 			arg = data.dst;
 			free(tmp);
+			if (data.yes)
+				free(data.tmp3);
 			if (data.tmp1)
 				free(data.tmp1);
 		}
 		data.count++;
 	}
-	// free(arg);
 	// data.dst = ft_strdup(data.dst);
 	return (data.dst);
 }
