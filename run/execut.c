@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 07:40:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/27 07:22:59 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/27 15:03:20 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	run_simple_commande(t_parsing *shell, \
 		mini, shell);
 	if (str_cmp(tmp, shell->cmd))
 	{
-		free(tmp);
+		// free(tmp);
 		shell->args = join_two_dim_arr(shell->cmd +	length_cmd(shell->cmd), content);
 		if (execve(shell->cmd, shell->args, mini->env_v) == -1) {
 			cmd_not_found(shell->cmd, mini);
@@ -37,7 +37,7 @@ void	run_simple_commande(t_parsing *shell, \
 	}
 	else
 	{
-		free(tmp);
+		// free(tmp);
 		shell->args = join_two_dim_arr(shell->cmd, content);
 		if (execve(find_cmd_path(shell->cmd, mini, shell), shell->args, mini->env_v) == -1) {
 			cmd_not_found(shell->cmd, mini);

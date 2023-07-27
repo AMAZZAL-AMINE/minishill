@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 18:05:53 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/22 11:01:20 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/27 15:19:52 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	run_utilis(t_data *data, t_minishell *ms)
 	if (export_to_en(ms, data->var, \
 		data->value, data->new_args[data->count]) == 1)
 		data->return_status = 1;
+	free_double(data->arg_splited);
 }
 
 void	init_data(t_data *data, t_parsing *shell)

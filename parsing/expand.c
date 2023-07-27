@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 20:17:48 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/24 20:07:34 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/27 18:47:39 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	expan_utilis(t_data *data, char *arg, t_minishell *mini)
 	data->tmp1 = ft_strndup(arg, data->count);
 	data->tmp2 = arg + (data->grep_size + (data->count + 1));
 	if (nothing_nrear_dolar_importent(data, arg))
-		data->dst = "$";
+		data->dst = ft_strdup("$");
 	else
 	{
 		if (arg[data->count + 1] == '?')
@@ -93,6 +93,7 @@ char	*expand(char *arg, t_minishell *mini)
 {
 	t_data	data;
 	int			size;
+	char	*tmp;
 
 	data.count = 0;
 	size = ft_strlen(arg);
@@ -103,14 +104,17 @@ char	*expand(char *arg, t_minishell *mini)
 		{
 			expan_utilis(&data, arg, mini);
 			if (data.dst == NULL)
-				data.dst = "";
-			data.dst = ft_strjoin(ft_strjoin(data.tmp1, data.dst), data.tmp2);
+				data.dst = ft_strdup("");
+			tmp = ft_strjoin(data.tmp1, data.dst);
+			data.dst = ft_strjoin(tmp, data.tmp2);
 			arg = data.dst;
+			free(tmp);
 			if (data.tmp1)
 				free(data.tmp1);
 		}
 		data.count++;
 	}
-	data.dst = ft_strdup(data.dst);
+	// free(arg);
+	// data.dst = ft_strdup(data.dst);
 	return (data.dst);
 }

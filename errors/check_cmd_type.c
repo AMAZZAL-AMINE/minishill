@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:50:12 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/24 19:17:50 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/27 18:51:17 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_is_file(char *cmd)
 int	permission_denied(char *cmd)
 {
 	captur.exit_status = 126;
-	ft_putstr_fd("minishell : ", 2);
+	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(cmd, 2);
 	ft_putstr_fd(": Permission denied\n", 2);
 	return (126);
@@ -36,7 +36,7 @@ int	run_file(char *cmd)
 	if (S_ISDIR(file_stat.st_mode))
 	{
 		captur.exit_status = 126;
-		ft_putstr_fd("minishell : ", 2);
+		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(cmd, 2);
 		ft_putstr_fd(": is a directory\n", 2);
 		return (126);

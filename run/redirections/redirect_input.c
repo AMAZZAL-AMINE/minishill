@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 22:45:05 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 19:34:39 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/27 18:51:17 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	no_permission(char *filename)
 {
 	captur.exit_status = 1;
-	ft_putstr_fd("minishell : ", 2);
+	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(filename, 2);
 	ft_putstr_fd(": Permission denied\n", 2);
 	return (1);
@@ -40,7 +40,7 @@ int	redirect_input(char **content, int count)
 	{
 		captur.exit_status = 1;
 		close(STDOUT_FILENO);
-		ft_putstr_fd("minishell : error opening a file", 2);
+		ft_putstr_fd("minishell: error opening a file", 2);
 		return (1);
 	}
 	dup2(fd, STDIN_FILENO);
