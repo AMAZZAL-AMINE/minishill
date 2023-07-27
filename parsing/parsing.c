@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/27 05:06:37 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/27 06:52:14 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,17 @@ void	init_and_split_utilis_part2(t_minishell *minishell, \
 char	**init_and_split_utilis_part1(t_minishell *minishell, \
 	char **dst, int pos)
 {
+	char **tmp;
 	if (is_redirec_output(dst))
 	{
-		
-		dst = sort_args(dst);
+		tmp = sort_args(dst);
+		free(dst);
+		dst = tmp;
 		if ((!ft_strlen(minishell->parsing[pos].cmd) \
 			|| is_redirect(minishell->parsing[pos].cmd)) \
 			&& !is_redirect(dst[0]))
 		{
+			free(minishell->parsing[pos].cmd);
 			minishell->parsing[pos].cmd = dst[0];
 			dst = duplicate_content(&dst[1]);
 		}

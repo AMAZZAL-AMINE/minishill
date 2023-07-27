@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 17:26:05 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 11:23:27 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/27 07:19:32 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ char	**join_two_dim_arr(char *s1, char **arr)
 		count++;
 	}
 	dst[count] = 0;
+	free(arr);
 	return (dst);
 }

@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 16:36:52 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/27 05:01:00 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/27 07:35:18 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	split_args_are_not_redirections(t_data *data, char **oldargs)
 	{
 		if (data->count == 0 && !is_redirect(oldargs[data->count]))
 		{
-			data->dst_two[data->index] = oldargs[data->count];
+			data->dst_two[data->index] = ft_strdup(oldargs[data->count]);
 			data->index++;
 		}
 		else
@@ -79,7 +79,7 @@ void	split_args_are_not_redirections(t_data *data, char **oldargs)
 			if (data->count - 1 >= 0 && !is_redirect(oldargs[data->count - 1]) \
 				&& !is_redirect(oldargs[data->count]))
 			{
-				data->dst_two[data->index] = oldargs[data->count];
+				data->dst_two[data->index] = ft_strdup(oldargs[data->count]);
 				data->index++;
 			}
 		}
@@ -91,6 +91,7 @@ void	split_args_are_not_redirections(t_data *data, char **oldargs)
 char	**sort_args(char **oldargs)
 {
 	t_data	data;
+	char		**new_args;
 
 	if (init_data_structer_sort_args(&data, oldargs))
 		return (NULL);
@@ -98,5 +99,9 @@ char	**sort_args(char **oldargs)
 	data.index = 0;
 	data.count = 0;
 	split_args_are_not_redirections(&data, oldargs);
-	return (join_tables(data.dst_two, data.dst));
+	// free_double(oldargs);
+	new_args = join_tables(data.dst_two, data.dst);
+	free(data.dst);
+	free(data.dst_two);
+	return (new_args);
 }

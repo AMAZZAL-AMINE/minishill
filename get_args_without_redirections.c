@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 22:28:04 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/20 19:37:07 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/27 06:33:25 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ char	**get_args_without_redirections(char **args)
 	count = 0;
 	while (count < index)
 	{
-		new_args[count] = args[count];
+		new_args[count] = ft_strdup(args[count]);
 		count++;
 	}
 	new_args[count] = NULL;
+	free_double(args);
 	return (new_args);
 }

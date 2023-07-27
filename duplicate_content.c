@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 17:57:18 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/20 19:30:12 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/27 06:39:27 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**duplicate_content(char **content)
 	count = 0;
 	while (content[count])
 	{
-		new_content[count] = ft_strdup(content[count]);
+		new_content[count] = content[count];
 		count++;
 	}
 	new_content[count] = NULL;

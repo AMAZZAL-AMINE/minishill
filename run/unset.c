@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:48:42 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/25 17:02:46 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/27 07:39:28 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ void	unset_arr_string(t_minishell *ms, t_parsing *shell)
 						ms->env_v[index] = ms->env_v[index + 1];
 						index++;
 					}
+					free_double(splpited);
 					break ;
 				}
+				free_double(splpited);
 			}
 		}
 	}
