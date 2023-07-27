@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/26 17:44:49 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/27 05:06:37 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,14 @@ char	**init_and_split_utilis_part1(t_minishell *minishell, \
 {
 	if (is_redirec_output(dst))
 	{
+		
 		dst = sort_args(dst);
 		if ((!ft_strlen(minishell->parsing[pos].cmd) \
 			|| is_redirect(minishell->parsing[pos].cmd)) \
 			&& !is_redirect(dst[0]))
 		{
 			minishell->parsing[pos].cmd = dst[0];
-			dst = dst + 1;
+			dst = duplicate_content(&dst[1]);
 		}
 	}
 	return (dst);
@@ -66,8 +67,7 @@ void	init_and_split(t_minishell *minishell, char *token, int pos)
 	else
 		minishell->parsing[pos].is_cmd_in_quotes = 0;
 	dst = split_commande_args(token, minishell);
-	dst = init_and_split_utilis_part1(minishell, dst, pos);
-	minishell->parsing[pos].args = dst;
+	minishell->parsing[pos].args = init_and_split_utilis_part1(minishell, dst, pos);
 	init_and_split_utilis_part2(minishell, token, pos);
 }
 
