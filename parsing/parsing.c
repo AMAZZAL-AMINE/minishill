@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/27 06:52:14 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/28 00:35:37 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 void	init_and_split_utilis_part2(t_minishell *minishell, \
 	char __unused *token, int pos)
 {
-	if (is_dolar_var(minishell->parsing[pos].cmd) && \
-		is_bettwen_double(minishell->parsing[pos].cmd))
+	if (is_dolar_var(minishell->parsing[pos].cmd))
 	{
 		minishell->parsing[pos].cmd_tmp = minishell->parsing[pos].cmd;
 		minishell->parsing[pos].cmd = \

@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 20:17:48 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/27 21:57:44 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/28 04:12:06 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,19 @@ int	ft_get_grepe_size(char *s)
 	return (count - 1);
 }
 
-int	is_var_between_quot(char *arg)
+typedef struct t_data
+{
+	int		count;
+	char	*tmp1;
+	char	*tmp2;
+	char	*dst;
+	char	*tmp3;
+	int		grep_size;
+	int		yes;
+	int saved_index;
+}	t_data;
+
+int	is_var_between_quot(char *arg, t_data *data)
 {
 	int	count;
 	int	count2;
@@ -38,23 +50,13 @@ int	is_var_between_quot(char *arg)
 	{
 		if (arg[count] == '\"')
 			count2++;
-		if (arg[count] == '$' && count2 % 2 != 0)
+		if (count == data->count && arg[count] == '$' && count2 % 2 != 0)
 			return (1);
 		count++;
 	}
 	return (0);
 }
 
-typedef struct t_data
-{
-	int		count;
-	char	*tmp1;
-	char	*tmp2;
-	char	*dst;
-	char	*tmp3;
-	int		grep_size;
-	int		yes;
-}	t_data;
 
 int	nothing_nrear_dolar_importent(t_data *data, char *arg)
 {
@@ -65,8 +67,32 @@ int	nothing_nrear_dolar_importent(t_data *data, char *arg)
 	return (0);
 }
 
+int	chould_i_expand(char *arg, t_data *data)
+{
+	int	count;
+	int	count2;
+	int	count3;
+
+	count = 0;
+	count2 = 0;
+	count3 = 0;
+	while (arg[count])
+	{
+		if (arg[count] == '\'' && count3 % 2 == 0)
+			count2++;
+		else if (arg[count] == '\"' && count2 % 2 == 0)
+			count3++;
+		else if (data->count == count && arg[count] == '$' && count2 % 2 == 0) {
+				return (1);
+		}
+		count++;
+	}
+	return (0);
+}
+
 void	expan_utilis(t_data *data, char *arg, t_minishell *mini)
 {
+	char *tmp;
 	if (arg[data->count + 1] && (arg[data->count + 1] == '@' \
 		|| ft_isdigit(arg[data->count + 1])))
 		data->grep_size = 1;
@@ -74,28 +100,34 @@ void	expan_utilis(t_data *data, char *arg, t_minishell *mini)
 		data->grep_size = ft_get_grepe_size(arg + data->count);
 	data->tmp1 = ft_strndup(arg, data->count);
 	data->tmp2 = arg + (data->grep_size + (data->count + 1));
+	tmp = ft_strndup((arg + (data->count + 1)), data->grep_size);
 	if (nothing_nrear_dolar_importent(data, arg)) {
 		data->dst = ft_strdup("$");
 		data->yes = 0;
 	}
 	else
 	{
-		if (arg[data->count + 1] == '?') {
-			data->dst = ft_itoa(captur.exit_status);
-			data->yes = 0;
-		}
-		else
-		{
-			data->dst = ft_strndup((arg + (data->count + 1)), data->grep_size);
-			data->dst = get_env_value(data->dst, mini);
-			if (data->dst)
-				if (!is_var_between_quot(arg)) {
-					data->tmp3 = get_value_with_no_moure_then_space(data->dst);
-					data->yes = 1;
-					data->dst = data->tmp3;
+			if (chould_i_expand(arg, data)) {
+				if (arg[data->count + 1] == '?') {
+						data->dst = ft_itoa(captur.exit_status);
+						data->yes = 0;
+				}else {					
+					data->dst = tmp;
+					data->dst = get_env_value(data->dst, mini);
+					data->yes = 0;
+					if (data->dst)
+						if (!is_var_between_quot(arg, data)) {
+							data->tmp3 = get_value_with_no_moure_then_space(data->dst);
+							data->yes = 1;
+							data->dst = data->tmp3;
+						}
 				}
+			}else {
+				data->dst = ft_strndup((arg + (data->count)), data->grep_size + 1);
+				data->yes = 0;
+			}
 		}
-	}
+		free(tmp);
 }
 
 char	*expand(char *arg, t_minishell *mini)
@@ -106,7 +138,7 @@ char	*expand(char *arg, t_minishell *mini)
 
 	data.count = 0;
 	size = ft_strlen(arg);
-	while (arg[data.count])
+	while (size > data.count)
 	{
 		data.grep_size = 0;
 		if (arg[data.count] == '$')
@@ -119,6 +151,7 @@ char	*expand(char *arg, t_minishell *mini)
 			tmp = ft_strjoin(data.tmp1, data.dst);
 			data.dst = ft_strjoin(tmp, data.tmp2);
 			arg = data.dst;
+			size = ft_strlen(arg);
 			free(tmp);
 			if (data.yes)
 				free(data.tmp3);

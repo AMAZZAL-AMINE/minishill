@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 19:28:25 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/22 15:24:07 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/28 01:48:21 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,32 @@ int	ft_get_grepe_size_ambiguous(char *s)
 char	*expande_amg_help(int grep_size, char *arg, \
 	int count, t_minishell *mini)
 {
+	char	*tmp;
 	char	*tmp1;
 	char	*tmp2;
+	char	*tmp3;
 	char	*dst;
 
 	grep_size = is_arobase(arg[count + 1], grep_size, arg, count);
+	tmp = ft_strndup((arg + (count + 1)), grep_size);
 	tmp1 = ft_strndup(arg, count);
 	tmp2 = arg + (grep_size + (count + 1));
 	if (is_only_dolar(arg[count], arg[count + 1]))
-		dst = "$";
+			dst = "$";
 	else
 	{
-		if (arg[count + 1] == '?')
-			dst = ft_itoa(captur.exit_status);
-		else
-			dst = get_env_value(ft_strndup((arg + (count + 1)), \
-				grep_size), mini);
+			if (arg[count + 1] == '?')
+					dst = ft_itoa(captur.exit_status);
+			else
+					dst = get_env_value(tmp, mini);
 	}
 	if (dst == NULL)
-		dst = "";
-	dst = ft_strjoin(ft_strjoin(tmp1, dst), tmp2);
+			dst = "";
+	tmp3 = ft_strjoin(tmp1, dst);
+	dst = ft_strjoin(tmp3, tmp2);
+	free(tmp);//free hna
+	free(tmp1);//free hna
+	free(tmp3);//free hna
 	return (dst);
 }
 
@@ -71,5 +77,6 @@ char	*expand_ambiguous(char *arg, t_minishell *mini)
 		count++;
 	}
 	dst = ft_strdup(dst);
+	free(arg);
 	return (dst);
 }
