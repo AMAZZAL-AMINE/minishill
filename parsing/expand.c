@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 20:17:48 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/28 04:12:06 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 01:54:46 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ typedef struct t_data
 	char	*tmp2;
 	char	*dst;
 	char	*tmp3;
+	char	*tmp4;
 	int		grep_size;
 	int		yes;
+	int	 can_free_tmp4;
 	int saved_index;
 }	t_data;
 
@@ -102,22 +104,26 @@ void	expan_utilis(t_data *data, char *arg, t_minishell *mini)
 	data->tmp2 = arg + (data->grep_size + (data->count + 1));
 	tmp = ft_strndup((arg + (data->count + 1)), data->grep_size);
 	if (nothing_nrear_dolar_importent(data, arg)) {
-		data->dst = ft_strdup("$");
+		free(data->dst);
+		data->dst = "$";
 		data->yes = 0;
 	}
 	else
 	{
 			if (chould_i_expand(arg, data)) {
 				if (arg[data->count + 1] == '?') {
-						data->dst = ft_itoa(captur.exit_status);
+						data->tmp4 = ft_itoa(captur.exit_status);
+						data->dst = data->tmp4;
 						data->yes = 0;
-				}else {					
+						data->can_free_tmp4 = 1;
+				}else {	
 					data->dst = tmp;
 					data->dst = get_env_value(data->dst, mini);
 					data->yes = 0;
 					if (data->dst)
 						if (!is_var_between_quot(arg, data)) {
 							data->tmp3 = get_value_with_no_moure_then_space(data->dst);
+							// free(tmp4);
 							data->yes = 1;
 							data->dst = data->tmp3;
 						}
@@ -143,15 +149,20 @@ char	*expand(char *arg, t_minishell *mini)
 		data.grep_size = 0;
 		if (arg[data.count] == '$')
 		{
+			data.can_free_tmp4 = 0;
 			expan_utilis(&data, arg, mini);
 			if (data.dst == NULL) {
 				data.yes = 0;
-				data.dst = ft_strdup("");
+				free(data.dst);
+				data.dst = "";
 			}
 			tmp = ft_strjoin(data.tmp1, data.dst);
 			data.dst = ft_strjoin(tmp, data.tmp2);
+	 
 			arg = data.dst;
 			size = ft_strlen(arg);
+			if (data.can_free_tmp4)
+				free(data.tmp4);
 			free(tmp);
 			if (data.yes)
 				free(data.tmp3);
