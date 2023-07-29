@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                        :+:      :+:    :+:   */
+/*   ft_strtok.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/29 19:40:28 by rouali            #+#    #+#             */
-/*   Updated: 2023/07/29 19:56:25 by rouali           ###   ########.fr       */
+/*   Created: 2023/07/29 21:45:44 by mamazzal          #+#    #+#             */
+/*   Updated: 2023/07/29 21:45:45 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -62,7 +63,7 @@ char	*ft_strndup_two(char const *str, size_t max)
 	return (dst);
 }
 
-size_t	ft_strjoin(char const *str, char crt)
+size_t	ft_silter(char const *str, char crt)
 {
 	size_t	index;
 	size_t	word_count;
@@ -92,10 +93,10 @@ char	**ft_strtok(char const *s, char c)
 	str_count = 0;
 	if (!s)
 		return (0);
-	strlist = malloc(sizeof(char *) * (ft_strjoin(s, c) + 1));
+	strlist = malloc(sizeof(char *) * (ft_silter(s, c) + 1));
 	if (!strlist)
 		return (0);
-	while (count < ft_strjoin(s, c) && s[str_count])
+	while (count < ft_silter(s, c) && s[str_count])
 	{
 		while (s[str_count] == c)
 			str_count++;

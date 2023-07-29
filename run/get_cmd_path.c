@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 14:02:51 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 20:29:04 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/29 21:57:59 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*get_env_value(char *what, t_minishell *shell)
 	content = NULL;
 	while (shell->n_var_env > count)
 	{
-		content = ft_split(shell->env_v[count], '=');
+		content = ft_strtok(shell->env_v[count], '=');
 		if (str_cmp(content[0], what))
 		{
 			free_double(content);
@@ -44,7 +44,7 @@ char	*find_cmd_path(char *cmd, t_minishell *shell, t_parsing *s)
 
 	count = 0;
 	path = NULL;
-	paths = ft_split(get_env_value("PATH", shell), ':');
+	paths = ft_strtok(get_env_value("PATH", shell), ':');
 	if (is_can_access(cmd, s))
 	{
 		captur.exit_status = 127;
@@ -54,8 +54,8 @@ char	*find_cmd_path(char *cmd, t_minishell *shell, t_parsing *s)
 		return (cmd);
 	while (paths[count])
 	{
-		tmp = ft_strjoin(paths[count], "/");
-		tmp2 = ft_strjoin(tmp, cmd);
+		tmp = ft_strjoin_tok(paths[count], "/");
+		tmp2 = ft_strjoin_tok(tmp, cmd);
 		if (stat(tmp2, &state) == 0)
 		{
 			path = tmp2;

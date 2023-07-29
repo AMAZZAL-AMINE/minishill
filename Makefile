@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rouali <rouali@student.42.fr>              +#+  +:+       +#+         #
+#    By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:24:14 by mamazzal          #+#    #+#              #
-#    Updated: 2023/07/29 20:28:24 by rouali           ###   ########.fr        #
+#    Updated: 2023/07/29 21:58:58 by mamazzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ SRC = main.c ./parsing/parsing.c ./parsing/update_token.c ./parsing/split_comman
 			./parsing/utilis/split_variabls.c ./parsing/utilis/utilis_part1.c ./parsing/utilis/utilis_part2.c \
 			./parsing/utilis/get_cmd_with_fixes_size.c ./parsing/utilis/utilis_part3.c \
 			./parsing/utilis/new_tokens.c ./parsing/remove_space_from_dst.c ./parsing/ft_strndup_new.c\
-			./parsing/count_splited_words.c ./parsing/get_rederection_length.c 
+			./parsing/count_splited_words.c ./parsing/get_rederection_length.c ft_strtok.c
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -O0 #-fsanitize=address -g

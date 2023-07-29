@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:48:42 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 20:25:01 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/29 21:55:37 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	unset_arr_string(t_minishell *ms, t_parsing *shell)
 			index = -1;
 			while (ms->env_v[++index])
 			{
-				splpited = ft_split(ms->env_v[index], '=');
+				splpited = ft_strtok(ms->env_v[index], '=');
 				if (str_cmp(shell->args[count], splpited[0]))
 				{
 					while ((index + 1) < ms->n_var_env)

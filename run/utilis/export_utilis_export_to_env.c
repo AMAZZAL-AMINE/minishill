@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utilis_export_to_env.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 10:20:22 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 20:29:39 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/30 00:39:22 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ int	search_is_already_exported(char *name, t_minishell *shell)
 	while (count < shell->n_var_env)
 	{
 		//khasso itfriyaa spli
-		spli = ft_split(shell->env_v[count], '=');
-		if (str_cmp(name, spli[0]))
+		spli = ft_strtok(shell->env_v[count], '=');
+		if (str_cmp(name, spli[0])) {
+			free_double(spli);
 			return (1);
-		// free_double(spli);
+		}
+		free_double(spli);
 		count++;
 	}
 	return (0);
@@ -49,22 +51,26 @@ void	update_env_array_string(t_minishell *shell, char *name, \
 	count = shell->n_var_env;
 	if (ft_strchr(content, '=') != NULL)
 	{
-		tmp = ft_strjoin(name, "=")	;	
-		shell->env_v[count] = ft_strjoin(tmp, value);
+		tmp = ft_strjoin_tok(name, "=");
+		shell->env_v[count] = ft_strjoin_tok(tmp, value);
 		free(tmp);
 	}
 	else
-		shell->env_v[count] = name;
+		shell->env_v[count] = ft_strjoin_tok(name, "");
 	shell->n_var_env += 1;
+	free(name);
 }
 
 int	export_to_en(t_minishell *shell, char *name, char *value, char *content)
 {
-	if (export_not_valid_utilis(name))
+	if (export_not_valid_utilis(name)) {
+		free(name);
 		return (1);
+	}
 	if (search_is_already_exported(name, shell))
 	{
 		update_exported_var(content, shell, name, value);
+		free(name);
 		return (0);
 	}
 	update_env_array_string(shell, name, value, content);

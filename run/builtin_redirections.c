@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_redirections.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 10:40:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 18:23:37 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/29 21:58:23 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ int	builtin_redirections(char **content, t_parsing *shell, t_minishell *mini)
 			count++;
 		}
 		shell->args = get_args_without_redirections(shell->args);
-		free_double(new_content);
 	}
 	return (captur);
 }

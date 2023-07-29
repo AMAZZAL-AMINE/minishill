@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 21:07:14 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/30 00:41:23 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	free_double(char **str)
 		return ;
 	while (str[i])
 	{
-		//free(str[i]);
+		free(str[i]);
 		i++;
 	}
-	//free(str);
+	free(str);
 }
 
 void	please_free_me(t_minishell *minishell)

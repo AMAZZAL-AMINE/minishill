@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 18:05:53 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 20:25:01 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/30 00:05:49 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,29 @@ typedef struct t_data
 	char	**new_args;
 }	t_data;
 
+char *ft_strdup_wo(char *str)
+{
+	char	*new_str;
+	int		i;
+
+	i = 0;
+	new_str = malloc(sizeof(char) * (ft_strlen(str) + 1));
+	if (!new_str)
+		return (NULL);
+	while (str[i])
+	{
+		if (str[i] != '"')
+		{
+			new_str[i] = str[i];
+			i++;
+		}
+		else
+			i++;
+	}
+	new_str[i] = '\0';
+	return (new_str);
+}
+
 void	run_utilis(t_data *data, t_minishell *ms)
 {
 	if (data->new_args[data->count][ft_strlen(data->new_args[data->count]) - 1] \
@@ -38,8 +61,8 @@ void	run_utilis(t_data *data, t_minishell *ms)
 	}
 	else
 	{
-		data->arg_splited = ft_split(data->new_args[data->count], '=');
-		data->var = data->arg_splited[0];
+		data->arg_splited = ft_strtok(data->new_args[data->count], '=');
+		data->var = ft_strdup_wo(data->arg_splited[0]);
 	}
 	data->value = data->new_args[data->count] + (ft_strlen(data->var) + 1);
 	if (!data->value)
@@ -47,6 +70,7 @@ void	run_utilis(t_data *data, t_minishell *ms)
 	if (export_to_en(ms, data->var, \
 		data->value, data->new_args[data->count]) == 1)
 		data->return_status = 1;
+	free_double(data->arg_splited);
 }
 
 void	init_data(t_data *data, t_parsing *shell)

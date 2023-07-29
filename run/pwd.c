@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 11:01:26 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 18:47:14 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/29 22:28:05 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void	pwd(t_parsing __unused *shell)
 	ft_putstr_fd(buff, 1);
 	ft_putchar_fd('\n', 1);
 	captur.exit_status = 0;
-	//free(buff);
+	free(buff);
 }

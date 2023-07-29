@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 20:17:48 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 20:27:41 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/29 21:40:42 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,15 +129,8 @@ char	*expand(char *arg, t_minishell *mini)
 				data.is_allocated = false;
 			}
 			tmp = ft_strjoin(data.tmp1, data.dst);
-			// if (data.is_allocated)
-				//free(data.dst);
 			data.dst = ft_strjoin(tmp, data.tmp2);
 			arg = data.dst;
-			// if (data.yes)
-				//free(data.tmp3);
-			// if (data.tmp1)
-				//free(data.tmp1);
-			//free(tmp);
 		}
 		data.count++;
 	}

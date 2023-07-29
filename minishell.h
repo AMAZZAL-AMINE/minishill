@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 20:27:41 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/30 00:32:21 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ int		get_rederection_length(char *token);
 int		count_splited_words(char *token);
 char	*ft_strndup_new(char const *str, size_t max);
 void	free_double(char **str);
+char	**ft_strtok(char const *s, char c);
 //redirection
 int		redirect_input(char **content, int count);
 int		redirect_output(char **content, int count);
@@ -148,7 +149,7 @@ int		is_cmd_redirected(char *cmd);
 void	run_buitins(t_minishell *shell, int count, int size);
 char	*get_env_value(char *what, t_minishell *shell);
 int		is_redirect(char *red);
-
+char *ft_strdup_wo(char *str);
 //commandes 
 void	execut(t_parsing *shell, t_minishell *mini, int ispipe);
 int		echo_cmd(t_parsing *shill);
