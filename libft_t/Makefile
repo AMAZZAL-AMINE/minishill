@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mamazzal <mamazzal@student.1337.ma>        +#+  +:+       +#+         #
+#    By: rouali <rouali@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/15 08:12:13 by mamazzal          #+#    #+#              #
-#    Updated: 2022/10/15 08:12:14 by mamazzal         ###   ########.fr        #
+#    Updated: 2023/07/29 20:27:41 by rouali           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,17 +34,21 @@ OBJS			=	ft_isalnum.o ft_isprint.o ft_memcmp.o  ft_putchar_fd.o ft_split.o \
 					ft_toupper.o ft_calloc.o  ft_isdigit.o ft_memchr.o  ft_memset.o  \
 					ft_putstr_fd.o  ft_strjoin.o ft_strmapi.o ft_strtrim.o ft_strlcat.o ft_striteri.o
 
+OBJS_MALLOC = ../ft_malloc/ft_malloc.a
 all : $(NAME)
 
 $(NAME): $(OBJS) $(INC)
-	ar -r $(NAME) $(OBJS)
+	make -C ../ft_malloc
+	ar -r $(NAME) $(OBJS) $(OBJS_MALLOC)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -I $(INC) $<
 clean:
 	rm -f $(OBJS)
+	make clean -C ../ft_malloc
 
 fclean:clean
 	rm -f $(NAME)
+	make fclean -C ../ft_malloc
 
 re: fclean all

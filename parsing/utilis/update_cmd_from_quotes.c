@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_cmd_from_quotes.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 16:46:14 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/22 20:34:38 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:45:39 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	update_utilis(t_data *data, char *cmd)
 	data->len = data->count;
 	data->count_d_quot = 0;
 	data->count_s_quot = 0;
-	data->new_cmd = malloc(sizeof(char) * (data->len + 1));
+	data->new_cmd = ft_malloc(sizeof(char) * (data->len + 1), 0, ALLOC, 0);
 	if (!data->new_cmd)
 		return (0);
 	data->count = 0;

@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 23:47:20 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/13 13:23:34 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 20:27:41 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include "../ft_malloc/ft_malloc.h"
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *sr, size_t num);

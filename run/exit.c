@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:22:04 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 14:29:27 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 20:06:41 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	exit_shell(t_parsing *shell, t_minishell *minishell, \
 		captur.exit_status = 0;
 		return ;
 	}
+	printf("exit\n");
 	if (shell->args[0] && is_not_num(shell->args[0]))
 		num_arg_err(shell, 255, 1);
 	else if (count_length_two_arr(shell->args) > 1)

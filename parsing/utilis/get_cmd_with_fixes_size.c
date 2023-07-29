@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd_with_fixes_size.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 17:02:49 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/24 19:06:58 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:44:43 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct t_data
 char	*get_cmd_with_fix_size_utilis(t_data *data, char *token, \
 	int size)
 {
-	data->dst = malloc(sizeof(char) * (size + 2));
+	data->dst = ft_malloc(sizeof(char) * (size + 2), 0, ALLOC, 0);
 	if (!data->dst)
 		return (NULL);
 	while (token[data->count])

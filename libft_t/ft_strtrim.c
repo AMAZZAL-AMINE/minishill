@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 14:17:28 by mamazzal          #+#    #+#             */
-/*   Updated: 2022/10/04 14:17:30 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:55:58 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	{
 		revcountlen--;
 	}
-	dst = malloc(sizeof(char) * revcountlen - count + 1);
+	dst = ft_malloc(sizeof(char) * revcountlen - count + 1, 0, ALLOC, 0);
 	if (dst != NULL)
 		ft_strlcpy(dst, &s1[count], revcountlen - count + 1);
 	return (dst);

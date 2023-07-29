@@ -1,0 +1,53 @@
+enter number in output
+"fach katbda dekhel lar9am mera mera kay3ti chi grb value hana ran3tik example ra thna "
+Example :
+    minishell ❯❯❯ 0
+    minishell: 0: command not found
+    minishell ❯❯❯ 0
+    minishell: 0: command not found
+    minishell ❯❯❯ 1
+    minishell: �A��: command not found <== haaaa chfti ghaaaaaa9;
+
+
+ila executit minishell 
+    Example :
+./minishell
+./minishell
+and ps kaytle3 had ikhan
+
+"You have access to multiple processes named minishell:
+    a) 31917 ./minishell
+    b) 31961 ./minishell"
+
+&& dir control+D kay3awd itle3 had ikhan khinin hai rah booooooooooocl
+" Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID) 
+Which process? (letter or PID)"
+
+
+
+echo a > $whitespace_right"foo"
+
+free_double(data->arg_splited);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 07:48:38 by mamazzal          #+#    #+#             */
-/*   Updated: 2022/10/05 07:48:39 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:42:35 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_itoa(int number)
 
 	nbr = number;
 	nb_ln = ft_count_nbr(number);
-	string = malloc(nb_ln + 1 * sizeof(char));
+	string = ft_malloc(nb_ln + 1 * sizeof(char), 0, ALLOC, 0);
 	if (!string)
 	{
 		return (NULL);

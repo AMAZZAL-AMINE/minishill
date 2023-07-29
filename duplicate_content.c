@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   duplicate_content.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 17:57:18 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/27 06:39:27 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:40:23 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**duplicate_content(char **content)
 	new_content = NULL;
 	while (content[count])
 		count++;
-	new_content = malloc(sizeof(char *) * (count + 1));
+	new_content = ft_malloc(sizeof(char *) * (count + 1), 0, ALLOC, 0);
 	count = 0;
 	while (content[count])
 	{

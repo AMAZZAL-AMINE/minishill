@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/26 17:46:47 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 20:27:41 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ struct s_captur
 	int		exit_status;
 	int		is_press_ctrl_c;
 	int		is_press_ctrl_d;
+	char	**tmp;
 }	captur;
 
 typedef struct s_minishell {
@@ -218,4 +219,7 @@ void	cd_err(char *dir);
 void	cd_between_pipe_cd_status(void);
 
 void	free_double(char **str);
+
+char	**ft_split(char const *s, char c);
+char	*ft_strjoin_tok(char const *s1, char const *s2);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utilis_update_exported_var.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 10:22:07 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 13:44:12 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 20:30:02 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	update_exported_var(char *content, \
 			{
 				tmp = ft_strjoin(name, "=");
 				shell->env_v[count] = ft_strjoin(tmp, value);
-				free(tmp);
+				//free(tmp);
 				free_double(splited);
 				return ;
 			}

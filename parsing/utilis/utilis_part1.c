@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilis_part1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 16:47:59 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 16:24:28 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:47:14 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	**get_new_arg(char **dst, char **args, int __unused size, \
 	t_minishell *minishell)
 {
 	t_data	data;
-	char		*tmp;
+	char	*tmp;
 	char	*tmp2;
 
 	init_data_fet_new_arg(&data);
@@ -74,13 +74,11 @@ char	**get_new_arg(char **dst, char **args, int __unused size, \
 		{
 			tmp2 = expand(tmp, minishell);
 			data.mini_dst = remove_quots(tmp2);
-			free(tmp2);
+			//free(tmp2);
 			if (*data.mini_dst)
 			{
 				dst[data.index] = data.mini_dst;
 				data.index++;
-			}else {
-				free(data.mini_dst);
 			}
 		}
 		else
@@ -88,10 +86,10 @@ char	**get_new_arg(char **dst, char **args, int __unused size, \
 			dst[data.index] = remove_quots(tmp);
 			data.index++;
 		}
-		free(tmp);
+		//free(tmp);
 		data.count++;
 	}
-	free(args);
+	//free(args);
 	dst[data.index] = NULL;
 	return (dst);
 }

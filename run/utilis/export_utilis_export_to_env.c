@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utilis_export_to_env.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 10:20:22 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/27 15:42:43 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 20:29:39 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	search_is_already_exported(char *name, t_minishell *shell)
 		spli = ft_split(shell->env_v[count], '=');
 		if (str_cmp(name, spli[0]))
 			return (1);
-		free_double(spli);
+		// free_double(spli);
 		count++;
 	}
 	return (0);
@@ -54,7 +54,7 @@ void	update_env_array_string(t_minishell *shell, char *name, \
 		free(tmp);
 	}
 	else
-		shell->env_v[count] = ft_strdup(name);
+		shell->env_v[count] = name;
 	shell->n_var_env += 1;
 }
 

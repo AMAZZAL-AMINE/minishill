@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join_two_dem_arr.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 17:26:05 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/27 07:19:32 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:47:14 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**join_two_dim_arr(char *s1, char **arr)
 
 	count = 1;
 	size = count_length_two_arr(arr) + 1;
-	dst = malloc(sizeof(char *) * (size + 1));
+	dst = ft_malloc(sizeof(char *) * (size + 1), 0, ALLOC, 0);
 	dst[0] = s1;
 	while (count < size)
 	{
@@ -38,6 +38,6 @@ char	**join_two_dim_arr(char *s1, char **arr)
 		count++;
 	}
 	dst[count] = 0;
-	free(arr);
+	//free(arr);
 	return (dst);
 }

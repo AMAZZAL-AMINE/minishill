@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utilis.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 21:16:47 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 15:36:39 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:46:21 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	**new_content(char **content)
 	{
 		index++;
 	}
-	dst = malloc(sizeof(char *) * (index + 1));
+	dst = ft_malloc(sizeof(char *) * (index + 1), 0, ALLOC, 0);
 	while (count < index)
 	{
 		dst[count] = ft_strdup(content[count]);

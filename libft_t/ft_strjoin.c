@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 16:11:06 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/24 19:46:13 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 20:27:41 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	{
 		return (NULL);
 	}
-	distination = malloc(ft_strlen(s1) + (ft_strlen(s2) + 1));
+	distination = ft_malloc(ft_strlen(s1) + (ft_strlen(s2) + 1), 0, ALLOC, 0);
 	if (!distination)
 		return (0);
 	while (s1[count])
@@ -37,6 +37,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		distination[dstcount++] = s2[count++];
 	}
 	distination[dstcount] = 0;
-	// free((char *)s1);
+	// //free((char *)s1);
 	return (distination);
 }

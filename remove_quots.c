@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quots.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 10:17:36 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/27 17:46:22 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:41:31 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*remove_quots(char *arg)
 	index = 0;
 	count_d_quot = 0;
 	count_s_quot = 0;
-	new_arg = malloc(sizeof(char) * (count + 2));
+	new_arg = ft_malloc(sizeof(char) * (count + 2), 0, ALLOC, 0);
 	count = 0;
 	while (arg[count])
 	{

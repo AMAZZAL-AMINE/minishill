@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections_utilis.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:52:39 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/21 20:23:14 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:15:26 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ int	check_redrect_output(char **new_content, \
 	int	captur;
 
 	captur = 0;
-	if (filename && \
-		!is_ambiguous_file(filename, mini))
+	if (filename && (!is_ambiguous_file(filename, mini)))
 	{
 		captur = redirect_output(new_content, count);
 		if (captur != 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:24:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 16:19:56 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:47:14 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 void	init_and_split_utilis_part2(t_minishell *minishell, \
 	char __unused *token, int pos)
 {
-	if (is_dolar_var(minishell->parsing[pos].cmd))
+	if (is_dolar_var(minishell->parsing[pos].cmd) && \
+		is_bettwen_double(minishell->parsing[pos].cmd))
 	{
 		minishell->parsing[pos].cmd_tmp = minishell->parsing[pos].cmd;
-		char *tmp  = expand(minishell->parsing[pos].cmd, minishell);
-		minishell->parsing[pos].cmd = remove_quots(tmp);
-		// free(tmp);
+		minishell->parsing[pos].cmd = \
+			remove_quots(expand(minishell->parsing[pos].cmd, minishell));
 		is_commande_var(&minishell->parsing[pos], minishell, pos);
 		minishell->parsing[pos].is_cmd_var = 1;
 	}
@@ -39,13 +39,13 @@ char	**init_and_split_utilis_part1(t_minishell *minishell, \
 	if (is_redirec_output(dst))
 	{
 		tmp = sort_args(dst);
-		free(dst);
+		//free(dst);
 		dst = tmp;
 		if ((!ft_strlen(minishell->parsing[pos].cmd) \
 			|| is_redirect(minishell->parsing[pos].cmd)) \
 			&& !is_redirect(dst[0]))
 		{
-			free(minishell->parsing[pos].cmd);
+			//free(minishell->parsing[pos].cmd);
 			minishell->parsing[pos].cmd = dst[0];
 			dst = duplicate_content(&dst[1]);
 		}
@@ -61,7 +61,7 @@ void	init_and_split(t_minishell *minishell, char *token, int pos)
 
 	get_cmd_ = get_cmd_with_fixes_size(token, commande_length(token));
 	rem_sp = rm_spaces_from_cmd(get_cmd_);
-	free(get_cmd_);
+	//free(get_cmd_);
 	minishell->parsing[pos].cmd = rem_sp;
 	token = &token[skip_spaces(token)];
 	token = token + (length_new_cmd(token));
@@ -88,7 +88,7 @@ int	parsing_input(t_minishell *minishell, char *line)
 		return (1);
 	count = 0;
 	minishell->n_cmd = size;
-	parsing = malloc(sizeof(t_parsing) * (size + 1));
+	parsing = ft_malloc(sizeof(t_parsing) * (size + 1), 0, ALLOC, 0);
 	minishell->parsing = parsing;
 	while (count <= size)
 	{

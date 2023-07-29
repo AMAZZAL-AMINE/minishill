@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   count_redirection_and_files.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 16:39:32 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 16:20:37 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 20:25:01 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int	is_commande_var(t_parsing *shell, t_minishell __unused *mini, \
 	cmd = ft_split(shell->cmd, ' ');
 	if (count_length_two_arr(cmd) > 0)
 	{
-		free(shell->cmd);
 		shell->cmd = cmd[0];
 		new_args = cmd + 1;
 		shell->args = join_tables(new_args, shell->args);

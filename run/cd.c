@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 17:29:23 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 13:41:08 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:47:14 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,11 @@ char	*get_env_oldpwd(char **conten)
 int	update_oldpwd(t_parsing __unused *shell, t_minishell *mini)
 {
 	char	*tmp;
-	char	*tmp2;
 
 	tmp = getcwd(NULL, 0);
-	tmp2 = get_env_oldpwd(mini->env_v);
-	update_exported_var(tmp2, \
+	update_exported_var(get_env_oldpwd(mini->env_v), \
 		mini, "OLDPWD", tmp);
-	free(tmp);
+	//free(tmp);
 	return (0);
 }
 

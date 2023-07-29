@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_value_with_no_moure_then_space.c               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:51:34 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 14:44:25 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:41:07 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*get_value_with_no_moure_then_space(char *value)
 
 	count = 0;
 	size = get_new_value_size(value);
-	dst = malloc(sizeof(char) * (size + 1));
+	dst = ft_malloc(sizeof(char) * (size + 1), 0, ALLOC, 0);
 	count = 0;
 	size = 0;
 	while (value[count])
@@ -58,7 +58,7 @@ char	*get_value_with_no_moure_then_space(char *value)
 		count++;
 	}
 	if (dst[0] == ' ')
-		dst = &dst[1];
+		dst = dst + 1;
 	dst[size] = '\0';
 	return (dst);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_args.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 16:36:52 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/27 07:35:18 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:47:14 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int	init_data_structer_sort_args(t_data *data, char **oldargs)
 {
 	data->index = 0;
 	data->count = 0;
-	data->dst = malloc(sizeof(char *) * \
-		(count_redirection_and_files(oldargs) + 1));
+	data->dst = ft_malloc(sizeof(char *) * \
+		(count_redirection_and_files(oldargs) + 1), 0, ALLOC, 0);
 	if (!data->dst)
 		return (1);
-	data->dst_two = malloc(sizeof(char *) * \
-		(count_argment_without_red(oldargs) +  1));
+	data->dst_two = ft_malloc(sizeof(char *) * \
+		(count_argment_without_red(oldargs) +  1), 0, ALLOC, 0);
 	return (0);
 }
 
@@ -101,7 +101,7 @@ char	**sort_args(char **oldargs)
 	split_args_are_not_redirections(&data, oldargs);
 	// free_double(oldargs);
 	new_args = join_tables(data.dst_two, data.dst);
-	free(data.dst);
-	free(data.dst_two);
+	//free(data.dst);
+	//free(data.dst_two);
 	return (new_args);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strndup_new.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 01:28:26 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/26 15:55:50 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:43:06 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strndup_new(char const *str, size_t max)
 	int		count_quots;
 
 	index = 0;
-	dst = malloc(sizeof(char) * (max + 1));
+	dst = ft_malloc(sizeof(char) * (max + 1), 0, ALLOC, 0);
 	if (!dst)
 		return (0);
 	count_quots = 0;

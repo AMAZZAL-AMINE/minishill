@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+         #
+#    By: rouali <rouali@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:24:14 by mamazzal          #+#    #+#              #
-#    Updated: 2023/07/29 16:23:57 by mamazzal         ###   ########.fr        #
+#    Updated: 2023/07/29 20:28:24 by rouali           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ SRC = main.c ./parsing/parsing.c ./parsing/update_token.c ./parsing/split_comman
 			./parsing/utilis/split_variabls.c ./parsing/utilis/utilis_part1.c ./parsing/utilis/utilis_part2.c \
 			./parsing/utilis/get_cmd_with_fixes_size.c ./parsing/utilis/utilis_part3.c \
 			./parsing/utilis/new_tokens.c ./parsing/remove_space_from_dst.c ./parsing/ft_strndup_new.c\
-			./parsing/count_splited_words.c ./parsing/get_rederection_length.c
+			./parsing/count_splited_words.c ./parsing/get_rederection_length.c 
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -O0 #-fsanitize=address -g
@@ -43,6 +43,8 @@ CFLAGS = -Wall -Wextra -Werror -g -O0 #-fsanitize=address -g
 #to defined the path of readline
 LDFLAGS="-L/goinfre/mamazzal/homebrew/opt/readline/lib"
 CPPFLAGS="-I/goinfre/mamazzal/homebrew/opt/readline/include"
+
+OBJS_MALLOC = ./ft_malloc/ft_malloc.a
 
 OBJ = $(SRC:.c=.o)
  
@@ -52,13 +54,16 @@ run: all clean
 	./$(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS)  ./libft_t/libft.a -o $(NAME) $(OBJ)  -lreadline
+	@make -C libft_t
+	$(CC) $(CFLAGS)  ./libft_t/libft.a -o $(NAME) $(OBJ) $(OBJS_MALLOC)  -lreadline
 
 
 clean:
 	@rm -f $(OBJ)
+	@make clean -C libft_t
 
 fclean: clean
 	@rm -f $(NAME)
+	@make fclean -C libft_t
 
 re: fclean all clean

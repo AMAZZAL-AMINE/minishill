@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_variabls.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 16:52:28 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/22 20:23:20 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 20:27:41 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	init_data_structer_split_var(t_data *data, int size, char *arg)
 	data->count = 0;
 	data->index = 0;
 	data->arg = arg;
-	data->dst = malloc(sizeof(char *) * (size + 1));
+	data->dst = ft_malloc(sizeof(char *) * (size + 1), 0, ALLOC, 0);
 	if (!data->dst)
 		return (0);
 	return (1);

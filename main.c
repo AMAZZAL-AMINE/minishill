@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 16:21:22 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 21:07:14 by rouali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,32 @@ void	free_double(char **str)
 		return ;
 	while (str[i])
 	{
-		free(str[i]);
+		//free(str[i]);
 		i++;
 	}
-	free(str);
+	//free(str);
 }
 
 void	please_free_me(t_minishell *minishell)
 {
-	int	i;
-	int	count;
+	// int	i;
+	// int	count;
 
-	i = 0;
-	while (minishell->n_cmd >= i)
-	{
-		count = 0;
-		while (minishell->parsing[i].args[count]) {
-			free(minishell->parsing[i].args[count]);
-			count++;
-		}
-		free(minishell->parsing[i].args);
-		free(minishell->parsing[i].cmd);
-		free(minishell->parsing[i].cmd_tmp);
-		i++;
-	}
-	free_double(minishell->tokens);
+	// i = 0;
+	// while (minishell->n_cmd >= i)
+	// {
+	// 	count = 0;
+	// 	while (minishell->parsing[i].args[count]) {
+	// 		//free(minishell->parsing[i].args[count]);
+	// 		count++;
+	// 	}
+	// 	//free(minishell->parsing[i].args);
+	// 	//free(minishell->parsing[i].cmd);
+	// 	//free(minishell->parsing[i].cmd_tmp);
+	// 	i++;
+	// }
+	// free_double(minishell->tokens);
+	(void)minishell;
 }
 
 int	is_not_space(char *line)
@@ -96,11 +97,10 @@ int	main(int __unused ac, char __unused **av, char **env)
 			parsing_input(minishell, line);
 			start_cmd(minishell, line);
 			please_free_me(minishell);
-			free(minishell->parsing);
-			// system("leaks minishell | grep 'leak'");
+			ft_malloc(0, 0, FREE_ALL, 0);
+			// system("leaks minishell | grep 'leaks for'");
 		}
 		free(line);
 	}
 	return (0);
 }
-// echo 1$USER$USER-
