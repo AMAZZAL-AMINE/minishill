@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 10:40:31 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/28 04:20:20 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 13:31:56 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ char	**get_new_args(char **content, t_minishell *mini)
 	count = 0;
 	while (new_content[count])
 	{
-		if (is_dolar_(new_content[count]) \
-			&& is_bettwen_double(new_content[count]))
+		if (is_dolar_(new_content[count]) && is_bettwen_double(new_content[count]))
 			new_content[count] = expand(new_content[count], mini);
 		new_content[count] = remove_quots(new_content[count]);
 		count++;

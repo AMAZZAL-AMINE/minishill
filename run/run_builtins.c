@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_builtins.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 13:42:49 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/25 16:58:29 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/29 15:26:35 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	update_argments(t_minishell *shell, int count)
 	size_new_vars = count_length_two_arr(shell->parsing[count].args);
 	new_arg = malloc(sizeof(char *) * (size_new_vars + 1));
 	shell->parsing[count].args = get_new_arg(new_arg, \
-	shell->parsing[count].args, size_new_vars, shell);
+		shell->parsing[count].args, size_new_vars, shell);
 }
 
 void	run_buitins(t_minishell *shell, int count, int size)

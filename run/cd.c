@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 17:29:23 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/27 15:46:07 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 13:41:08 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ char	*get_env_oldpwd(char **conten)
 int	update_oldpwd(t_parsing __unused *shell, t_minishell *mini)
 {
 	char	*tmp;
+	char	*tmp2;
 
 	tmp = getcwd(NULL, 0);
-	update_exported_var(get_env_oldpwd(mini->env_v), \
+	tmp2 = get_env_oldpwd(mini->env_v);
+	update_exported_var(tmp2, \
 		mini, "OLDPWD", tmp);
 	free(tmp);
 	return (0);

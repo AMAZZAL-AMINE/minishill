@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 16:47:59 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/27 23:29:07 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:24:28 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ char	**get_new_arg(char **dst, char **args, int __unused size, \
 			{
 				dst[data.index] = data.mini_dst;
 				data.index++;
+			}else {
+				free(data.mini_dst);
 			}
 		}
 		else

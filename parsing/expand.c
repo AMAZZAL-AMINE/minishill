@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 20:17:48 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 01:54:46 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:25:51 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	expan_utilis(t_data *data, char *arg, t_minishell *mini)
 	data->tmp2 = arg + (data->grep_size + (data->count + 1));
 	tmp = ft_strndup((arg + (data->count + 1)), data->grep_size);
 	if (nothing_nrear_dolar_importent(data, arg)) {
-		free(data->dst);
+		// free(data->dst);
 		data->dst = "$";
 		data->yes = 0;
 	}
@@ -123,13 +123,16 @@ void	expan_utilis(t_data *data, char *arg, t_minishell *mini)
 					if (data->dst)
 						if (!is_var_between_quot(arg, data)) {
 							data->tmp3 = get_value_with_no_moure_then_space(data->dst);
-							// free(tmp4);
+							// free(data->tmp4);
 							data->yes = 1;
 							data->dst = data->tmp3;
 						}
 				}
 			}else {
-				data->dst = ft_strndup((arg + (data->count)), data->grep_size + 1);
+				char *tmp2 = arg + (data->count);
+				if (data->dst)
+					free(data->dst);
+				data->dst = ft_strndup(tmp2, data->grep_size + 1);
 				data->yes = 0;
 			}
 		}
@@ -158,12 +161,11 @@ char	*expand(char *arg, t_minishell *mini)
 			}
 			tmp = ft_strjoin(data.tmp1, data.dst);
 			data.dst = ft_strjoin(tmp, data.tmp2);
-	 
 			arg = data.dst;
 			size = ft_strlen(arg);
+			free(tmp);
 			if (data.can_free_tmp4)
 				free(data.tmp4);
-			free(tmp);
 			if (data.yes)
 				free(data.tmp3);
 			if (data.tmp1)
