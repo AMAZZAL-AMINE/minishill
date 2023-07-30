@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/30 20:07:59 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/30 21:02:13 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	main(int __unused ac, char __unused **av, char **env)
 			start_cmd(minishell, line);
 			please_free_me(minishell);
 			ft_malloc(0, 0, FREE_ALL, 0);
-			// system("leaks minishell | grep 'leaks for'");
 		}
 		free(line);
 	}
