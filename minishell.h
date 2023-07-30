@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:07:30 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/30 00:32:21 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/30 22:30:00 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ int		count_splited_words(char *token);
 char	*ft_strndup_new(char const *str, size_t max);
 void	free_double(char **str);
 char	**ft_strtok(char const *s, char c);
+void	heredoc_segnal(int sig);
+void	free_double(char **str);
 //redirection
 int		redirect_input(char **content, int count);
 int		redirect_output(char **content, int count);
@@ -149,7 +151,7 @@ int		is_cmd_redirected(char *cmd);
 void	run_buitins(t_minishell *shell, int count, int size);
 char	*get_env_value(char *what, t_minishell *shell);
 int		is_redirect(char *red);
-char *ft_strdup_wo(char *str);
+char	*ft_strdup_wo(char *str);
 //commandes 
 void	execut(t_parsing *shell, t_minishell *mini, int ispipe);
 int		echo_cmd(t_parsing *shill);
@@ -186,6 +188,7 @@ int		check_redrect_input(char **new_content, t_minishell *mini, \
 int		check_appned(t_minishell *mini, char *filename, int count, \
 	char **new_content);
 int		is_q_in_cmd(char *token);
+int		is_eof_in_quot_fun(char *arg);
 
 //ERRORS
 int		all_functions_errors(char *line, t_minishell *ms, t_parsing *shell);

@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_env.c                                          :+:      :+:    :+:   */
+/*   free_double.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/19 17:39:28 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 19:27:00 by rouali           ###   ########.fr       */
+/*   Created: 2023/07/30 22:27:43 by mamazzal          #+#    #+#             */
+/*   Updated: 2023/07/30 22:27:54 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-int	count_env_vars(char **envs)
+void	free_double(char **str)
 {
-	int	count;
+	int	i;
 
-	count = 0;
-	while (envs[count])
-		count++;
-	return (count);
+	i = 0;
+	if (str[0] && ft_strlen(str[0]) == 0)
+		return ;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }
-
- 
-void	set_env(t_minishell *shell)
-{
-	shell->n_var_env = count_env_vars(shell->env_v);
-}
-	

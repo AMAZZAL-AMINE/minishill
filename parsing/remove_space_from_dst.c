@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_space_from_dst.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 00:31:00 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 18:47:14 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/30 21:23:39 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	init_data_structer_rm_sp(t_data *data)
 char	**remove_space_from_dst(char **dst)
 {
 	t_data	data;
-	char	*tmp;
 
 	data.count = 0;
 	while (dst[data.count])
@@ -51,12 +50,10 @@ char	**remove_space_from_dst(char **dst)
 				break ;
 			data.helper2++;
 		}
-		tmp = dst[data.count];
- 		dst[data.count] = ft_strndup(tmp, data.helper2);
-		//free(tmp);
+		dst[data.count] = ft_strndup(dst[data.count], \
+			data.helper2);
 		data.count++;
 	}
-	//free(dst[data.count]);
 	dst[data.count] = NULL;
 	return (dst);
 }

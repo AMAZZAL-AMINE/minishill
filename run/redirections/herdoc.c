@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 22:58:20 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/30 19:55:53 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/30 22:18:27 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,37 +26,11 @@ int	is_dolar(char *arg)
 	return (0);
 }
 
-int	is_eof_in_quot_fun(char *arg)
-{
-	int	count;
-
-	count = 0;
-	while (arg[count])
-	{
-		if (arg[count] == '\'')
-			return (1);
-		else if (arg[count] == '\"')
-			return (1);
-		count++;
-	}
-	return (0);
-}
-
-void	heredoc_segnal(int sig) 
-{
-	captur.is_press_ctrl_c = 0;
-	if (sig == SIGINT) {
-		printf("\n");
-		// rl_on_new_line();
-		exit(0);
-	}
-}
-
 char	*start_herdoc_utilis(char *eof, int is_eof_in_quot, \
 	char *tmp, t_minishell *mini)
 {
 	char	*line;
-	
+
 	while (1)
 	{
 		signal(SIGINT, heredoc_segnal);
@@ -79,31 +53,46 @@ char	*start_herdoc_utilis(char *eof, int is_eof_in_quot, \
 	return (tmp);
 }
 
-int	run_herdoc(char __unused **content, \
-	char *eof, t_minishell __unused *mini, int *pipid)
+typedef struct t_data
 {
-	int pid = 0;
+	int		pid;
 	char	*line;
 	int		is_eof_in_quot;
 	char	*tmp;
+}	t_data;
 
-	line = NULL;
-	is_eof_in_quot = 0;
-	tmp = "";
-	pid = fork();
-	if (pid == 0) {
+void	init_t_data_herdoc(t_data *data)
+{
+	data->pid = 0;
+	data->line = NULL;
+	data->is_eof_in_quot = 0;
+	data->tmp = "";
+}
+
+int	run_herdoc(char __unused **content, \
+	char *eof, t_minishell __unused *mini, int *pipid)
+{
+	t_data	data;
+
+	init_t_data_herdoc(&data);
+	data.pid = fork();
+	if (data.pid == 0)
+	{
 		close(pipid[0]);
 		if (is_eof_in_quot_fun(eof))
-			is_eof_in_quot = 1;
+			data.is_eof_in_quot = 1;
 		eof = remove_quots(eof);
-		if (is_dolar(eof) && !is_eof_in_quot)
+		if (is_dolar(eof) && !data.is_eof_in_quot)
 			eof = expand(eof, mini);
-		tmp = start_herdoc_utilis(eof, is_eof_in_quot, tmp, mini);
-		if (tmp)
-			write(pipid[1], tmp, ft_strlen(tmp));
+		data.tmp = start_herdoc_utilis(eof, \
+			data.is_eof_in_quot, data.tmp, mini);
+		if (data.tmp)
+			write(pipid[1], data.tmp, ft_strlen(data.tmp));
 		exit(0);
-	}else {
-		waitpid(pid, NULL, 0);
+	}
+	else
+	{
+		waitpid(data.pid, NULL, 0);
 		close(pipid[1]);
 		return (pipid[0]);
 	}

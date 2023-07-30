@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 18:05:53 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/30 00:05:49 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/30 21:37:52 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct t_data
 	char	**new_args;
 }	t_data;
 
-char *ft_strdup_wo(char *str)
+char	*ft_strdup_wo(char *str)
 {
 	char	*new_str;
 	int		i;

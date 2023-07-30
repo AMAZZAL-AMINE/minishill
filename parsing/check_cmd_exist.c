@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_cmd_exist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 18:40:48 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 18:47:14 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/30 21:11:05 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,4 @@ void	check_cmd_exist(t_parsing *shell, t_minishell __unused *ms)
 			shell->args = shell->args + 1;
 		}
 	}
-	//free(old_cmd);
 }

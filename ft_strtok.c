@@ -6,10 +6,9 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 21:45:44 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 21:45:45 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/30 22:27:01 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -38,10 +37,8 @@ char	*ft_strjoin_tok(char const *s1, char const *s2)
 		distination[dstcount++] = s2[count++];
 	}
 	distination[dstcount] = 0;
-	// //free((char *)s1);
 	return (distination);
 }
-
 
 char	*ft_strndup_two(char const *str, size_t max)
 {

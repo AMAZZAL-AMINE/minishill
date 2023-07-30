@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ambiguous.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 19:28:25 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 20:27:41 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/30 21:10:30 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,10 @@ char	*expande_amg_help(int grep_size, char *arg, \
 		else
 			dst = get_env_value(tmp, mini);
 	}
-	//free(tmp);//free here
 	if (dst == NULL)
 		dst = "";
 	tmp3 = ft_strjoin(tmp1, dst);
-	//free(tmp1);//free here
 	dst = ft_strjoin(tmp3, tmp2);
-	//free(tmp3);//free here
 	return (dst);
 }
 
@@ -77,6 +74,5 @@ char	*expand_ambiguous(char *arg, t_minishell *mini)
 		count++;
 	}
 	dst = ft_strdup(dst);
-	//free(arg);//free here
 	return (dst);
 }

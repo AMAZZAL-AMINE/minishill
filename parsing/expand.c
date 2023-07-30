@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 20:17:48 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 21:40:42 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/30 21:17:07 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ int	nothing_nrear_dolar_importent(t_data *data, char *arg)
 
 void	expan_utilis(t_data *data, char *arg, t_minishell *mini)
 {
-	char	*tmp;
-
 	data->is_allocated = false;
 	if (arg[data->count + 1] && (arg[data->count + 1] == '@' \
 		|| ft_isdigit(arg[data->count + 1])))
@@ -78,41 +76,30 @@ void	expan_utilis(t_data *data, char *arg, t_minishell *mini)
 		data->grep_size = ft_get_grepe_size(arg + data->count);
 	data->tmp1 = ft_strndup(arg, data->count);
 	data->tmp2 = arg + (data->grep_size + (data->count + 1));
-	tmp = ft_strndup((arg + (data->count + 1)), data->grep_size);
-	if (nothing_nrear_dolar_importent(data, arg)) {
-		data->dst = "$";//strdup here
-		data->yes = 0;
-	}
+	if (nothing_nrear_dolar_importent(data, arg))
+		data->dst = "$";
 	else
 	{
-		if (arg[data->count + 1] == '?') {
+		if (arg[data->count + 1] == '?')
 			data->dst = ft_itoa(captur.exit_status);
-			data->yes = 0;
-			data->is_allocated = true;
-		}
 		else
 		{
-			data->dst = tmp;
+			data->dst = ft_strndup((arg + (data->count + 1)), data->grep_size);
 			data->dst = get_env_value(data->dst, mini);
 			if (data->dst)
 			{
 				if (!is_var_between_quot(arg))
-				{
-					data->tmp3 = get_value_with_no_moure_then_space(data->dst);
-					data->yes = 1;
-					data->dst = data->tmp3;
-				}
+					data->dst = get_value_with_no_moure_then_space(data->dst);
 			}
 		}
 	}
-	//free(tmp);
 }
 
 char	*expand(char *arg, t_minishell *mini)
 {
-	t_data	data;
+	t_data		data;
 	int			size;
-	char	*tmp;
+	char		*tmp;
 
 	data.count = 0;
 	size = ft_strlen(arg);

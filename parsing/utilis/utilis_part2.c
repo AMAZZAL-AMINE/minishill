@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilis_part2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 17:01:16 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 20:25:01 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/30 21:28:45 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,11 @@ int	skip_spaces(char *token)
 	return (count);
 }
 
-
-
 char	*rm_spaces_from_cmd(char *cmd)
 {
-	int	size;
-	int	count_quots;
-	int	count_squots;
+	int		size;
+	int		count_quots;
+	int		count_squots;
 	char	*new_cmd;
 
 	size = 0;

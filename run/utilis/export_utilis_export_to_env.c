@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 10:20:22 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/30 00:39:22 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/30 22:21:07 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	search_is_already_exported(char *name, t_minishell *shell)
 	count = 0;
 	while (count < shell->n_var_env)
 	{
-		//khasso itfriyaa spli
 		spli = ft_strtok(shell->env_v[count], '=');
-		if (str_cmp(name, spli[0])) {
+		if (str_cmp(name, spli[0]))
+		{
 			free_double(spli);
 			return (1);
 		}
@@ -63,7 +63,8 @@ void	update_env_array_string(t_minishell *shell, char *name, \
 
 int	export_to_en(t_minishell *shell, char *name, char *value, char *content)
 {
-	if (export_not_valid_utilis(name)) {
+	if (export_not_valid_utilis(name))
+	{
 		free(name);
 		return (1);
 	}

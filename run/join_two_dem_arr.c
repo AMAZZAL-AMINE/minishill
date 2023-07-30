@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join_two_dem_arr.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 17:26:05 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 18:47:14 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/30 21:42:15 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,5 @@ char	**join_two_dim_arr(char *s1, char **arr)
 		count++;
 	}
 	dst[count] = 0;
-	//free(arr);
 	return (dst);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_tokens.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 17:09:46 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 18:44:53 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/30 21:24:32 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void	init_data_structer(t_data *data, char *line)
 {
 	data->count = 0;
 	data->count_tokens = ft_count_tokens(line) * 2;
-	data->tokens = ft_malloc(sizeof(char *) * (data->count_tokens + 2), 0, ALLOC, 0);
+	data->tokens = ft_malloc(sizeof(char *) * \
+		(data->count_tokens + 2), 0, ALLOC, 0);
 	data->new_line = line;
 }
 

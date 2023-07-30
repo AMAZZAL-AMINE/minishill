@@ -6,7 +6,7 @@
 #    By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:24:14 by mamazzal          #+#    #+#              #
-#    Updated: 2023/07/30 17:33:03 by mamazzal         ###   ########.fr        #
+#    Updated: 2023/07/30 22:28:14 by mamazzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC = main.c ./parsing/parsing.c ./parsing/update_token.c ./parsing/split_comman
 			./run/redirections/redirect.c ./run/utilis/exec_utilis.c  \
 			str_cmp.c ./run/redirections/appned.c ./run/redirections/herdoc.c ./run/redirections/redirect_input.c \
 			./run/redirections/redirect_output.c ./run/get_cmd_path.c  ./run/join_two_dem_arr.c ./run/cd.c \
-			./run/pwd.c ./run/exit.c ./run/env.c ./run/set_env.c ./run/export.c ./run/unset.c \
+			./run/pwd.c ./run/exit.c ./run/env.c ./run/export.c ./run/unset.c \
 			./run/redirections/search_for_herdoc.c ./run/builtin_redirections.c ./run/run_builtins.c \
 			./parsing/expand.c ./signals.c ./run/is_cmd_redirected.c ./parsing/check_cmd_exist.c \
 			./errors/handle_undfined_file.c ./errors/cmd_not_found.c ./errors/is_can_access.c \
@@ -35,8 +35,9 @@ SRC = main.c ./parsing/parsing.c ./parsing/update_token.c ./parsing/split_comman
 			./parsing/utilis/split_variabls.c ./parsing/utilis/utilis_part1.c ./parsing/utilis/utilis_part2.c \
 			./parsing/utilis/get_cmd_with_fixes_size.c ./parsing/utilis/utilis_part3.c \
 			./parsing/utilis/new_tokens.c ./parsing/remove_space_from_dst.c ./parsing/ft_strndup_new.c\
-			./parsing/count_splited_words.c ./parsing/get_rederection_length.c ft_strtok.c
-
+			./parsing/count_splited_words.c ./parsing/get_rederection_length.c ft_strtok.c \
+			./run/redirections/heredoc_segnal.c free_double.c
+	
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -O0 #-fsanitize=address -g
 

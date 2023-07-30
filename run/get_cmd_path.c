@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 14:02:51 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 21:57:59 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/30 21:41:45 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ char	*find_cmd_path(char *cmd, t_minishell *shell, t_parsing *s)
 	char		*path;
 	char		**paths;
 	struct stat	state;
-	char		*tmp;
-	char		*tmp2;
 
 	count = 0;
 	path = NULL;
@@ -54,16 +52,9 @@ char	*find_cmd_path(char *cmd, t_minishell *shell, t_parsing *s)
 		return (cmd);
 	while (paths[count])
 	{
-		tmp = ft_strjoin_tok(paths[count], "/");
-		tmp2 = ft_strjoin_tok(tmp, cmd);
-		if (stat(tmp2, &state) == 0)
-		{
-			path = tmp2;
-			// free(tmp);
+		path = ft_strjoin_tok(ft_strjoin_tok(paths[count], "/"), cmd);
+		if (stat(path, &state) == 0)
 			return (path);
-		}
-		// free(tmp);
-		// free(tmp2);
 		count++;
 	}
 	free_double(paths);

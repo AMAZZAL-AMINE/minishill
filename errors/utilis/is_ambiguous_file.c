@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_ambiguous_file.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 13:13:44 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 18:47:14 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/30 21:09:59 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ int	help_func_ambg(char *name, char *dst, t_minishell *mini, int index)
 		dst = expand_ambiguous(tmp, mini);
 		if (is_btween_word_space(dst))
 			return (ambg_err_msg(name));
-		//free(dst);//free here
 	}
-	//free(tmp);//free here
 	return (0);
 }
 
@@ -41,17 +39,13 @@ int	is_ambiguous_file(char *name, t_minishell *mini)
 {
 	char	*dst;
 	int		index;
-	char	*tmp;
 
-	tmp = ft_strdup(name);
+	dst = ft_strdup(name);
 	if (name[0] == '$')
 	{
-		dst = expand_ambiguous(tmp, mini);
+		dst = expand_ambiguous(dst, mini);
 		if (ft_strlen(dst) == 0)
-		{
-			//free(dst);//free here
 			return (ambg_err_msg(name));
-		}
 		else if (is_dolar_(name))
 		{
 			if (!is_dolar_between_quot(name))
@@ -60,17 +54,12 @@ int	is_ambiguous_file(char *name, t_minishell *mini)
 				while (name[index])
 				{
 					if (help_func_ambg(name, dst, mini, index))
-					{
-						//free(dst);//free here
 						return (1);
-					}
 					index++;
 				}
 			}
 		}
-		//free(dst);//free here
 	}
 	captur.exit_status = 0;
-	//free(tmp);//free here
 	return (0);
 }

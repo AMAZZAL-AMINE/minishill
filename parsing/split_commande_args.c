@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_commande_args.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:23:36 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 18:44:31 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/30 21:24:02 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	init_dara_struct_split(t_data *data, char *token)
 	data->stopen = 0;
 	data->within_quots = 0;
 	data->within_quots_two = 0;
-	data->dst = ft_malloc(sizeof(char *) * (count_splited_words(token) + 1), 0, ALLOC, 0);
+	data->dst = ft_malloc(sizeof(char *) * \
+		(count_splited_words(token) + 1), 0, ALLOC, 0);
 	if (!data->dst)
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:55:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/25 19:36:08 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/30 21:31:26 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ void	echo_in_console(char **content)
 	while (content[count])
 	{
 		if (count == 0)
-		{
 			while (content[count] && is_print_new_line(content[count]))
 				count++;
-		}
 		if (content[count])
 		{
 			if (content[count + 1])
