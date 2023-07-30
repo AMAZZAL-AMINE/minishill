@@ -6,7 +6,7 @@
 #    By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:24:14 by mamazzal          #+#    #+#              #
-#    Updated: 2023/07/30 22:28:14 by mamazzal         ###   ########.fr        #
+#    Updated: 2023/07/30 22:46:41 by mamazzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,9 +39,8 @@ SRC = main.c ./parsing/parsing.c ./parsing/update_token.c ./parsing/split_comman
 			./run/redirections/heredoc_segnal.c free_double.c
 	
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -O0 #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -g -O0
 
-#to defined the path of readline
 LDFLAGS="-L/goinfre/mamazzal/homebrew/opt/readline/lib"
 CPPFLAGS="-I/goinfre/mamazzal/homebrew/opt/readline/include"
 
@@ -56,7 +55,7 @@ run: all clean
 
 $(NAME): $(OBJ)
 	@make -C libft_t
-	$(CC) $(CFLAGS)  ./libft_t/libft.a -o $(NAME) $(OBJ) $(OBJS_MALLOC)  -lreadline
+	$(CC) $(CFLAGS)  ./libft_t/libft.a -o $(NAME) $(OBJ) $(OBJS_MALLOC)  -lreadline $(LDFLAGS) $(CPPFLAGS)
 
 
 clean:

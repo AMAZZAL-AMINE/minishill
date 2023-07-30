@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:51:14 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/30 22:33:08 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/30 22:40:48 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	handle_signals(int sig)
 		{
 			printf("\n");
 			rl_on_new_line();
-			// rl_replace_line("", 0);
+			rl_replace_line("", 0);
 			rl_redisplay();
 		}
 	}
