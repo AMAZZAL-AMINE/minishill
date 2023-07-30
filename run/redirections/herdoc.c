@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 22:58:20 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/30 17:31:49 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/30 19:55:53 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ char	*start_herdoc_utilis(char *eof, int is_eof_in_quot, \
 int	run_herdoc(char __unused **content, \
 	char *eof, t_minishell __unused *mini, int *pipid)
 {
-	captur.is_press_ctrl_c = 1;
 	int pid = 0;
 	char	*line;
 	int		is_eof_in_quot;
@@ -115,20 +114,17 @@ int	herdoc(char **content, t_minishell __unused *mini)
 {
 	int		count;
 	int		savedid;
-	int		status;
-	int		pid;
 	int		pipid[2];
 
 	count = 0;
 	savedid = -1;
-	pid = -1;
+	captur.is_press_ctrl_c = 1;
 	while (content[count])
 	{
 		if (str_cmp(content[count], "<<"))
 		{
 			pipe(pipid);
 			savedid = run_herdoc(content, content[count + 1], mini, pipid);
-			waitpid(pid, &status, 0);
 		}
 		count++;
 	}
