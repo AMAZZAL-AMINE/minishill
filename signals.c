@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouali <rouali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:51:14 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 19:28:29 by rouali           ###   ########.fr       */
+/*   Updated: 2023/07/30 17:33:00 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@ void	handle_signals(int sig)
 {
 	if (sig == SIGINT)
 	{
-		captur.is_press_ctrl_c = 1;
-		printf("\n");
-		rl_on_new_line();
-		// rl_replace_line("", 0);
-		rl_redisplay();
+		if (captur.is_press_ctrl_c == 0) {
+			printf("\n");
+			rl_on_new_line();
+			// rl_replace_line("", 0);
+			rl_redisplay();
+		}
 	}
 	else if (sig == SIGQUIT)
 	{
-		rl_redisplay();
+		return ;
 	}
 }
 

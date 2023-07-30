@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 22:58:20 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/29 23:34:03 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/30 17:31:49 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,24 @@ int	is_eof_in_quot_fun(char *arg)
 	return (0);
 }
 
+void	heredoc_segnal(int sig) 
+{
+	captur.is_press_ctrl_c = 0;
+	if (sig == SIGINT) {
+		printf("\n");
+		// rl_on_new_line();
+		exit(0);
+	}
+}
+
 char	*start_herdoc_utilis(char *eof, int is_eof_in_quot, \
 	char *tmp, t_minishell *mini)
 {
 	char	*line;
-
+	
 	while (1)
 	{
+		signal(SIGINT, heredoc_segnal);
 		line = readline("> ");
 		if ((int)line == 0)
 			break ;
@@ -71,6 +82,8 @@ char	*start_herdoc_utilis(char *eof, int is_eof_in_quot, \
 int	run_herdoc(char __unused **content, \
 	char *eof, t_minishell __unused *mini, int *pipid)
 {
+	captur.is_press_ctrl_c = 1;
+	int pid = 0;
 	char	*line;
 	int		is_eof_in_quot;
 	char	*tmp;
@@ -78,16 +91,24 @@ int	run_herdoc(char __unused **content, \
 	line = NULL;
 	is_eof_in_quot = 0;
 	tmp = "";
-	if (is_eof_in_quot_fun(eof))
-		is_eof_in_quot = 1;
-	eof = remove_quots(eof);
-	if (is_dolar(eof) && !is_eof_in_quot)
-		eof = expand(eof, mini);
-	tmp = start_herdoc_utilis(eof, is_eof_in_quot, tmp, mini);
-	if (tmp)
-		write(pipid[1], tmp, ft_strlen(tmp));
-	close(pipid[1]);
-	return (pipid[0]);
+	pid = fork();
+	if (pid == 0) {
+		close(pipid[0]);
+		if (is_eof_in_quot_fun(eof))
+			is_eof_in_quot = 1;
+		eof = remove_quots(eof);
+		if (is_dolar(eof) && !is_eof_in_quot)
+			eof = expand(eof, mini);
+		tmp = start_herdoc_utilis(eof, is_eof_in_quot, tmp, mini);
+		if (tmp)
+			write(pipid[1], tmp, ft_strlen(tmp));
+		exit(0);
+	}else {
+		waitpid(pid, NULL, 0);
+		close(pipid[1]);
+		return (pipid[0]);
+	}
+	return (0);
 }
 
 int	herdoc(char **content, t_minishell __unused *mini)
@@ -107,7 +128,6 @@ int	herdoc(char **content, t_minishell __unused *mini)
 		{
 			pipe(pipid);
 			savedid = run_herdoc(content, content[count + 1], mini, pipid);
-			close(pipid[1]);
 			waitpid(pid, &status, 0);
 		}
 		count++;
@@ -115,5 +135,6 @@ int	herdoc(char **content, t_minishell __unused *mini)
 	dup2(savedid, 0);
 	if (savedid != -1)
 		close(savedid);
+	captur.is_press_ctrl_c = 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mamazzal <mamazzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:21:08 by mamazzal          #+#    #+#             */
-/*   Updated: 2023/07/30 00:41:23 by mamazzal         ###   ########.fr       */
+/*   Updated: 2023/07/30 17:24:14 by mamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	init_structer(t_minishell *minishell, char **env)
 {
 	minishell->env_v = env;
 	set_env(minishell);
+	//SIG_IGN
 	signal(SIGQUIT, handle_signals);
 	signal(SIGINT, handle_signals);
 	minishell->_stdin = dup(STDIN_FILENO);
